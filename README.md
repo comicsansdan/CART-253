@@ -2,4 +2,4 @@
 
 Course work for CART-253
 
-[Check out my portfolio] (https://www.cacatiandanportfolio.ca/)
+[Check out my portfolio](https://cacatiandanportfolio.com/)
