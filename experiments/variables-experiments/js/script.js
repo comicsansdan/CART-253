@@ -6,9 +6,11 @@ Experimenting with p5's drawing and color functions.
 **************************************************/
 
 let circleSize = 250;
-let circleX = 250;
-let circleY = 100;
+let circleX = 0;
+let circleY = 250;
 let backgroundShade = 0;
+let circleSpeed = 2;
+let circleAcceleration = 0.25;
 
 // setup()
 //
@@ -25,6 +27,8 @@ function setup() {
 function draw() {
 
   background(backgroundShade);
+  circleX += circleSpeed;
+  circleSpeed += circleAcceleration;
   ellipse(circleX, circleY, circleSize);
 
 
