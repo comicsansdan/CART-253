@@ -32,5 +32,5 @@ function draw() {
   circle.x = circle.x + circle.speed;
   ellipse(circle.x, circle.y, circle.size);
 
-
+  console.log(`circleX: ${circle.x}, circleY: ${circle.y}, circleSize: ${circle.size}, circleSpeed: ${circle.speed}`);
 }
