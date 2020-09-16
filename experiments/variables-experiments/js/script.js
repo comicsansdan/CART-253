@@ -5,12 +5,17 @@ Daniel Cacatian
 Experimenting with p5's drawing and color functions.
 **************************************************/
 
+let circleSize = 250;
+let circleX = 250;
+let circleY = 100;
+let backgroundShade = 0;
+
 // setup()
 //
 // Description of setup() goes here.
 function setup() {
 
-createCanvas(windowWidth, windowHeight);
+  createCanvas(500, 500);
 
 }
 
@@ -19,8 +24,8 @@ createCanvas(windowWidth, windowHeight);
 // Description of draw() goes here.
 function draw() {
 
-background(mouseX, mouseY, 255);
-rectMode(CENTER);
-rect(width/2, height/2, 100, 100);
+  background(backgroundShade);
+  ellipse(circleX, circleY, circleSize);
+
 
 }
