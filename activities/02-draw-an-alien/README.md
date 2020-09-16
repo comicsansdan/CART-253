@@ -1,3 +1,3 @@
-# Template p5 project
+# Activity 02: Draw an Alien
 
-This is the README file for the entire project. For more official projects you should write information here about the nature of the project, your name, any special explanations of how the project works, etc.
+This README file contains the link to Activity 02: Draw an alien: [Alien](https://comicsansdan.github.io/CART-253/activities/02-draw-an-alien/)
