@@ -5,12 +5,14 @@ Daniel Cacatian
 Experimenting with p5's drawing and color functions.
 **************************************************/
 
-let circleSize = 250;
-let circleX = 0;
-let circleY = 250;
 let backgroundShade = 0;
-let circleSpeed = 2;
-let circleAcceleration = 0.25;
+
+let circle = {
+  x: 0,
+  y: 250,
+  size: 200,
+  speed: 2,
+};
 
 // setup()
 //
@@ -27,9 +29,8 @@ function setup() {
 function draw() {
 
   background(backgroundShade);
-  circleX += circleSpeed;
-  circleSpeed += circleAcceleration;
-  ellipse(circleX, circleY, circleSize);
+  circle.x = circle.x + circle.speed;
+  ellipse(circle.x, circle.y, circle.size);
 
 
 }
