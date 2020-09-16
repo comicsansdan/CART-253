@@ -8,11 +8,11 @@ Experimenting with p5's drawing and color functions.
 let backgroundShade = 0;
 
 let circle = {
-  x: 250,
+  x: 0,
   y: 250,
   size: 200,
-  speed: 2,
-  fill: 0,
+  speed: 1,
+  fill: 255,
 };
 
 // setup()
@@ -31,12 +31,16 @@ function draw() {
 
   background(backgroundShade);
 
-  circle.speed = random(-5,5);
+  //circle.speed = random(-5,5);
   circle.x = circle.x + circle.speed;
-  circle.y = random(0,height);
-  circle.size = random(0, 100);
+  circle.x = constrain(circle.x, 0, width);
 
-  circle.fill = random(0, 255);
+  circle.size = map(mouseY, height, 0, 50, 500);
+  //circle.y = random(0,height);
+  //circle.size = random(0, 100);
+
+  //circle.fill = random(0, 255);
+  circle.fill = map(circle.x, 0, width, 0, 255);
   fill(circle.fill);
   ellipse(circle.x, circle.y, circle.size);
 
