@@ -1,76 +1,44 @@
 /**************************************************
-Activity 02: Draw an Alien
+Activity 03: Moving Pictures
 Daniel Cacatian
 
-This activity consist of creating an alien by following Pippin's instructions or by ourselves with JavaScript and p5 references.
+This activity consist of creating movings objects using variables, constrains and mapping.
 **************************************************/
+
+let bg = {
+  r: 0,
+  g: 0,
+  b: 0,
+};
+
+let circle1 = {
+  x: 0,
+  y: 250,
+  size: 100,
+  growthRate: 1,
+  fill: 255,
+  alpha: 200,
+  speed: 1,
+};
+
+let circle2 = {
+  x: 500,
+  y: 250,
+  size: 75,
+  sizeRatio: 0.75,
+  fill: 255,
+  alpha: 200,
+  speed: -1,
+};
 
 // setup()
 //
-// Setup that contains code which forms the Alien.
+// Setup that contains code which forms canvas and no strokes
 function setup() {
-createCanvas(750, 610);
 
-background(34, 41, 97);
+  createCanvas(500, 500);
 
-noStroke();
-
-//ANTENNA///////////////////////////////////////////////////////
-// Line
-fill(171, 193, 58);
-ellipse(375, 190, 20, 150);
-
-// Dot
-fill(171, 193, 58);
-ellipse(375, 115, 60, 60);
-
-//BODY///////////////////////////////////////////////////////
-// Body
-fill(51, 131, 199);
-ellipse(375, 570, 525, 600);
-
-// Collar
-fill(135, 83, 155);
-ellipse(375, 395, 450, 330);
-
-//HEAD///////////////////////////////////////////////////////
-fill(171, 193, 58);
-ellipse(375, 355, 480, 330);
-
-//EYES///////////////////////////////////////////////////////
-// Middle eye
-fill(255, 255, 255);
-ellipse(375, 270, 100, 100);
-
-// Left eye
-fill(255, 255, 255);
-ellipse(265, 325, 100, 100);
-
-// Right eye
-fill(255, 255, 255);
-ellipse(485, 325, 100, 100);
-
-//IRIS///////////////////////////////////////////////////////
-// Middle iris
-fill(0, 0, 0);
-ellipse(375, 290, 25, 25);
-
-// Left iris
-fill(0, 0, 0);
-ellipse(245, 340, 25, 25);
-
-// Right eye
-fill(0, 0, 0);
-ellipse(510, 325, 25, 25);
-
-//MOUTH///////////////////////////////////////////////////////
-// Mouth hole
-fill(61, 72, 20);
-ellipse(375, 430, 75, 30);
-
-// Smirk
-fill(61, 72, 20);
-ellipse(375, 430, 300, 2.5);
+  noStroke();
 
 }
 
@@ -78,5 +46,24 @@ ellipse(375, 430, 300, 2.5);
 //
 // Draw() does nothing.
 function draw() {
+  //Background
+  background(bg.r, bg.g, bg.b);
+  //bg.r += 1;
+  bg.r = map(circle1.size, 100, width, 0, 255);
+
+  //Left circle
+  circle1.x += circle1.speed;
+  circle1.x = constrain(circle1.x, 0, width/2);
+  circle1.size += circle1.growthRate;
+  circle1.size = constrain(circle1.size, 0, width);
+  fill(circle1.fill, circle1.alpha);
+  ellipse(circle1.x, circle1.y, circle1.size);
+
+  //Right circle
+  circle2.x += circle2.speed;
+  circle2.x = constrain(circle2.x, width/2, width);
+  circle2.size = circle1.size * circle2.sizeRatio;
+  fill(circle2.fill, circle2.alpha);
+  ellipse(circle2.x, circle2.y, circle2.size);
 
 }
