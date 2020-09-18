@@ -75,4 +75,12 @@ function draw() {
   r_square.size = map(mouseY, height, 0, 75, 200);
   fill(r_square.fill);
   rect(r_square.x, mouseY, r_square.size, r_square.size, r_square.corners);
+
+// Dividers
+  line(300, 0, 300, 1000);
+  stroke(255);
+
+  line(600, 0, 600, 1000);
+  stroke(255);
+
 }
