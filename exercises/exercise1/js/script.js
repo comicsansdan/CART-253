@@ -15,9 +15,10 @@ let bg = {
 
 let circle = {
   x: 150,
-  size: 400,
+  y: 1000,
+  size: 75,
   fill: 255,
-  speed: 0.5,
+  speed: -1.25,
 };
 
 let square = {
@@ -40,6 +41,8 @@ function setup() {
 
   createCanvas(900, 1000);
 
+  noStroke();
+
 }
 
 // draw()
@@ -50,5 +53,11 @@ function draw() {
 // Background color
   background(bg.r, bg.g, bg.b);
   bg.r = map(0, mouseX, windowWidth, mouseY, windowHeight);
+
+// Left circle
+  circle.y += circle.speed;
+  circle.y = constrain(circle.y, 0, 1000);
+  fill(circle.fill);
+  ellipse(circle.x, circle.y, circle.size);
 
 }
