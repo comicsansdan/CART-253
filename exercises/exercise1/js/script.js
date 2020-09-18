@@ -10,8 +10,6 @@ This activity consist of creating moving objects using variables, mapping, const
 // Setup that contains code for the canvas.
 function setup() {
 
-createCanvas(500, 500);
-
 }
 
 // draw()
