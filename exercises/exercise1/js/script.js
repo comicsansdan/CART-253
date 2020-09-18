@@ -9,8 +9,8 @@ This activity consist of creating moving objects using variables, mapping, const
 
 let bg = {
   r: 0,
-  g: 0,
-  b: 0,
+  g: 86,
+  b: 120,
 };
 
 let circle = {
@@ -38,7 +38,7 @@ let triangle = {
 // Setup that contains code for the canvas.
 function setup() {
 
-  createCanvas(900, 750);
+  createCanvas(900, 1000);
 
 }
 
@@ -46,5 +46,9 @@ function setup() {
 //
 // Draw() consists of all the shapes, background and animations.
 function draw() {
+
+// Background color
+  background(bg.r, bg.g, bg.b);
+  bg.r = map(0, mouseX, windowWidth, mouseY, windowHeight);
 
 }
