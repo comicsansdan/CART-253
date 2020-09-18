@@ -23,9 +23,9 @@ let circle = {
 
 let square = {
   x: 450,
-  y: 450,
-  size: 200,
-  growthRate: 1,
+  y: 500,
+  size: 75,
+  growthRate: 0.25,
   fill: 255,
 }
 
@@ -60,4 +60,10 @@ function draw() {
   fill(circle.fill);
   ellipse(circle.x, circle.y, circle.size);
 
+// Middle square
+  square.size += square.growthRate;
+  square.size = constrain(square.size, 0, 150);
+  rectMode(CENTER);
+  fill(square.fill);
+  rect(square.x, square.y, square.size)
 }
