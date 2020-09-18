@@ -27,12 +27,15 @@ let square = {
   size: 75,
   growthRate: 0.25,
   fill: 255,
-}
+};
 
-let triangle = {
-  size: 200,
+let r_square = {
+  x: 750,
+  y: 1000,
+  size: 75,
   fill: 255,
-}
+  corners: 20,
+};
 
 // setup()
 //
@@ -62,8 +65,14 @@ function draw() {
 
 // Middle square
   square.size += square.growthRate;
-  square.size = constrain(square.size, 0, 150);
+  square.size = constrain(square.size, 0, 200);
   rectMode(CENTER);
   fill(square.fill);
-  rect(square.x, square.y, square.size)
+  rect(square.x, square.y, square.size);
+
+// Right square
+  r_square.y = constrain(r_square.y, 1000, 0);
+  r_square.size = map(mouseY, height, 0, 75, 200);
+  fill(r_square.fill);
+  rect(r_square.x, mouseY, r_square.size, r_square.size, r_square.corners);
 }
