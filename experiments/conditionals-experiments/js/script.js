@@ -13,6 +13,8 @@ let circle = {
   speed: 2,
 }
 
+let displayCircle = false;
+
 // setup()
 //
 // Description of setup() goes here.
@@ -26,10 +28,10 @@ function setup() {
 function draw() {
   background(backgroundShade)
 
-  circle.x += circle.speed;
+  /*circle.x += circle.speed;
   fill(255,255,255);
 
-//CONDITIONALS (ONLY 1 CONDITION)
+//CONDITIONALS (ONLY 1 CONDITION)////////////////////////////////////////////////////
   if (circle.x > width){
     circle.speed = -circle.speed;
   }
@@ -38,7 +40,7 @@ function draw() {
     circle.speed = -circle.speed;
   }
 
-  /*if (mouseY < height/3){
+  if (mouseY < height/3){
     fill(255,0,0);
   }
   else if (mouseY < 2 * height/3) {
@@ -46,13 +48,24 @@ function draw() {
   }
   else{
     fill(0,0,255);
-  }*/
+  }
 
-  //CONDITIONALS (WITH MULTIPLE CONDITIONS)
+  //CONDITIONALS (WITH MULTIPLE CONDITIONS)////////////////////////////////////////////////////
   if (!(circle.x < width/3)) {
       fill(200, 40, 180);
   }
 
 
-  ellipse(circle.x, circle.y, circle.size);
+  ellipse(circle.x, circle.y, circle.size);*/
+
+  //BOOLEANS////////////////////////////////////////////////////
+  if (mouseIsPressed) {
+    displayCircle = true;
+  }
+
+  if (displayCircle) {
+    ellipse(250,250,100,100);
+  }
+
+
 }
