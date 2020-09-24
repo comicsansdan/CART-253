@@ -69,14 +69,14 @@ function draw() {
   //
   //   //LOOPS////////////////////////////////////////////////////
 
-  noStroke();
-  fill(100, 200, 100);
-
-    let caterpillar = {
-      x:100,
-      y:250,
-      segmentSize: 50,
-    }
+  // noStroke();
+  // fill(100, 200, 100);
+  //
+  //   let caterpillar = {
+  //     x:100,
+  //     y:250,
+  //     segmentSize: 50,
+  //   }
   //
   //   let x = caterpillar.x;
   //   let numSegments = 8;
@@ -88,12 +88,30 @@ function draw() {
   //     segmentsDrawn ++;
   //   }*/
 
-  let x = caterpillar.x
-  let numSegments = 10;
+  // let x = caterpillar.x
+  // let numSegments = 10;
+  //
+  // for (let i = 0; i < numSegments; i++) {
+  //   ellipse(x, caterpillar.y, caterpillar.segmentSize);
+  //   x += 40;
+  // }
 
-  for (let i = 0; i < numSegments; i++) {
-    ellipse(x, caterpillar.y, caterpillar.segmentSize);
-    x += 40;
-  }
+  //   //MOUSE INPUT////////////////////////////////////////////////////
 
+
+  ellipse(circle.x,circle.y,circle.size);
+  background (bg.r, bg.g, bg.b);
+
+}
+
+let bg = {
+  r:0,
+  g:0,
+  b:0,
+}
+
+function mouseWheel() {
+  bg.r = random(0,255);
+  bg.g = random(0,255);
+  bg.b = random(0,255);
 }
