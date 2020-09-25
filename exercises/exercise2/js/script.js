@@ -28,6 +28,14 @@ let gameInstructions = {
   writing: 'CLICK mouse to increase difficulty (x5)',
 }
 
+let gameOver = {
+  x: 0,
+  y: 0,
+  fill: 0,
+  size: 30,
+  writing: 'GAME OVER'
+}
+
 let clown = {
   x: 0,
   y: 0,
@@ -75,7 +83,19 @@ function draw() {
   if (d < clown.size/2 + user.size/2) {
     bg.r = 255;
     background(bg.r, bg.g, bg.b);
+
     noLoop();
+
+    //Game Over text
+    gameOver.x = width/2;
+    gameOver.y = height/2;
+
+    push();
+    textAlign(CENTER);
+    textSize(gameOver.size);
+    fill(gameOver.fill);
+    text(gameOver.writing, gameOver.x, gameOver.y);
+    pop();
   }
 
   // USER ///////////////////////////////////////////////////////////////////////////
@@ -138,5 +158,5 @@ function mousePressed() {
 
   //Difficulty indicator (the reder the harder)
   bg.r += 50;
-  
+
 }
