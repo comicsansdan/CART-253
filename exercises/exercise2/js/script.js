@@ -138,5 +138,5 @@ function mousePressed() {
 
   //Difficulty indicator (the reder the harder)
   bg.r += 50;
-
-};
+  
+}
