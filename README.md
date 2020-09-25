@@ -10,6 +10,12 @@ Activities:
 
 -[Activity 03: Moving Pictures](https://danielcacatian.github.io/CART-253/activities/03-moving-pictures)
 
+-[Activity 04: Dodging COVID19](https://danielcacatian.github.io/CART-253/activities/04-dodging-covid-19)
+
+
 Exercises:
 
 -[Exercise 1](https://danielcacatian.github.io/CART-253/exercises/exercise1)
+
+-[Exercise 2](https://danielcacatian.github.io/CART-253/exercises/exercise2)
+
