@@ -12,6 +12,22 @@ let bg = {
   b: 0,
 }
 
+let gameTitle = {
+  x: 50,
+  y:50,
+  fill: 255,
+  size: 20,
+  writing: 'DODGE THE CLOWN',
+}
+
+let gameInstructions = {
+  x: 50,
+  y:70,
+  fill: 255,
+  size: 18,
+  writing: 'CLICK mouse to increase difficulty (x5)',
+}
+
 let clown = {
   x: 0,
   y: 0,
@@ -91,6 +107,17 @@ function draw() {
   //Display clown image
   imageMode(CENTER);
   image(clown.image, clown.x, clown.y, clown.size, clown.size);
+
+  // TEXT /////////////////////////////////////////////////////////////////
+  // Title of the game
+  textSize(gameTitle.size);
+  fill(gameTitle.fill);
+  text(gameTitle.writing, gameTitle.x, gameTitle.y);
+
+  // Let's player know how to change the difficulty
+  textSize(gameInstructions.size);
+  fill(gameInstructions.fill);
+  text(gameInstructions.writing, gameInstructions.x, gameInstructions.y);
 
 }
 
