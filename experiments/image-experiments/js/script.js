@@ -1,19 +1,15 @@
 /**************************************************
-Drawing Experiments
+Image Experiments
 Daniel Cacatian
 
-Experimenting with p5's drawing and color functions.
+Experimenting with p5's image functions.
 **************************************************/
 
-let backgroundShade = 0;
+let clownImage;
 
-let circle = {
-  x: 0,
-  y: 250,
-  size: 200,
-  speed: 1,
-  fill: 255,
-};
+function preload() {
+  clownImage = loadImage("assets/images/clown.png")
+}
 
 // setup()
 //
@@ -28,21 +24,9 @@ function setup() {
 //
 // Description of draw() goes here.
 function draw() {
+  background(0);
 
-  background(backgroundShade);
+  imageMode(CENTER);
+  image(clownImage, width/2, height/2, 200, 25);
 
-  //circle.speed = random(-5,5);
-  circle.x = circle.x + circle.speed;
-  circle.x = constrain(circle.x, 0, width);
-
-  circle.size = map(mouseY, height, 0, 50, 500);
-  //circle.y = random(0,height);
-  //circle.size = random(0, 100);
-
-  //circle.fill = random(0, 255);
-  circle.fill = map(circle.x, 0, width, 0, 255);
-  fill(circle.fill);
-  ellipse(circle.x, circle.y, circle.size);
-
-  console.log(`circleX: ${circle.x}, circleY: ${circle.y}, circleSize: ${circle.size}, circleSpeed: ${circle.speed}`);
 }
