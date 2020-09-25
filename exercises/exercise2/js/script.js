@@ -16,15 +16,15 @@ let bg = {
 let clown = {
   x: 0,
   y: 0,
-  size: 100,
+  size: 275,
   image: undefined,
-  alpha: 1,
+  fade: 0,
   vx: 0,
   vy: 0,
   ax: 0,
   ay: 0,
-  acceleration: 0.5,
-  maxSpeed: 5,
+  acceleration: 1,
+  maxSpeed: 20,
 }
 
 function preload() {
@@ -32,8 +32,8 @@ function preload() {
 }
 
 let user = {
-  x: 1800,
-  y: 900,
+  x: 0,
+  y: 0,
   size: 50,
   vx: 0,
   vy: 0,
@@ -59,33 +59,37 @@ function draw() {
 
   background(bg.r, bg.g, bg.b);
 
-  // USER //////////////////////////////////////
+  // USER ///////////////////////////////////////////////////////////////////////////
+  //Display user & controls
+  ellipse(mouseX, mouseY, user.size);
 
-  //User's mouvement controls (mouse on X axis)
-  if (mouseX < user.x){
-    user.ax = -user.acceleration;
+  // CLOWN (VILLAIN) /////////////////////////////////////////////////////////////////
+  //Clown's mouvement controls (X axis)
+  if (mouseX < clown.x) {
+    clown.ax = -clown.acceleration;
   } else {
-    user.ax = user.acceleration;
+    clown.ax = clown.acceleration;
   }
 
-  //User's mouvement controls (mouse on Y axis)
-  if (mouseY < user.y) {
-    user.ay = -user.acceleration;
+  //Clown's mouvement controls (Y axis)
+  if (mouseY < clown.y) {
+    clown.ay = -clown.acceleration;
   } else {
-    user.ay = user.acceleration;
+    clown.ay = clown.acceleration;
   }
 
-  //User's acceleration constraint
-  user.vx += user.ax
-  user.vx = constrain(user.vx, -user.maxSpeed, user.maxSpeed);
-  user.vy += user.ay
-  user.vy = constrain(user.vy, -user.maxSpeed, user.maxSpeed);
+  //Clown's acceleration constraint
+  clown.vx += clown.ax
+  clown.vx = constrain(clown.vx, -clown.maxSpeed, clown.maxSpeed);
+  clown.vy += clown.ay
+  clown.vy = constrain(clown.vy, -clown.maxSpeed, clown.maxSpeed);
 
-  //User's velocity controls
-  user.x += user.vx;
-  user.y += user.vy;
+  //Clown's velocity controls
+  clown.x += clown.vx;
+  clown.y += clown.vy;
 
-  //User drawing form
-  ellipse(user.x,user.y,user.size);
+  //Display clown image
+  imageMode(CENTER);
+  image(clown.image, clown.x, clown.y, clown.size, clown.size);
 
 }
