@@ -18,8 +18,8 @@ let clown = {
   y: 0,
   size: 300,
   image: undefined,
-  speedX: 10,
-  speedY: 10,
+  speedX: 15,
+  speedY: 15,
   maxSpeed: 40,
 }
 
@@ -40,6 +40,8 @@ function setup() {
 
   createCanvas(windowWidth, windowHeight);
 
+  noStroke();
+
   clown.y = random(0,height);
 
 }
@@ -51,17 +53,25 @@ function draw() {
 
   background(bg.r, bg.g, bg.b);
 
+  // GAME OVER /////////////////////////////////////////////////////////////////
+  //Check for getting caught by the clown
+  let d = dist(user.x, user.y, clown.x, clown.y);
+  if (d < clown.size/2 + user.size/2) {
+    bg.r = 255;
+    background(bg.r, bg.g, bg.b);
+    noLoop();
+  }
+
   // USER ///////////////////////////////////////////////////////////////////////////
   //Display user & controls
-  user.x = 1000;
-  user.y = 1000;
+  user.x = mouseX;
+  user.y = mouseY;
 
   ellipse(mouseX, mouseY, user.size);
 
   // CLOWN (VILLAIN) /////////////////////////////////////////////////////////////////
   //Clown's mouvement (X axis)
   clown.x += clown.speedX;
-
   if (clown.x > width){
       clown.speedX = -clown.speedX;
     }
@@ -71,7 +81,6 @@ function draw() {
 
   //Clown's mouvement controls (Y axis)
   clown.y += clown.speedY;
-
   if (clown.y > height){
     clown.speedY = -clown.speedY;
   }
@@ -82,13 +91,6 @@ function draw() {
   //Display clown image
   imageMode(CENTER);
   image(clown.image, clown.x, clown.y, clown.size, clown.size);
-
-  // GAME OVER /////////////////////////////////////////////////////////////////
-  //Check for getting caught by the CLOWN
-  // let d = dist(user.x, user.y, clown.x, clown.y);
-  // if (d < clown.size/2 + user.size/2) {
-  //   noLoop();
-  // }
 
 
 }
