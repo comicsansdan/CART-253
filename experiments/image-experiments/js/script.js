@@ -5,10 +5,15 @@ Daniel Cacatian
 Experimenting with p5's image functions.
 **************************************************/
 
-let clownImage;
+let clown = {
+  x: 250,
+  y: 250,
+  size: 100,
+  image: undefined,
+};
 
 function preload() {
-  clownImage = loadImage("assets/images/clown.png")
+  clown.image = loadImage("assets/images/clown.png")
 }
 
 // setup()
@@ -26,7 +31,13 @@ function setup() {
 function draw() {
   background(0);
 
-  imageMode(CENTER);
-  image(clownImage, width/2, height/2, 200, 25);
+  clown.x = mouseX;
+  clown.y = mouseY;
 
+  imageMode(CENTER);
+  image(clown.image, clown.x, clown.y, clown.size, clown.size);
+}
+
+function mousePressed() {
+  clown.size += 50;
 }
