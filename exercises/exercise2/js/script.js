@@ -16,15 +16,11 @@ let bg = {
 let clown = {
   x: 0,
   y: 0,
-  size: 275,
+  size: 300,
   image: undefined,
-  fade: 0,
-  vx: 0,
-  vy: 0,
-  ax: 0,
-  ay: 0,
-  acceleration: 1,
-  maxSpeed: 20,
+  speedX: 10,
+  speedY: 10,
+  maxSpeed: 40,
 }
 
 function preload() {
@@ -35,20 +31,16 @@ let user = {
   x: 0,
   y: 0,
   size: 50,
-  vx: 0,
-  vy: 0,
-  ax: 0,
-  ay: 0,
-  acceleration: 0.25,
-  maxSpeed: 5,
 }
 
 // setup()
 //
-// Setup that contains code for the canvas.
+// Setup that contains code for the canvas and the random spawn for the clown.
 function setup() {
 
   createCanvas(windowWidth, windowHeight);
+
+  clown.y = random(0,height);
 
 }
 
@@ -61,35 +53,42 @@ function draw() {
 
   // USER ///////////////////////////////////////////////////////////////////////////
   //Display user & controls
+  user.x = 1000;
+  user.y = 1000;
+
   ellipse(mouseX, mouseY, user.size);
 
   // CLOWN (VILLAIN) /////////////////////////////////////////////////////////////////
-  //Clown's mouvement controls (X axis)
-  if (mouseX < clown.x) {
-    clown.ax = -clown.acceleration;
-  } else {
-    clown.ax = clown.acceleration;
-  }
+  //Clown's mouvement (X axis)
+  clown.x += clown.speedX;
+
+  if (clown.x > width){
+      clown.speedX = -clown.speedX;
+    }
+    if (clown.x < 0){
+        clown.speedX = -clown.speedX;
+      }
 
   //Clown's mouvement controls (Y axis)
-  if (mouseY < clown.y) {
-    clown.ay = -clown.acceleration;
-  } else {
-    clown.ay = clown.acceleration;
+  clown.y += clown.speedY;
+
+  if (clown.y > height){
+    clown.speedY = -clown.speedY;
   }
-
-  //Clown's acceleration constraint
-  clown.vx += clown.ax
-  clown.vx = constrain(clown.vx, -clown.maxSpeed, clown.maxSpeed);
-  clown.vy += clown.ay
-  clown.vy = constrain(clown.vy, -clown.maxSpeed, clown.maxSpeed);
-
-  //Clown's velocity controls
-  clown.x += clown.vx;
-  clown.y += clown.vy;
+  if (clown.y < 0){
+    clown.speedY = -clown.speedY;
+  }
 
   //Display clown image
   imageMode(CENTER);
   image(clown.image, clown.x, clown.y, clown.size, clown.size);
+
+  // GAME OVER /////////////////////////////////////////////////////////////////
+  //Check for getting caught by the CLOWN
+  // let d = dist(user.x, user.y, clown.x, clown.y);
+  // if (d < clown.size/2 + user.size/2) {
+  //   noLoop();
+  // }
+
 
 }
