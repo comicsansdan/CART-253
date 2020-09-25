@@ -6,7 +6,6 @@ This activity consist of creating a simulation where there are conditionals, int
 **************************************************/
 
 // VARIABLES //////////////////////////////////////
-
 let bg = {
   r: 0,
   g: 0,
@@ -18,9 +17,10 @@ let clown = {
   y: 0,
   size: 300,
   image: undefined,
-  speedX: 15,
-  speedY: 15,
-  maxSpeed: 40,
+  speedX: 20,
+  speedY: 20,
+  maxSpeed: 60,
+  maxSize: 600,
 }
 
 function preload() {
@@ -92,5 +92,24 @@ function draw() {
   imageMode(CENTER);
   image(clown.image, clown.x, clown.y, clown.size, clown.size);
 
-
 }
+
+// mousePressed()
+//
+// mousePressed() allows the user to higher the difficulty
+function mousePressed() {
+  //Increase clown size
+  clown.size += 50;
+  clown.size = constrain(clown.size, 300, clown.maxSize);
+
+  //Increase clown speed
+  clown.speedX *= 2;
+  clown.speedX = constrain(clown.speedX, -50, clown.maxSpeed);
+
+  clown.speedY *= 1.5;
+  clown.speedY = constrain(clown.speedY, -50, clown.maxSpeed);
+
+  //Difficulty indicator (the reder the harder)
+  bg.r += 50;
+
+};
