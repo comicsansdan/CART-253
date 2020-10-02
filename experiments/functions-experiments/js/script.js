@@ -19,6 +19,12 @@ let circle = {
 function setup() {
   createCanvas(500, 500);
 
+  // FUNCTIONS WITH RETURN VALUES////////////////////////////////////////////////
+  let hotCelcius = toCelcius(100);
+  console.log('100 degrees Fahrenheit is ${hotCelcius} degrees Celcius');
+
+  let coldCelcius = toCelcius(10);
+  console.log('10 degrees Fahrenheit is ${coldCelcius} degrees Celcius');
 }
 
 // draw()
@@ -28,10 +34,10 @@ function draw() {
   background(0);
 
   // FUNCTIONS PARAMETERS////////////////////////////////////////////////
-  parrallels(100, 100, 5, 1, 100,1);
-  parrallels(50, 50, 10, 2, 20, 10);
-  parrallels(200, 200, 15, 7, 3, 20);
-  parrallels(23, 99, 20, 0.5, 300, 1);
+  // parrallels(100, 100, 5, 1, 100,1);
+  // parrallels(50, 50, 10, 2, 20, 10);
+  // parrallels(200, 200, 15, 7, 3, 20);
+  // parrallels(23, 99, 20, 0.5, 300, 1);
   //FUNCTIONS//////////////////////////////////////////////////////
   // move();
   // wrap();
@@ -39,17 +45,24 @@ function draw() {
 
 }
 
-// FUNCTIONS PARAMETERS////////////////////////////////////////////////
-function parrallels(x, y, numLines, lineWidth, lineHeight, lineSpacing) {
-  //For loop
-  for (let i = 0; i < numLines; i++) {
-    noStroke();
-    fill(255);
-    rectMode(CENTER);
-    rect(x, y, lineWidth, lineHeight);
-    x += lineSpacing;
-  }
+// FUNCTIONS WITH RETURN VALUES////////////////////////////////////////////////
+// Used to return math calculations
+function toCelcius(fahrenheit){
+  let celcius = (fahrenheit - 32) * 5/9;
+  return celcius;
 }
+
+// FUNCTIONS PARAMETERS////////////////////////////////////////////////
+// function parrallels(x, y, numLines, lineWidth, lineHeight, lineSpacing) {
+//   //For loop
+//   for (let i = 0; i < numLines; i++) {
+//     noStroke();
+//     fill(255);
+//     rectMode(CENTER);
+//     rect(x, y, lineWidth, lineHeight);
+//     x += lineSpacing;
+//   }
+// }
 
 //FUNCTIONS//////////////////////////////////////////////////////
 // Functions can also be reffered as modular. Also reuse
