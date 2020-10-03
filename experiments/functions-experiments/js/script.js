@@ -4,20 +4,21 @@ Daniel Cacatian
 
 Experimenting with p5's functions.
 **************************************************/
+let bg = 0;
 
 let circle = {
-  x: 0,
+  x: 250,
   y: 250,
   size: 100,
-  vx: 1,
+  vx: 0,
   vy: 0,
   speed: 2,
 }
 
-//STATES////////////////////////////////////////////////
+//STATES////////////////////////////////////////////////////////////////////////
 let state = `title`; //Possible states are: title, animation, ending
 
-//TEXT////////////////////////////////////////////////
+//TEXT/////////////////////////////////////////////////////////////////////////
 //Use the ` back-tech key (on the tilted ~) for text BEST OPTION
 let hello = {
   string: `Hello world!`,
@@ -34,10 +35,10 @@ let hello = {
 function setup() {
   createCanvas(500, 500);
 
-  //STATES////////////////////////////////////////////////
-  textSize(32);
-  textAlign(CENTER,CENTER);
-  circle.vx = circle.speed;
+  //STATES//////////////////////////////////////////////////////////////////
+  // textSize(32);
+  // textAlign(CENTER,CENTER);
+  // circle.vx = circle.speed;
 
   // FUNCTIONS WITH RETURN VALUES////////////////////////////////////////////////
   //   let hotCelcius = toCelcius(100);
@@ -51,18 +52,54 @@ function setup() {
 //
 // Description of draw() goes here.
 function draw() {
-  background(0);
+  background(bg);
+
+  //AUTOMATED MOVEMENTS/////////////////////////////////////////////////////////////
+  let dx = circle.x - mouseX;
+  let dy = circle.y - mouseY;
+
+  if (dx < 0) {
+    circle.vx = circle.speed;
+  }
+  else if (dx > 0){
+    circle.vx = -circle.speed;
+  }
+
+  if (dy < 0) {
+    circle.vy = circle.speed;
+  }
+  else if (dy > 0){
+    circle.vy = -circle.speed;
+  }
+
+  circle.x += circle.vx;
+  circle.y += circle.vy;
+
+  ellipse(circle.x,circle.y,circle.size);
+
+  //KEYBOARD INPUTS/////////////////////////////////////////////////////////////
+  // textAlign(CENTER,CENTER);
+  // textSize(64);
+  // fill(255);
+  // text(keyCode, width/2, height/2);
+  //
+  // if (keyIsDown(65)){
+  //   rectMode(CENTER);
+  //   rect(250,250,100,100);
+  // }
+
 
   //STATES/////////////////////////////////////////////////////////////
-  if(state === `title`) {
-    title();
-  }
-  else if ( state === `animation`){
-  animation();
-  }
-  else if (state === `ending`){
-    ending();
-  }
+  // if(state === `title`) {
+  //   title();
+  // }
+  // else if ( state === `animation`){
+  // animation();
+  // }
+  // else if (state === `ending`){
+  //   ending();
+  // }
+
   //TEXT//////////////////////////////////////////////////////////////
   // hello.x += hello.vx;
   // hello.y += hello.vy;
@@ -83,38 +120,49 @@ function draw() {
   // parrallels(50, 50, 10, 2, 20, 10);
   // parrallels(200, 200, 15, 7, 3, 20);
   // parrallels(23, 99, 20, 0.5, 300, 1);
-  //FUNCTIONS//////////////////////////////////////////////////////
+  //FUNCTIONS//////////////////////////////////////////////////////////////
   // move();
   // wrap();
   // display();
-
 }
+
+//KEYBOARD INPUTS/////////////////////////////////////////////////////////////
+// function keyPressed(){
+//   if (keyCode === 38){
+//     bg += 10;
+//     bg = constrain(bg, 0, 255);
+//   }
+//   else if (keyCode === 40) {
+//     bg += -10;
+//     bg = constrain(bg, 0, 255);
+//   }
+// }
 
 //STATES//////////////////////////////////////////////////////////////////
-function title(){
-  fill(255);
-  text(`Life.`, width/2, height/2);
-}
-
-function animation(){
-  circle.x += circle.vx;
-  circle.y += circle.vy;
-  if (circle.x > width) {
-    state = `ending`;
-  }
-  ellipse(circle.x, circle.y, circle.size);
-}
-
-function ending(){
-  fill(127);
-  text(`It's all over.`, width/2, height/2);
-}
-
-function keyPressed() {
-  if (state === `title`){
-  state = `animation`;
-  }
-}
+// function title(){
+//   fill(255);
+//   text(`Life.`, width/2, height/2);
+// }
+//
+// function animation(){
+//   circle.x += circle.vx;
+//   circle.y += circle.vy;
+//   if (circle.x > width) {
+//     state = `ending`;
+//   }
+//   ellipse(circle.x, circle.y, circle.size);
+// }
+//
+// function ending(){
+//   fill(127);
+//   text(`It's all over.`, width/2, height/2);
+// }
+//
+// function keyPressed() {
+//   if (state === `title`){
+//   state = `animation`;
+//   }
+// }
 
 // FUNCTIONS WITH RETURN VALUES////////////////////////////////////////////////
 // Used to return math calculations
