@@ -13,6 +13,17 @@ let circle = {
   vy: 0,
 }
 
+//TEXT////////////////////////////////////////////////
+//Use the ` back-tech key (on the tilted ~) for text BEST OPTION
+let hello = {
+  string: `Hello world!`,
+  x: 250,
+  y: 250,
+  vx: 5,
+  vy: 1,
+  size: 64,
+}
+
 // setup()
 //
 // Description of setup() goes here.
@@ -20,11 +31,11 @@ function setup() {
   createCanvas(500, 500);
 
   // FUNCTIONS WITH RETURN VALUES////////////////////////////////////////////////
-  let hotCelcius = toCelcius(100);
-  console.log('100 degrees Fahrenheit is ${hotCelcius} degrees Celcius');
-
-  let coldCelcius = toCelcius(10);
-  console.log('10 degrees Fahrenheit is ${coldCelcius} degrees Celcius');
+  //   let hotCelcius = toCelcius(100);
+  //   console.log(`100 degrees Fahrenheit is ${hotCelcius} degrees Celcius`);
+  //
+  //   let coldCelcius = toCelcius(10);
+  //   console.log(`10 degrees Fahrenheit is ${coldCelcius} degrees Celcius`);
 }
 
 // draw()
@@ -32,6 +43,21 @@ function setup() {
 // Description of draw() goes here.
 function draw() {
   background(0);
+
+  //TEXT////////////////////////////////////////////////
+  hello.x += hello.vx;
+  hello.y += hello.vy;
+
+  hello.size += 1;
+
+  textAlign(CENTER, CENTER);
+  textSize(hello.size);
+  textStyle(BOLD);
+  fill(200, 10, 200);
+  stroke(50, 50, 200);
+  strokeWeight(5);
+
+  text(hello.string, hello.x, hello.y);
 
   // FUNCTIONS PARAMETERS////////////////////////////////////////////////
   // parrallels(100, 100, 5, 1, 100,1);
@@ -47,8 +73,8 @@ function draw() {
 
 // FUNCTIONS WITH RETURN VALUES////////////////////////////////////////////////
 // Used to return math calculations
-function toCelcius(fahrenheit){
-  let celcius = (fahrenheit - 32) * 5/9;
+function toCelcius(fahrenheit) {
+  let celcius = (fahrenheit - 32) * 5 / 9;
   return celcius;
 }
 
