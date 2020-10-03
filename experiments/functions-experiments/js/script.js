@@ -11,7 +11,11 @@ let circle = {
   size: 100,
   vx: 1,
   vy: 0,
+  speed: 2,
 }
+
+//STATES////////////////////////////////////////////////
+let state = `title`; //Possible states are: title, animation, ending
 
 //TEXT////////////////////////////////////////////////
 //Use the ` back-tech key (on the tilted ~) for text BEST OPTION
@@ -30,6 +34,11 @@ let hello = {
 function setup() {
   createCanvas(500, 500);
 
+  //STATES////////////////////////////////////////////////
+  textSize(32);
+  textAlign(CENTER,CENTER);
+  circle.vx = circle.speed;
+
   // FUNCTIONS WITH RETURN VALUES////////////////////////////////////////////////
   //   let hotCelcius = toCelcius(100);
   //   console.log(`100 degrees Fahrenheit is ${hotCelcius} degrees Celcius`);
@@ -44,20 +53,30 @@ function setup() {
 function draw() {
   background(0);
 
-  //TEXT////////////////////////////////////////////////
-  hello.x += hello.vx;
-  hello.y += hello.vy;
-
-  hello.size += 1;
-
-  textAlign(CENTER, CENTER);
-  textSize(hello.size);
-  textStyle(BOLD);
-  fill(200, 10, 200);
-  stroke(50, 50, 200);
-  strokeWeight(5);
-
-  text(hello.string, hello.x, hello.y);
+  //STATES/////////////////////////////////////////////////////////////
+  if(state === `title`) {
+    title();
+  }
+  else if ( state === `animation`){
+  animation();
+  }
+  else if (state === `ending`){
+    ending();
+  }
+  //TEXT//////////////////////////////////////////////////////////////
+  // hello.x += hello.vx;
+  // hello.y += hello.vy;
+  //
+  // hello.size += 1;
+  //
+  // textAlign(CENTER, CENTER);
+  // textSize(hello.size);
+  // textStyle(BOLD);
+  // fill(200, 10, 200);
+  // stroke(50, 50, 200);
+  // strokeWeight(5);
+  //
+  // text(hello.string, hello.x, hello.y);
 
   // FUNCTIONS PARAMETERS////////////////////////////////////////////////
   // parrallels(100, 100, 5, 1, 100,1);
@@ -69,6 +88,32 @@ function draw() {
   // wrap();
   // display();
 
+}
+
+//STATES//////////////////////////////////////////////////////////////////
+function title(){
+  fill(255);
+  text(`Life.`, width/2, height/2);
+}
+
+function animation(){
+  circle.x += circle.vx;
+  circle.y += circle.vy;
+  if (circle.x > width) {
+    state = `ending`;
+  }
+  ellipse(circle.x, circle.y, circle.size);
+}
+
+function ending(){
+  fill(127);
+  text(`It's all over.`, width/2, height/2);
+}
+
+function keyPressed() {
+  if (state === `title`){
+  state = `animation`;
+  }
 }
 
 // FUNCTIONS WITH RETURN VALUES////////////////////////////////////////////////
@@ -90,7 +135,7 @@ function toCelcius(fahrenheit) {
 //   }
 // }
 
-//FUNCTIONS//////////////////////////////////////////////////////
+//FUNCTIONS/////////////////////////////////////////////////////////////////
 // Functions can also be reffered as modular. Also reuse
 // function move() {
 //   circle.x += circle.vx;
