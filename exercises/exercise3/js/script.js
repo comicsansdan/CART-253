@@ -174,7 +174,7 @@ function instructions(){
   fill(200, 100, 100);
   textAlign(CENTER);
   rectMode(CENTER);
-  text(`Press any key to continue`, width / 2, height / 2*2, 300, 200);
+  text(`(Love is never easy...) Press any key to start`, width / 2, height / 2*2, 300, 200);
   pop();
 }
 

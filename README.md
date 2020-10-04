@@ -19,3 +19,4 @@ Exercises:
 
 -[Exercise 2](https://danielcacatian.github.io/CART-253/exercises/exercise2)
 
+-[Exercise 3](https://danielcacatian.github.io/CART-253/exercises/exercise3)
