@@ -60,7 +60,7 @@ function setup() {
 function circleSetup(){
   //Player's starting position
     you.x = width / 2;
-    you.y = height / 8 * 7.25;
+    you.y = height / 8 * 6.5;
 
   //Soulmate's starting position
     soulmate.x = width/ 2;
@@ -85,16 +85,80 @@ function draw() {
 
   background(255, 248, 255);
 
-  display();
-  movement();
-  controls();
-  obstructed();
+  if(state === `title`){
+    title();
+  } else if (state === `simulation`){
+    simulation();
+  } else if (state === `love`){
+    love();
+  } else if (state === `optional`){
+    optional();
+  } else if (state === `secret`){
+    secret();
+  }
 
 }
 
 // STATES /////////////////////////////////////////////////////////////////////
 //Title state
+function title(){
+  push();
+  textSize(54);
+  fill(200, 100, 100);
+  textAlign(CENTER);
+  rectMode(CENTER);
+  text(`LOVE, ACTUALLY...`, width / 2, height / 2, 300, 200);
+  pop();
 
+  push();
+  textSize(24);
+  fill(200, 100, 100);
+  textAlign(CENTER);
+  rectMode(CENTER);
+  text(`Press any key to continue`, width / 2, height / 2*2, 300, 200);
+  pop();
+}
+
+//Simulation state
+function simulation(){
+  display();
+  movement();
+  controls();
+  obstructed();
+}
+
+//Love! ending state
+function love(){
+  push();
+  textSize(54);
+  fill(200, 100, 100);
+  textAlign(CENTER);
+  rectMode(CENTER);
+  text(`YOU FOUND TRUE LOVE!`, width / 2, height / 2, 300, 400);
+  pop();
+}
+
+//Optional ending state
+function optional(){
+  push();
+  textSize(24);
+  fill(200, 100, 100);
+  textAlign(CENTER);
+  rectMode(CENTER);
+  text(`We accept the love we think we deserve... maybe try again?`, width / 2, height / 2, 300, 100);
+  pop();
+}
+
+//Secret ending state
+function secret(){
+  push();
+  textSize(24);
+  fill(118, 202, 228);
+  textAlign(CENTER);
+  rectMode(CENTER);
+  text(`Love doesn't have to be rushed, you can always come back when you feel ready :)`, width / 2, height / 2, 300, 150);
+  pop();
+}
 
 
 // DISPLAY /////////////////////////////////////////////////////////////////////
@@ -189,15 +253,32 @@ let d2 = dist(you.x, you.y, obstacle2.x, obstacle2.y);
     }
 
 //Collision with the soulmate
-// let d3 = dist(you.x, you.y, soulmate.x, soulmate.y);
-//   if (d3 < you.size/2 + soulmate.size/2){
-//     state = `love!`
-//   }
+let d3 = dist(you.x, you.y, soulmate.x, soulmate.y);
+  if (d3 < you.size/2 + soulmate.size/2){
+    state = `love`
+  }
 
 //Collision with the fake
-let d3 = dist(you.x, you.y, fake.x, fake.y);
-  if (d3 < you.size/2 + fake.size/2 + 150){
+let d4 = dist(you.x, you.y, fake.x, fake.y);
+  if (d4 < you.size/2 + fake.size/2 + 150){
     fill(17, 59, 81);
     text(fake.string, 130, fake.y);
+  }
+  if (d4 < you.size/2 + fake.size/2){
+    state = `optional`
+  }
+
+  //Collision with the bottom
+  if (you.y > height){
+    state = `secret`
+  }
+
+
+}
+
+// START BUTTON ///////////////////////////////////////////////////////////
+function keyPressed(){
+if (state === `title`){
+  state = `simulation`;
   }
 }
