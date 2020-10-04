@@ -91,8 +91,8 @@ function draw() {
     simulation();
   } else if (state === `love`){
     love();
-  } else if (state === `optional`){
-    optional();
+  } else if (state === `bad`){
+    bad();
   } else if (state === `secret`){
     secret();
   }
@@ -102,21 +102,8 @@ function draw() {
 // STATES /////////////////////////////////////////////////////////////////////
 //Title state
 function title(){
-  push();
-  textSize(54);
-  fill(200, 100, 100);
-  textAlign(CENTER);
-  rectMode(CENTER);
-  text(`LOVE, ACTUALLY...`, width / 2, height / 2, 300, 200);
-  pop();
-
-  push();
-  textSize(24);
-  fill(200, 100, 100);
-  textAlign(CENTER);
-  rectMode(CENTER);
-  text(`Press any key to continue`, width / 2, height / 2*2, 300, 200);
-  pop();
+  header();
+  instructions();
 }
 
 //Simulation state
@@ -129,35 +116,17 @@ function simulation(){
 
 //Love! ending state
 function love(){
-  push();
-  textSize(54);
-  fill(200, 100, 100);
-  textAlign(CENTER);
-  rectMode(CENTER);
-  text(`YOU FOUND TRUE LOVE! :D`, width / 2, height / 2, 300, 300);
-  pop();
+  goodText();
 }
 
-//Optional ending state
-function optional(){
-  push();
-  textSize(24);
-  fill(200, 100, 100);
-  textAlign(CENTER);
-  rectMode(CENTER);
-  text(`We accept the love we think we deserve... maybe try again?`, width / 2, height / 2, 300, 100);
-  pop();
+//bad ending state
+function bad(){
+  badText();
 }
 
 //Secret ending state
 function secret(){
-  push();
-  textSize(24);
-  fill(118, 202, 228);
-  textAlign(CENTER);
-  rectMode(CENTER);
-  text(`Love doesn't have to be rushed, you can always come back when you feel ready :)`, width / 2, height / 2, 300, 150);
-  pop();
+  easterEgg();
 }
 
 
@@ -183,6 +152,63 @@ function display() {
   fill(199, 145, 168);
   ellipse(obstacle2.x, obstacle2.y, obstacle2.size)
 }
+
+// TEXT ////////////////////////////////////////////////////////////////////////
+//Main title text
+function header(){
+  push();
+  textSize(54);
+  fill(200, 100, 100);
+  textAlign(CENTER);
+  rectMode(CENTER);
+  text(`LOVE, ACTUALLY...`, width / 2, height / 2, 300, 200);
+  pop();
+}
+
+//Instruction text
+function instructions(){
+  push();
+  textSize(24);
+  fill(200, 100, 100);
+  textAlign(CENTER);
+  rectMode(CENTER);
+  text(`Press any key to continue`, width / 2, height / 2*2, 300, 200);
+  pop();
+}
+
+//Good ending text
+function goodText(){
+  push();
+  textSize(54);
+  fill(255, 194, 202);
+  textAlign(CENTER);
+  rectMode(CENTER);
+  text(`YOU FOUND TRUE LOVE! :D`, width / 2, height / 2, 300, 300);
+  pop();
+}
+
+//Bad ending text
+function badText(){
+  push();
+  textSize(24);
+  fill(17, 59, 81);
+  textAlign(CENTER);
+  rectMode(CENTER);
+  text(`We accept the love we think we deserve... maybe try again?`, width / 2, height / 2, 300, 100);
+  pop();
+}
+
+//Secret ending text
+function easterEgg(){
+  push();
+  textSize(24);
+  fill(118, 202, 228);
+  textAlign(CENTER);
+  rectMode(CENTER);
+  text(`Love doesn't have to be rushed, you can always come back when you feel ready :)`, width / 2, height / 2, 300, 150);
+  pop();
+}
+
 
 // MOVEMENT /////////////////////////////////////////////////////////////////////
 //This function contains the movement of certain circles
@@ -265,14 +291,13 @@ let d4 = dist(you.x, you.y, fake.x, fake.y);
     text(fake.string, 130, fake.y);
   }
   if (d4 < you.size/2 + fake.size/2){
-    state = `optional`
+    state = `bad`
   }
 
   //Collision with the bottom
   if (you.y > height){
     state = `secret`
   }
-
 
 }
 
