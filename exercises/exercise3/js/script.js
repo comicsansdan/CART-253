@@ -114,6 +114,8 @@ function simulation(){
   movement();
   controls();
   obstructed();
+  tip();
+  objective();
 }
 
 //Love! ending state
@@ -175,6 +177,28 @@ function instructions(){
   textAlign(CENTER);
   rectMode(CENTER);
   text(`(Love is never easy...) Press any key to start`, width / 2, height / 2*2, 300, 200);
+  pop();
+}
+
+//Controls text
+function tip(){
+  push();
+  textSize(24);
+  fill(118, 202, 228);
+  textAlign(CENTER);
+  rectMode(CENTER);
+  text(`Use WASD or ArrowKeys to move`, width / 2, height / 2*2, 300, 200);
+  pop();
+}
+
+//Objective text
+function objective(){
+  push();
+  textSize(24);
+  fill(255, 194, 202);
+  textAlign(CENTER);
+  rectMode(CENTER);
+  text(`Get to your soulmate!`, width / 2, 50);
   pop();
 }
 
