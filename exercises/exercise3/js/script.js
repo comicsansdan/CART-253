@@ -32,7 +32,7 @@ let obstacle2 = {
   x: undefined,
   y: undefined,
   size: 50,
-  speed: 11,
+  speed: 13,
 }
 
 let fake = {
@@ -134,7 +134,7 @@ function love(){
   fill(200, 100, 100);
   textAlign(CENTER);
   rectMode(CENTER);
-  text(`YOU FOUND TRUE LOVE!`, width / 2, height / 2, 300, 400);
+  text(`YOU FOUND TRUE LOVE! :D`, width / 2, height / 2, 300, 300);
   pop();
 }
 
