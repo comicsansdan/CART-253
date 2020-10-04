@@ -85,6 +85,8 @@ function draw() {
 
   background(255, 248, 255);
 
+  decoration(0, 0, 50, width, 5, 25);
+
   if(state === `title`){
     title();
   } else if (state === `simulation`){
@@ -299,6 +301,17 @@ let d4 = dist(you.x, you.y, fake.x, fake.y);
     state = `secret`
   }
 
+}
+
+// BACKGROUND FOR LOOP /////////////////////////////////////////////////////////
+function decoration(x, y, numLines, lineWidth, lineHeight, lineSpacing) {
+  //For loop
+  for (let i = 0; i < numLines; i++) {
+    noStroke();
+    fill(255, 239, 255);
+    rect(x, y, lineWidth, lineHeight);
+    y += lineSpacing;
+  }
 }
 
 // START BUTTON ///////////////////////////////////////////////////////////
