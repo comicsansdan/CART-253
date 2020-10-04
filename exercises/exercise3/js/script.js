@@ -39,7 +39,10 @@ let fake = {
   x: 0,
   y: 0,
   size: 50,
+  string: `hey! <3`
 }
+
+let state = `title`
 
 // SETUP //////////////////////////////////////////////////////////////////////
 //
@@ -88,6 +91,11 @@ function draw() {
   obstructed();
 
 }
+
+// STATES /////////////////////////////////////////////////////////////////////
+//Title state
+
+
 
 // DISPLAY /////////////////////////////////////////////////////////////////////
 //Displays the player, their soulmate, others, etc.
@@ -179,4 +187,17 @@ let d2 = dist(you.x, you.y, obstacle2.x, obstacle2.y);
     if (d2 < you.size/2 + obstacle2.size/2){
       you.y += 200;
     }
+
+//Collision with the soulmate
+// let d3 = dist(you.x, you.y, soulmate.x, soulmate.y);
+//   if (d3 < you.size/2 + soulmate.size/2){
+//     state = `love!`
+//   }
+
+//Collision with the fake
+let d3 = dist(you.x, you.y, fake.x, fake.y);
+  if (d3 < you.size/2 + fake.size/2 + 150){
+    fill(17, 59, 81);
+    text(fake.string, 130, fake.y);
+  }
 }
