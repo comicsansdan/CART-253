@@ -7,30 +7,35 @@ This exercise is to recreate the "Looking for Love" activity by using our own if
 
 // VARIABLES //////////////////////////////////////////////////////////////////
 let you = {
-  x: 0,
-  y: 0,
+  x: undefined,
+  y: undefined,
   size: 50,
-  speed: 1,
+  speed: 3,
 }
 
 let soulmate = {
-  x: 0,
-  y: 0,
+  x: undefined,
+  y: undefined,
   size: 50,
   vx: 1,
   speed: 1,
 }
 
-let others = {
-  x: 0,
-  y: 0,
+let obstacle1 = {
+  x: undefined,
+  y: undefined,
   size: 50,
-  vx: 0,
-  vy: 0,
-  speed: 2,
+  speed: 15,
 }
 
-let fakes = {
+let obstacle2 = {
+  x: undefined,
+  y: undefined,
+  size: 50,
+  speed: 11,
+}
+
+let fake = {
   x: 0,
   y: 0,
   size: 50,
@@ -57,6 +62,17 @@ function circleSetup(){
   //Soulmate's starting position
     soulmate.x = width/ 2;
     soulmate.y = height / 8;
+
+  //Fake's starting position
+    fake.x = 100;
+    fake.y = height/2;
+
+  //Obstacle starting positions
+    obstacle1.x = 0;
+    obstacle1.y = height/3.5;
+    obstacle2.x = width;
+    obstacle2.y = height/3*2;
+
 }
 
 // DRAW ///////////////////////////////////////////////////////////////////////
@@ -69,6 +85,7 @@ function draw() {
   display();
   movement();
   controls();
+  obstructed();
 
 }
 
@@ -83,6 +100,16 @@ function display() {
   fill(255, 194, 202);
   ellipse(soulmate.x, soulmate.y, soulmate.size);
 
+  //Fake
+  fill(17, 59, 81);
+  ellipse(fake.x, fake.y, fake.size);
+
+  //Obstacles
+  fill(199, 145, 168);
+  ellipse(obstacle1.x, obstacle1.y, obstacle1.size)
+
+  fill(199, 145, 168);
+  ellipse(obstacle2.x, obstacle2.y, obstacle2.size)
 }
 
 // MOVEMENT /////////////////////////////////////////////////////////////////////
@@ -97,13 +124,24 @@ function movement(){
     soulmate.vx += soulmate.speed;
   }
 
+  // Obstacle's movement
+  obstacle1.x += obstacle1.speed;
+  if (obstacle1.x > width){
+    obstacle1.x = 0;
+  }
+  obstacle2.x += -obstacle2.speed;
+  if (obstacle2.x < 0){
+    obstacle2.x = width;
+  }
 
 }
-
 
 // PLAYERS CONTROLS ///////////////////////////////////////////////////////////
 //Allows the player to control the circle with either the arrow keys or WASD
 function controls(){
+  //Movement constrain (doesn't go out of bounds)
+  you.x = constrain(you.x, 0, width);
+  you.y = constrain(you.y, 0, height);
   // Up movement
   if (keyIsDown(38)){
     you.y += -you.speed;
@@ -128,4 +166,17 @@ function controls(){
   } else if (keyIsDown(65)){
     you.x += -you.speed;
   }
+}
+
+// COLLISIONS ///////////////////////////////////////////////////////////
+//Collision with the obstacles
+function obstructed(){
+let d1 = dist(you.x, you.y, obstacle1.x, obstacle1.y);
+  if (d1 < you.size/2 + obstacle1.size/2){
+    you.y += 200;
+  }
+let d2 = dist(you.x, you.y, obstacle2.x, obstacle2.y);
+    if (d2 < you.size/2 + obstacle2.size/2){
+      you.y += 200;
+    }
 }
