@@ -86,12 +86,13 @@ let forest = {
   x: undefined,
   y: undefined,
   image: undefined,
-  size: 2000,
+  size: 1950,
 }
 
 let axeSFX;
 let chopSFX;
 let fireSFX;
+let nightSFX;
 
 let state = `simulation`;
 
@@ -110,6 +111,7 @@ function preload() {
   axeSFX = loadSound(`assets/sounds/axeAcquired.wav`);
   chopSFX = loadSound(`assets/sounds/chop.wav`);
   fireSFX = loadSound(`assets/sounds/fire.wav`);
+  nightSFX = loadSound(`assets/sounds/nightfall.wav`)
 };
 
 
@@ -157,7 +159,7 @@ function objectSetup() {
 
   // Forest starting postion
   forest.x = width/2;
-  forest.y = height/2*1.5;
+  forest.y = height/2*1.3;
 
 
 }
@@ -276,7 +278,7 @@ function environment(){
   floor.width = width;
 
   push();
-  fill(19, 40, 12);
+  fill(19, 50, 12);
   rectMode(CENTER);
   rect(floor.x, floor.y, floor.width, floor.height);
   pop();
@@ -447,6 +449,9 @@ function collision() {
   //Turns night time
     if (bg.r < 56){
       state = `noFire`;
+      if (!nightSFX.isPlaying()) {
+          nightSFX.loop();
+        }
     }
 
 }
