@@ -5,6 +5,7 @@ Daniel Cacatian
 Here is a description of this template p5 project.
 **************************************************/
 
+// VARIABLES ////////////////////////////////////////////////////////////////////
 let bg = {
   r: 248,
   g: 177,
@@ -14,7 +15,7 @@ let bg = {
 let player = {
   x: 0,
   y: 0,
-  speed: 10,
+  speed: 5,
   image: undefined,
   size: 120,
 }
@@ -64,6 +65,7 @@ let tent = {
   y: 0,
   size: 600,
   image: undefined,
+  imageFire: undefined,
 }
 
 let axe = {
@@ -80,6 +82,8 @@ let wood = {
   size: 100,
 }
 
+let state = `title`;
+
 function preload() {
   tent.image = loadImage(`assets/images/tent.png`);
   player.image = loadImage(`assets/images/player_R.png`);
@@ -87,10 +91,11 @@ function preload() {
   axe.image = loadImage(`assets/images/axe.png`);
   wood.image = loadImage(`assets/images/wood.png`);
   loadImage(`assets/images/player_L.png`);
+  tent.imageFire = loadImage(`assets/images/tent_F.png`);
 };
 
 
-// setup()
+// SETUP ////////////////////////////////////////////////////////////////////
 //
 // Description of setup() goes here.
 function setup() {
@@ -134,17 +139,67 @@ function objectSetup() {
 
 }
 
-// draw()
+// DRAW ////////////////////////////////////////////////////////////////////
 //
 // Description of draw() goes here.
 function draw() {
   background(bg.r, bg.g, bg.b);
 
+  if (state === `title`){
+    title();
+  } else if (state === `simulation`){
+    simulation();
+  } else if (state === `fire`){
+    goodEnding();
+  } else if (state === `noFire`){
+    badEnding();
+  }
+
+
+}
+
+// STATES ////////////////////////////////////////////////////////////////////
+//Title state
+function title(){
+  header();
+  instructions();
+  tip();
+}
+
+function simulation(){
   display();
+  environment();
+  displayTent();
+  displayPlayer();
   controls();
   movement();
   collision();
+}
 
+function goodEnding(){
+  fire();
+}
+
+function badEnding(){
+  noFire();
+}
+
+// ENDINGS ////////////////////////////////////////////////////////////////////
+//How the GOOD ending screen will be displayed
+function fire(){
+  background(53, 94, 126)
+  good();
+  environment();
+  displayTentFire();
+}
+
+//How the BAD ending screen will be displayed
+function noFire(){
+  background(53, 94, 126)
+  bad();
+  tryAgain();
+  environment();
+  displayTent();
 }
 
 
@@ -164,16 +219,25 @@ function display() {
   rect(inventory.x, inventory.y, inventory.width, inventory.height, 20);
   image(inventory.image, inventory.imageX, inventory.imageY, inventory.imageSize, inventory.imageSize);
 
+  //Display axe
+  push();
+  image(axe.image, axe.x, axe.y, axe.size, axe.size);
+  pop();
+
+  //Display wood in inventory
+  push();
+  image(wood.image, wood.x, wood.y, wood.size, wood.size);
+  pop();
+
+}
+
+//Displays the environment ONLY (trees, floor & tent)
+function environment(){
   //Display tree
   push();
   fill(83, 53, 10);
   rectMode(CENTER);
   rect(tree.x, tree.y, tree.width, tree.height);
-  pop();
-
-  //Display axe
-  push();
-  image(axe.image, axe.x, axe.y, axe.size, axe.size);
   pop();
 
   //Display stump
@@ -192,38 +256,113 @@ function display() {
   rect(floor.x, floor.y, floor.width, floor.height);
   pop();
 
-  //Display tent
-  push();
-  imageMode(CENTER);
-  image(tent.image, tent.x, tent.y, tent.size, tent.size);
-  pop();
+}
 
-  //Display player
+//Displays tent WITHOUT bonfire
+function displayTent(){
+push();
+imageMode(CENTER);
+image(tent.image, tent.x, tent.y, tent.size, tent.size);
+pop();
+}
+
+//Displays tent WITH bonfire
+function displayTentFire(){
+push();
+imageMode(CENTER);
+image(tent.imageFire, tent.x, tent.y, tent.size, tent.size);
+pop();
+}
+
+//Displays player
+function displayPlayer(){
   push();
-  fill(255);
   image(player.image, player.x, player.y, player.size, player.size);
   pop();
-
-  //Display wood in inventory
-  push();
-  image(wood.image, wood.x, wood.y, wood.size, wood.size);
-  pop();
-
 }
+
+// TEXT ///////////////////////////////////////////////////////////////////////
+//Title text
+function header(){
+  push();
+  textSize(100);
+  fill(53, 94, 126);
+  textStyle(BOLD);
+  textAlign(CENTER);
+  rectMode(CENTER);
+  text(`- UNTIL NIGHTFALL -`, width / 2, height / 2);
+  pop();
+}
+
+function instructions(){
+  push();
+  textSize(54);
+  fill(53, 94, 126);
+  textStyle(ITALIC)
+  textAlign(CENTER);
+  rectMode(CENTER);
+  text(`Build a bonfire before night to survived... Press any key to start`, width / 2, height / 2+100, 1000, 150);
+  pop();
+}
+
+//Controls text
+function tip(){
+  push();
+  textSize(24);
+  fill(53, 94, 126);
+  textAlign(CENTER);
+  rectMode(CENTER);
+  text(`Controls: Use WASD or ArrowKeys to move LEFT or RIGHT`, width / 2, height / 2*1.9);
+  pop();
+}
+
+function good(){
+  push();
+  textSize(100);
+  fill(255);
+  textStyle(BOLD);
+  textAlign(CENTER);
+  rectMode(CENTER);
+  text(`- YOU SURVIVED THE NIGHT! -`, width / 2, height / 2);
+  pop();
+}
+
+function bad(){
+  push();
+  textSize(80);
+  fill(255);
+  textStyle(BOLD);
+  textAlign(CENTER);
+  rectMode(CENTER);
+  text(`YOU DIDN'T SURVIVE THE NIGHT! :(`, width / 2, height / 2, 900, 300);
+  pop();
+}
+
+function tryAgain(){
+  push();
+  textSize(54);
+  fill(255);
+  textStyle(ITALIC)
+  textAlign(CENTER);
+  rectMode(CENTER);
+  text(`Try again?`, width / 2, height / 2+120, 1000, 150);
+  pop();
+}
+
 
 // MOVEMENT/CHANGE ////////////////////////////////////////////////////////////////////
 //Allows movement to certain objects
 function movement() {
   //Sun set movement
-  sun.y += 0.2;
+  sun.y += 0.6;
 
   //Background change
   bg.r = constrain(bg.r, 53, 248);
-  bg.r += -0.05;
+  bg.r += -0.2;
   bg.g = constrain(bg.g, 94, 177);
-  bg.g += -0.05;
+  bg.g += -0.2;
   bg.b = constrain(bg.b, 126, 149);
-  bg.b += -0.05;
+  bg.b += -0.2;
 
 }
 
@@ -246,8 +385,8 @@ function controls() {
   }
 }
 
-// COLLISION /////////////////////////////////////////////////////////////////
-//Detects collision with various objects
+// COLLISION/CHANGE STATE /////////////////////////////////////////////////////////////////
+//Detects collision with various objects that will change the current state
 function collision() {
   //Collision with axe
   let d1 = dist(player.x, player.y, axe.x, axe.y);
@@ -261,4 +400,20 @@ function collision() {
       wood.x = 325;
       wood.y = 50;
     }
+  //Collision with tree (right)
+    if (wood.x === 325 && player.x === width/2){
+      state = `fire`
+    }
+  //Turns night time
+    if (bg.r < 56){
+      state = `noFire`;
+    }
+
+}
+
+// START BUTTON ///////////////////////////////////////////////////////////
+function keyPressed(){
+if (state === `title`){
+  state = `simulation`;
+  }
 }
