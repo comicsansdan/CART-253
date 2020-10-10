@@ -5,17 +5,24 @@ Daniel Cacatian
 Here is a description of this template p5 project.
 **************************************************/
 
+let bg = {
+  r: 248,
+  g: 177,
+  b: 149
+}
+
 let player = {
   x: 0,
   y: 0,
-  speed: 2,
+  speed: 10,
   image: undefined,
+  size: 120,
 }
 
 let sun = {
   x: 0,
   y: 0,
-  size: 1000,
+  size: 1500,
   alpha: 0.5,
   speed: 2,
 }
@@ -66,11 +73,19 @@ let axe = {
   size: 100,
 }
 
-function preload(){
+let wood = {
+  x: undefined,
+  y: undefined,
+  image: `assets/images/wood.png`,
+  size: 100,
+}
+
+function preload() {
   tent.image = loadImage(`assets/images/tent.png`);
   player.image = loadImage(`assets/images/player_R.png`);
   inventory.image = loadImage(`assets/images/inventory.png`);
   axe.image = loadImage(`assets/images/axe.png`);
+  wood.image = loadImage(`assets/images/wood.png`);
   loadImage(`assets/images/player_L.png`);
 };
 
@@ -88,34 +103,34 @@ function setup() {
 }
 
 // STARTING POSITIONS ///////////////////////////////////////////////////////
-function objectSetup(){
+function objectSetup() {
   // Player starting position
-    player.x = width/2;
-    player.y = height/2*1.65;
+  player.x = width / 2;
+  player.y = height / 2 * 1.65;
 
   // Tree starting position
-    tree.x = width/6*5.5;
-    tree.y = height/6;
+  tree.x = width / 6 * 5.5;
+  tree.y = height;
 
   // Stump starting position
-    stump.x = width/10;
-    stump.y = height;
+  stump.x = width / 10;
+  stump.y = height;
 
   // Sun starting postion
-    sun.x = width/2;
-    sun.y = height;
+  sun.x = width / 2;
+  sun.y = height;
 
   // Floor starting postion
-    floor.x = width/2;
-    floor.y = height;
+  floor.x = width / 2;
+  floor.y = height;
 
   // Tent starting postion
-    tent.x = width/2;
-    tent.y = height/2*1.65;
+  tent.x = width / 2;
+  tent.y = height / 2 * 1.65;
 
-  // Tent starting postion
-    axe.x = width/10 + 60;
-    axe.y = height - 190;
+  // Axe starting postion
+  axe.x = width / 10 + 60;
+  axe.y = height - 190;
 
 }
 
@@ -123,44 +138,52 @@ function objectSetup(){
 //
 // Description of draw() goes here.
 function draw() {
-  background(255, 213, 163);
+  background(bg.r, bg.g, bg.b);
 
   display();
   controls();
-
+  movement();
+  collision();
 
 }
 
+
 // DISPLAY ////////////////////////////////////////////////////////////////////
 // Displays the player, tree, stump, sun
-function display(){
+function display() {
 
-//Display tree
+  //Display sun
   push();
-  fill(83,53,10);
+  fill(255, 255, 217, 150);
+  ellipse(sun.x, sun.y, sun.size)
+  pop();
+
+  //Display inventory
+  push();
+  fill(0, 0, 0, 100);
+  rect(inventory.x, inventory.y, inventory.width, inventory.height, 20);
+  image(inventory.image, inventory.imageX, inventory.imageY, inventory.imageSize, inventory.imageSize);
+
+  //Display tree
+  push();
+  fill(83, 53, 10);
   rectMode(CENTER);
   rect(tree.x, tree.y, tree.width, tree.height);
   pop();
 
-//Display max
+  //Display axe
   push();
   image(axe.image, axe.x, axe.y, axe.size, axe.size);
   pop();
 
-//Display stump
+  //Display stump
   push();
-  fill(83,53,10);
+  fill(83, 53, 10);
   rectMode(CENTER);
   rect(stump.x, stump.y, stump.width, stump.height);
   pop();
 
-//Display sun
-  push();
-  fill(255, 255, 217, 100);
-  ellipse(sun.x, sun.y, sun.size)
-  pop();
-
-//Display floor
+  //Display floor
   floor.width = width;
 
   push();
@@ -169,42 +192,73 @@ function display(){
   rect(floor.x, floor.y, floor.width, floor.height);
   pop();
 
-//Display tent
+  //Display tent
   push();
   imageMode(CENTER);
   image(tent.image, tent.x, tent.y, tent.size, tent.size);
   pop();
 
-//Display player
+  //Display player
   push();
   fill(255);
-  image(player.image, player.x, player.y);
+  image(player.image, player.x, player.y, player.size, player.size);
   pop();
 
-//Display inventory
+  //Display wood in inventory
   push();
-  fill(0, 0, 0, 100);
-  rect(inventory.x, inventory.y, inventory.width, inventory.height, 20);
-  image(inventory.image, inventory.imageX, inventory.imageY, inventory.imageSize, inventory.imageSize);
+  image(wood.image, wood.x, wood.y, wood.size, wood.size);
+  pop();
 
+}
+
+// MOVEMENT/CHANGE ////////////////////////////////////////////////////////////////////
+//Allows movement to certain objects
+function movement() {
+  //Sun set movement
+  sun.y += 0.2;
+
+  //Background change
+  bg.r = constrain(bg.r, 53, 248);
+  bg.r += -0.05;
+  bg.g = constrain(bg.g, 94, 177);
+  bg.g += -0.05;
+  bg.b = constrain(bg.b, 126, 149);
+  bg.b += -0.05;
 
 }
 
 // PLAYER CONTROLS /////////////////////////////////////////////////////////////
 //Allows the player to control themselves with either the arrow keys or WASD
-function controls(){
+function controls() {
   //Movement constrain (doesn't go out of bounds)
-  player.x = constrain(player.x, 0, width);
+  player.x = constrain(player.x, 250, 1600);
   //Right movement
-  if (keyIsDown(39)){
+  if (keyIsDown(39)) {
     player.x += player.speed;
-  } else if (keyIsDown(68)){
+  } else if (keyIsDown(68)) {
     player.x += player.speed;
   }
   //Left movement
-  if (keyIsDown(37)){
+  if (keyIsDown(37)) {
     player.x += -player.speed;
-  } else if (keyIsDown(65)){
+  } else if (keyIsDown(65)) {
     player.x += -player.speed;
   }
+}
+
+// COLLISION /////////////////////////////////////////////////////////////////
+//Detects collision with various objects
+function collision() {
+  //Collision with axe
+  let d1 = dist(player.x, player.y, axe.x, axe.y);
+    if (d1 < player.size/2 + axe.size/2){
+      axe.x = 200;
+      axe.y = 50;
+  }
+  //Collision with tree (right)
+    if (player.x === 1600 && axe.x === 200){
+      tree.height = 250;
+      wood.x = 325;
+      wood.y = 50;
+    }
 }
