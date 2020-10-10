@@ -71,20 +71,32 @@ let tent = {
 let axe = {
   x: 0,
   y: 0,
-  image: `assets/images/axe.png`,
+  image: undefined,
   size: 100,
 }
 
 let wood = {
   x: undefined,
   y: undefined,
-  image: `assets/images/wood.png`,
+  image: undefined,
   size: 100,
 }
 
-let state = `title`;
+let forest = {
+  x: undefined,
+  y: undefined,
+  image: undefined,
+  size: 2000,
+}
+
+let axeSFX;
+let chopSFX;
+let fireSFX;
+
+let state = `simulation`;
 
 function preload() {
+  //Preload IMAGES
   tent.image = loadImage(`assets/images/tent.png`);
   player.image = loadImage(`assets/images/player_R.png`);
   inventory.image = loadImage(`assets/images/inventory.png`);
@@ -92,6 +104,12 @@ function preload() {
   wood.image = loadImage(`assets/images/wood.png`);
   loadImage(`assets/images/player_L.png`);
   tent.imageFire = loadImage(`assets/images/tent_F.png`);
+  forest.image = loadImage(`assets/images/background.png`);
+
+  //Preload SOUND
+  axeSFX = loadSound(`assets/sounds/axeAcquired.wav`);
+  chopSFX = loadSound(`assets/sounds/chop.wav`);
+  fireSFX = loadSound(`assets/sounds/fire.wav`);
 };
 
 
@@ -137,6 +155,11 @@ function objectSetup() {
   axe.x = width / 10 + 60;
   axe.y = height - 190;
 
+  // Forest starting postion
+  forest.x = width/2;
+  forest.y = height/2*1.5;
+
+
 }
 
 // DRAW ////////////////////////////////////////////////////////////////////
@@ -169,6 +192,7 @@ function title(){
 function simulation(){
   display();
   environment();
+  displayAxe();
   displayTent();
   displayPlayer();
   controls();
@@ -188,18 +212,18 @@ function badEnding(){
 //How the GOOD ending screen will be displayed
 function fire(){
   background(53, 94, 126)
-  good();
   environment();
   displayTentFire();
+  good();
 }
 
 //How the BAD ending screen will be displayed
 function noFire(){
-  background(53, 94, 126)
-  bad();
-  tryAgain();
+  background(53, 94, 126);
   environment();
   displayTent();
+  bad();
+  tryAgain();
 }
 
 
@@ -219,11 +243,6 @@ function display() {
   rect(inventory.x, inventory.y, inventory.width, inventory.height, 20);
   image(inventory.image, inventory.imageX, inventory.imageY, inventory.imageSize, inventory.imageSize);
 
-  //Display axe
-  push();
-  image(axe.image, axe.x, axe.y, axe.size, axe.size);
-  pop();
-
   //Display wood in inventory
   push();
   image(wood.image, wood.x, wood.y, wood.size, wood.size);
@@ -233,6 +252,12 @@ function display() {
 
 //Displays the environment ONLY (trees, floor & tent)
 function environment(){
+  //Display background trees
+  push();
+  imageMode(CENTER);
+  image(forest.image, forest.x, forest.y, forest.size, forest.size);
+  pop();
+
   //Display tree
   push();
   fill(83, 53, 10);
@@ -251,11 +276,19 @@ function environment(){
   floor.width = width;
 
   push();
-  fill(11, 102, 35);
+  fill(19, 40, 12);
   rectMode(CENTER);
   rect(floor.x, floor.y, floor.width, floor.height);
   pop();
 
+}
+
+//Displays axe
+function displayAxe(){
+  //Display axe
+  push();
+  image(axe.image, axe.x, axe.y, axe.size, axe.size);
+  pop();
 }
 
 //Displays tent WITHOUT bonfire
@@ -301,7 +334,7 @@ function instructions(){
   textStyle(ITALIC)
   textAlign(CENTER);
   rectMode(CENTER);
-  text(`Build a bonfire before night to survived... Press any key to start`, width / 2, height / 2+100, 1000, 150);
+  text(`Build a bonfire before night to survive... Press any key to start`, width / 2, height / 2+100, 1000, 150);
   pop();
 }
 
@@ -393,16 +426,23 @@ function collision() {
     if (d1 < player.size/2 + axe.size/2){
       axe.x = 200;
       axe.y = 50;
+      axeSFX.play();
   }
   //Collision with tree (right)
     if (player.x === 1600 && axe.x === 200){
       tree.height = 250;
       wood.x = 325;
       wood.y = 50;
+      if (!chopSFX.isPlaying()) {
+          chopSFX.play();
+        }
     }
   //Collision with tree (right)
     if (wood.x === 325 && player.x === width/2){
       state = `fire`
+      if (!fireSFX.isPlaying()) {
+          fireSFX.loop();
+        }
     }
   //Turns night time
     if (bg.r < 56){
