@@ -5,6 +5,8 @@ Daniel Cacatian
 This project is a small little game puzzle where the player has to figure out how to survive the night! Its a race against the sun.
 **************************************************/
 
+"use strict";
+
 // VARIABLES ////////////////////////////////////////////////////////////////////
 let bg = {
   r: 248,
