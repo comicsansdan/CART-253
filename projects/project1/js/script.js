@@ -102,11 +102,11 @@ function preload() {
   //Preload IMAGES
   tent.image = loadImage(`assets/images/tent.png`);
   player.image = loadImage(`assets/images/player_R.png`);
-  inventory.image = loadImage(`assets/images/inventory.png`);
+  inventory.image = loadImage(`assets/images/Inventory.png`);
   axe.image = loadImage(`assets/images/axe.png`);
   wood.image = loadImage(`assets/images/wood.png`);
   loadImage(`assets/images/player_L.png`);
-  tent.imageFire = loadImage(`assets/images/tent_F.png`);
+  tent.imageFire = loadImage(`assets/images/Tent_F.png`);
   forest.image = loadImage(`assets/images/background.png`);
 
   //Preload SOUND
