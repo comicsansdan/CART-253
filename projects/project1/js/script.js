@@ -1,9 +1,11 @@
 /**************************************************
-Project 1 : "Something fire themeed"
+Project 1 : Until Nightfall
 Daniel Cacatian
 
-Here is a description of this template p5 project.
+This project is a small little game puzzle where the player has to figure out how to survive the night! Its a race against the sun.
 **************************************************/
+
+"use strict";
 
 // VARIABLES ////////////////////////////////////////////////////////////////////
 let bg = {
@@ -94,7 +96,7 @@ let chopSFX;
 let fireSFX;
 let nightSFX;
 
-let state = `simulation`;
+let state = `title`;
 
 function preload() {
   //Preload IMAGES
@@ -117,7 +119,7 @@ function preload() {
 
 // SETUP ////////////////////////////////////////////////////////////////////
 //
-// Description of setup() goes here.
+// Contains the canvas, and the starting positions of the objects
 function setup() {
 
   createCanvas(windowWidth, windowHeight);
@@ -128,6 +130,7 @@ function setup() {
 }
 
 // STARTING POSITIONS ///////////////////////////////////////////////////////
+//Function that gives the starting positions for objects
 function objectSetup() {
   // Player starting position
   player.x = width / 2;
@@ -161,12 +164,11 @@ function objectSetup() {
   forest.x = width/2;
   forest.y = height/2*1.3;
 
-
 }
 
 // DRAW ////////////////////////////////////////////////////////////////////
 //
-// Description of draw() goes here.
+// Contains everything else, the title, simulation, background, endings, etc.
 function draw() {
   background(bg.r, bg.g, bg.b);
 
@@ -184,6 +186,7 @@ function draw() {
 }
 
 // STATES ////////////////////////////////////////////////////////////////////
+//Functions that activate when a different state occurs
 //Title state
 function title(){
   header();
@@ -191,6 +194,7 @@ function title(){
   tip();
 }
 
+//Simulation state
 function simulation(){
   display();
   environment();
@@ -202,15 +206,17 @@ function simulation(){
   collision();
 }
 
+//Good ending state
 function goodEnding(){
   fire();
 }
 
+//Bad ending state
 function badEnding(){
   noFire();
 }
 
-// ENDINGS ////////////////////////////////////////////////////////////////////
+// ENDINGS FUNCTIONS ////////////////////////////////////////////////////////////////////
 //How the GOOD ending screen will be displayed
 function fire(){
   background(53, 94, 126)
@@ -229,10 +235,10 @@ function noFire(){
 }
 
 
-// DISPLAY ////////////////////////////////////////////////////////////////////
+// DISPLAY FUNCTIONS ////////////////////////////////////////////////////////////////////
+//Functions that allow objects to be displayed
 // Displays the player, tree, stump, sun
 function display() {
-
   //Display sun
   push();
   fill(255, 255, 217, 150);
@@ -285,7 +291,7 @@ function environment(){
 
 }
 
-//Displays axe
+//Displays axe ONLY
 function displayAxe(){
   //Display axe
   push();
@@ -316,7 +322,8 @@ function displayPlayer(){
   pop();
 }
 
-// TEXT ///////////////////////////////////////////////////////////////////////
+// TEXT FUNCTIONS ///////////////////////////////////////////////////////////////////////
+// Contains functions that have text only
 //Title text
 function header(){
   push();
@@ -329,6 +336,7 @@ function header(){
   pop();
 }
 
+//Instructions text
 function instructions(){
   push();
   textSize(54);
@@ -351,6 +359,7 @@ function tip(){
   pop();
 }
 
+//Good ending text
 function good(){
   push();
   textSize(100);
@@ -362,6 +371,7 @@ function good(){
   pop();
 }
 
+//Bad ending text
 function bad(){
   push();
   textSize(80);
@@ -385,7 +395,8 @@ function tryAgain(){
 }
 
 
-// MOVEMENT/CHANGE ////////////////////////////////////////////////////////////////////
+// MOVEMENT/CHANGE FUNCTION ////////////////////////////////////////////////////////////////////
+//Functions to have movement and change occur
 //Allows movement to certain objects
 function movement() {
   //Sun set movement
@@ -401,26 +412,30 @@ function movement() {
 
 }
 
-// PLAYER CONTROLS /////////////////////////////////////////////////////////////
-//Allows the player to control themselves with either the arrow keys or WASD
+// PLAYER CONTROLS FUNCTION /////////////////////////////////////////////////////////////
+//Function that allows the player to control themselves with either the arrow keys or WASD
 function controls() {
   //Movement constrain (doesn't go out of bounds)
   player.x = constrain(player.x, 250, 1600);
   //Right movement
   if (keyIsDown(39)) {
     player.x += player.speed;
+    player.image = loadImage(`assets/images/player_R.png`)
   } else if (keyIsDown(68)) {
     player.x += player.speed;
+    player.image = loadImage(`assets/images/player_R.png`);
   }
   //Left movement
   if (keyIsDown(37)) {
     player.x += -player.speed;
+    player.image = loadImage(`assets/images/player_L.png`);
   } else if (keyIsDown(65)) {
     player.x += -player.speed;
+    player.image = loadImage(`assets/images/player_L.png`);
   }
 }
 
-// COLLISION/CHANGE STATE /////////////////////////////////////////////////////////////////
+// COLLISION/CHANGE STATE FUNCTION /////////////////////////////////////////////////////////////////
 //Detects collision with various objects that will change the current state
 function collision() {
   //Collision with axe
@@ -456,7 +471,7 @@ function collision() {
 
 }
 
-// START BUTTON ///////////////////////////////////////////////////////////
+// START BUTTON FUNCTION ///////////////////////////////////////////////////////////
 function keyPressed(){
 if (state === `title`){
   state = `simulation`;
