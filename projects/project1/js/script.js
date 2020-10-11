@@ -19,6 +19,7 @@ let player = {
   y: 0,
   speed: 5,
   image: undefined,
+  imageL: undefined,
   size: 120,
 }
 
@@ -102,10 +103,10 @@ function preload() {
   //Preload IMAGES
   tent.image = loadImage(`assets/images/tent.png`);
   player.image = loadImage(`assets/images/player_R.png`);
+  player.imageL = loadImage(`assets/images/player_L.png`);
   inventory.image = loadImage(`assets/images/Inventory.png`);
   axe.image = loadImage(`assets/images/axe.png`);
   wood.image = loadImage(`assets/images/wood.png`);
-  loadImage(`assets/images/player_L.png`);
   tent.imageFire = loadImage(`assets/images/Tent_F.png`);
   forest.image = loadImage(`assets/images/background.png`);
 
@@ -200,7 +201,6 @@ function simulation() {
   environment();
   displayAxe();
   displayTent();
-  displayPlayer();
   controls();
   movement();
   collision();
@@ -315,13 +315,6 @@ function displayTentFire() {
   pop();
 }
 
-//Displays player
-function displayPlayer() {
-  push();
-  image(player.image, player.x, player.y, player.size, player.size);
-  pop();
-}
-
 // TEXT FUNCTIONS ///////////////////////////////////////////////////////////////////////
 // Contains functions that have text only
 //Title text
@@ -355,7 +348,7 @@ function tip() {
   fill(53, 94, 126);
   textAlign(CENTER);
   rectMode(CENTER);
-  text(`Controls: Use WASD or ArrowKeys to move LEFT or RIGHT`, width / 2, height / 2 * 1.9);
+  text(`Controls: Use ArrowKeys to move LEFT or RIGHT`, width / 2, height / 2 * 1.9);
   pop();
 }
 
@@ -415,20 +408,21 @@ function movement() {
 // PLAYER CONTROLS FUNCTION /////////////////////////////////////////////////////////////
 //Function that allows the player to control themselves with either the arrow keys or WASD
 function controls() {
-  //Movement constrain (doesn't go out of bounds)
-  player.x = constrain(player.x, 250, 1600);
   //Right movement
   if (keyIsDown(39)) {
     player.x += player.speed;
-  } else if (keyIsDown(68)) {
-    player.x += player.speed;
+    image(player.image, player.x, player.y, player.size, player.size);
   }
   //Left movement
   if (keyIsDown(37)) {
     player.x += -player.speed;
-  } else if (keyIsDown(65)) {
-    player.x += -player.speed;
+    image(player.imageL, player.x, player.y, player.size, player.size);
   }
+  else {
+    image(player.image, player.x, player.y, player.size, player.size);
+  }
+  //Movement constrain (doesn't go out of bounds)
+  player.x = constrain(player.x, 250, 1600);
 }
 
 // COLLISION/CHANGE STATE FUNCTION /////////////////////////////////////////////////////////////////
