@@ -420,18 +420,14 @@ function controls() {
   //Right movement
   if (keyIsDown(39)) {
     player.x += player.speed;
-    player.image = loadImage(`assets/images/player_R.png`)
   } else if (keyIsDown(68)) {
     player.x += player.speed;
-    player.image = loadImage(`assets/images/player_R.png`);
   }
   //Left movement
   if (keyIsDown(37)) {
     player.x += -player.speed;
-    player.image = loadImage(`assets/images/player_L.png`);
   } else if (keyIsDown(65)) {
     player.x += -player.speed;
-    player.image = loadImage(`assets/images/player_L.png`);
   }
 }
 
