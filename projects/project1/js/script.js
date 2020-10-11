@@ -102,11 +102,11 @@ function preload() {
   //Preload IMAGES
   tent.image = loadImage(`assets/images/tent.png`);
   player.image = loadImage(`assets/images/player_R.png`);
-  inventory.image = loadImage(`assets/images/Inventory.png`);
+  inventory.image = loadImage(`assets/images/inventory.png`);
   axe.image = loadImage(`assets/images/axe.png`);
   wood.image = loadImage(`assets/images/wood.png`);
   loadImage(`assets/images/player_L.png`);
-  tent.imageFire = loadImage(`assets/images/Tent_F.png`);
+  tent.imageFire = loadImage(`assets/images/tent_F.png`);
   forest.image = loadImage(`assets/images/background.png`);
 
   //Preload SOUND
@@ -161,8 +161,8 @@ function objectSetup() {
   axe.y = height - 190;
 
   // Forest starting postion
-  forest.x = width/2;
-  forest.y = height/2*1.3;
+  forest.x = width / 2;
+  forest.y = height / 2 * 1.3;
 
 }
 
@@ -172,13 +172,13 @@ function objectSetup() {
 function draw() {
   background(bg.r, bg.g, bg.b);
 
-  if (state === `title`){
+  if (state === `title`) {
     title();
-  } else if (state === `simulation`){
+  } else if (state === `simulation`) {
     simulation();
-  } else if (state === `fire`){
+  } else if (state === `fire`) {
     goodEnding();
-  } else if (state === `noFire`){
+  } else if (state === `noFire`) {
     badEnding();
   }
 
@@ -188,14 +188,14 @@ function draw() {
 // STATES ////////////////////////////////////////////////////////////////////
 //Functions that activate when a different state occurs
 //Title state
-function title(){
+function title() {
   header();
   instructions();
   tip();
 }
 
 //Simulation state
-function simulation(){
+function simulation() {
   display();
   environment();
   displayAxe();
@@ -207,18 +207,18 @@ function simulation(){
 }
 
 //Good ending state
-function goodEnding(){
+function goodEnding() {
   fire();
 }
 
 //Bad ending state
-function badEnding(){
+function badEnding() {
   noFire();
 }
 
 // ENDINGS FUNCTIONS ////////////////////////////////////////////////////////////////////
 //How the GOOD ending screen will be displayed
-function fire(){
+function fire() {
   background(53, 94, 126)
   environment();
   displayTentFire();
@@ -226,7 +226,7 @@ function fire(){
 }
 
 //How the BAD ending screen will be displayed
-function noFire(){
+function noFire() {
   background(53, 94, 126);
   environment();
   displayTent();
@@ -259,7 +259,7 @@ function display() {
 }
 
 //Displays the environment ONLY (trees, floor & tent)
-function environment(){
+function environment() {
   //Display background trees
   push();
   imageMode(CENTER);
@@ -292,7 +292,7 @@ function environment(){
 }
 
 //Displays axe ONLY
-function displayAxe(){
+function displayAxe() {
   //Display axe
   push();
   image(axe.image, axe.x, axe.y, axe.size, axe.size);
@@ -300,23 +300,23 @@ function displayAxe(){
 }
 
 //Displays tent WITHOUT bonfire
-function displayTent(){
-push();
-imageMode(CENTER);
-image(tent.image, tent.x, tent.y, tent.size, tent.size);
-pop();
+function displayTent() {
+  push();
+  imageMode(CENTER);
+  image(tent.image, tent.x, tent.y, tent.size, tent.size);
+  pop();
 }
 
 //Displays tent WITH bonfire
-function displayTentFire(){
-push();
-imageMode(CENTER);
-image(tent.imageFire, tent.x, tent.y, tent.size, tent.size);
-pop();
+function displayTentFire() {
+  push();
+  imageMode(CENTER);
+  image(tent.imageFire, tent.x, tent.y, tent.size, tent.size);
+  pop();
 }
 
 //Displays player
-function displayPlayer(){
+function displayPlayer() {
   push();
   image(player.image, player.x, player.y, player.size, player.size);
   pop();
@@ -325,7 +325,7 @@ function displayPlayer(){
 // TEXT FUNCTIONS ///////////////////////////////////////////////////////////////////////
 // Contains functions that have text only
 //Title text
-function header(){
+function header() {
   push();
   textSize(100);
   fill(53, 94, 126);
@@ -337,30 +337,30 @@ function header(){
 }
 
 //Instructions text
-function instructions(){
+function instructions() {
   push();
   textSize(54);
   fill(53, 94, 126);
   textStyle(ITALIC)
   textAlign(CENTER);
   rectMode(CENTER);
-  text(`Build a bonfire before night to survive... Press any key to start`, width / 2, height / 2+100, 1000, 150);
+  text(`Build a bonfire before night to survive... Press any key to start`, width / 2, height / 2 + 100, 1000, 150);
   pop();
 }
 
 //Controls text
-function tip(){
+function tip() {
   push();
   textSize(24);
   fill(53, 94, 126);
   textAlign(CENTER);
   rectMode(CENTER);
-  text(`Controls: Use WASD or ArrowKeys to move LEFT or RIGHT`, width / 2, height / 2*1.9);
+  text(`Controls: Use WASD or ArrowKeys to move LEFT or RIGHT`, width / 2, height / 2 * 1.9);
   pop();
 }
 
 //Good ending text
-function good(){
+function good() {
   push();
   textSize(100);
   fill(255);
@@ -372,7 +372,7 @@ function good(){
 }
 
 //Bad ending text
-function bad(){
+function bad() {
   push();
   textSize(80);
   fill(255);
@@ -383,14 +383,14 @@ function bad(){
   pop();
 }
 
-function tryAgain(){
+function tryAgain() {
   push();
   textSize(54);
   fill(255);
   textStyle(ITALIC)
   textAlign(CENTER);
   rectMode(CENTER);
-  text(`Try again?`, width / 2, height / 2+120, 1000, 150);
+  text(`Try again?`, width / 2, height / 2 + 120, 1000, 150);
   pop();
 }
 
@@ -440,40 +440,40 @@ function controls() {
 function collision() {
   //Collision with axe
   let d1 = dist(player.x, player.y, axe.x, axe.y);
-    if (d1 < player.size/2 + axe.size/2){
-      axe.x = 200;
-      axe.y = 50;
-      axeSFX.play();
+  if (d1 < player.size / 2 + axe.size / 2) {
+    axe.x = 200;
+    axe.y = 50;
+    axeSFX.play();
   }
   //Collision with tree (right)
-    if (player.x === 1600 && axe.x === 200){
-      tree.height = 250;
-      wood.x = 325;
-      wood.y = 50;
-      if (!chopSFX.isPlaying()) {
-          chopSFX.play();
-        }
+  if (player.x === 1600 && axe.x === 200) {
+    tree.height = 250;
+    wood.x = 325;
+    wood.y = 50;
+    if (!chopSFX.isPlaying()) {
+      chopSFX.play();
     }
+  }
   //Collision with tree (right)
-    if (wood.x === 325 && player.x === width/2){
-      state = `fire`
-      if (!fireSFX.isPlaying()) {
-          fireSFX.loop();
-        }
+  if (wood.x === 325 && player.x === width / 2) {
+    state = `fire`
+    if (!fireSFX.isPlaying()) {
+      fireSFX.loop();
     }
+  }
   //Turns night time
-    if (bg.r < 56){
-      state = `noFire`;
-      if (!nightSFX.isPlaying()) {
-          nightSFX.loop();
-        }
+  if (bg.r < 56) {
+    state = `noFire`;
+    if (!nightSFX.isPlaying()) {
+      nightSFX.loop();
     }
+  }
 
 }
 
 // START BUTTON FUNCTION ///////////////////////////////////////////////////////////
-function keyPressed(){
-if (state === `title`){
-  state = `simulation`;
+function keyPressed() {
+  if (state === `title`) {
+    state = `simulation`;
   }
 }
