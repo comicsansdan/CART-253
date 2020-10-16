@@ -12,6 +12,15 @@ let user = {
   size: 100
 };
 
+let shark = {
+  x: 0,
+  y: 0,
+  size: 150,
+  vx: 0,
+  vy: 0,
+  speed: 3,
+}
+
 let school = [];
 let schoolSize = 10;
 
@@ -22,13 +31,18 @@ function setup() {
   createCanvas(600, 600);
   noStroke();
 
+  //Spawn for fishes
   for (let i = 0; i < schoolSize; i++) {
     school[i] = createFish(random(0, width), random(0, height));
   }
 
+  //Spawn shark randomly
+  shark.x = random(0, width);
+  shark.y = random(0, height);
 }
 
-// Creates a new JavaScript Object describing a fish and returns it
+//OBJECT SETUP FUNCTIONS///////////////////////////////////////////////////////////////////////////////////////////////////////
+// Creates and spawn fishes
 function createFish(x, y) {
   let fish = {
     x: x,
@@ -49,6 +63,7 @@ function draw() {
   background(12,164,255);
 
   displayUser();
+  displayShark();
   moveUser();
 
   for (let i = 0; i < school.length; i++){
@@ -69,8 +84,16 @@ function displayFish(fish) {
 // Display the user as a circle
 function displayUser() {
   push();
-  fill(255);
+  fill(249, 131, 50);
   ellipse(user.x, user.y, user.size);
+  pop();
+}
+
+//Display the shark as a circle
+function displayShark() {
+  push();
+  fill(150, 151, 150);
+  ellipse(shark.x, shark.y, shark.size);
   pop();
 }
 
