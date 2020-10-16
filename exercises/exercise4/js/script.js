@@ -68,18 +68,21 @@ function draw() {
   moveShark();
 
   for (let i = 0; i < school.length; i++){
-  moveFish(school[i])
+  moveFish(school[i]);
   displayFish(school[i]);
+  checkFish(school[i]);
   }
 }
 
 //DISPLAY FUNCTIONS///////////////////////////////////////////////////////////////////////////////////////////////////////
 // Displays the provided fish on the canvas
 function displayFish(fish) {
-  push();
-  fill(225,192,39);
-  ellipse(fish.x, fish.y, fish.size);
-  pop();
+  if (!fish.eaten){
+    push();
+    fill(225,192,39);
+    ellipse(fish.x, fish.y, fish.size);
+    pop();
+  }
 }
 
 // Display the user as a circle
@@ -131,11 +134,23 @@ function moveShark(){
     shark.vy = random(-shark.speed, shark.speed);
   }
 
-  // Move the fish
+  // Move the shark
   shark.x = shark.x + shark.vx;
   shark.y = shark.y + shark.vy;
 
-  // Constrain the fish to the canvas
+  // Constrain the shark to the canvas
   shark.x = constrain(shark.x, 0, width);
   shark.y = constrain(shark.y, 0, height);
+}
+
+//COLLISION-BASED FUNCTIONS///////////////////////////////////////////////////////////////////////////////////////////////////////
+// Checks if the user overlaps the fish object and eats it if so
+function checkFish(fish) {
+  // We only want to check for an overlap if food1 hasn't been eaten yet
+  if (!fish.eaten) {
+    let d = dist(user.x, user.y, fish.x, fish.y);
+    if (d < user.size / 2 + fish.size / 2) {
+      fish.eaten = true;
+    }
+  }
 }
