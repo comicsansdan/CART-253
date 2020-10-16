@@ -1,9 +1,19 @@
 /**************************************************
-Template p5 project
-Pippin Barr
+Exercise 04: The Age of Aquariums
+Daniel Cacatian
 
-Here is a description of this template p5 project.
+Exercise to practice using arrays, intermediate functions, for loops and states
 **************************************************/
+
+//VARIABLES///////////////////////////////////////////////////////////////////////////////////////////////////////
+let user = {
+  x: 0,
+  y: 0,
+  size: 100
+};
+
+let school = [];
+let schoolSize = 10;
 
 // setup()
 //
