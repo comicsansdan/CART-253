@@ -20,6 +20,7 @@ let schoolSize = 10;
 // Description of setup() goes here.
 function setup() {
   createCanvas(600, 600);
+  noStroke();
 
   for (let i = 0; i < schoolSize; i++) {
     school[i] = createFish(random(0, width), random(0, height));
@@ -35,7 +36,8 @@ function createFish(x, y) {
     size: 50,
     vx: 0,
     vy: 0,
-    speed: 2
+    speed: 2,
+    eaten: false,
   };
   return fish;
 }
@@ -46,8 +48,11 @@ function createFish(x, y) {
 function draw() {
   background(12,164,255);
 
-    for (let i = 0; i < school.length; i++){
-    displayFish(school[i]);
+  displayUser();
+  moveUser();
+
+  for (let i = 0; i < school.length; i++){
+  displayFish(school[i]);
   }
 }
 
@@ -56,7 +61,20 @@ function draw() {
 function displayFish(fish) {
   push();
   fill(225,192,39);
-  noStroke();
   ellipse(fish.x, fish.y, fish.size);
   pop();
+}
+
+// Display the user as a circle
+function displayUser() {
+  push();
+  fill(255);
+  ellipse(user.x, user.y, user.size);
+  pop();
+}
+
+//MOVEMENT FUNCTIONS///////////////////////////////////////////////////////////////////////////////////////////////////////
+function moveUser(){
+  user.x = mouseX;
+  user.y = mouseY;
 }
