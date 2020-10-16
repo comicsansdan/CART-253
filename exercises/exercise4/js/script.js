@@ -66,6 +66,7 @@ function draw() {
   displayShark();
   moveUser();
   moveShark();
+  checkShark();
 
   for (let i = 0; i < school.length; i++){
   moveFish(school[i]);
@@ -152,5 +153,12 @@ function checkFish(fish) {
     if (d < user.size / 2 + fish.size / 2) {
       fish.eaten = true;
     }
+  }
+}
+
+function checkShark(){
+  let d1 = dist(user.x, user.y, shark.x, shark.y);
+  if (d1 < user.size/2 + shark.size/2) {
+    noLoop();
   }
 }
