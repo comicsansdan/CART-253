@@ -65,6 +65,7 @@ function draw() {
   displayUser();
   displayShark();
   moveUser();
+  moveShark();
 
   for (let i = 0; i < school.length; i++){
   moveFish(school[i])
@@ -120,4 +121,21 @@ function moveFish(fish) {
   // Constrain the fish to the canvas
   fish.x = constrain(fish.x, 0, width);
   fish.y = constrain(fish.y, 0, height);
+}
+
+// Same movement as the fishes with a higher speed
+function moveShark(){
+  let change = random(0, 1);
+  if (change < 0.05) {
+    shark.vx = random(-shark.speed, shark.speed);
+    shark.vy = random(-shark.speed, shark.speed);
+  }
+
+  // Move the fish
+  shark.x = shark.x + shark.vx;
+  shark.y = shark.y + shark.vy;
+
+  // Constrain the fish to the canvas
+  shark.x = constrain(shark.x, 0, width);
+  shark.y = constrain(shark.y, 0, height);
 }
