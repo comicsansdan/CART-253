@@ -52,6 +52,7 @@ function draw() {
   moveUser();
 
   for (let i = 0; i < school.length; i++){
+  moveFish(school[i])
   displayFish(school[i]);
   }
 }
@@ -74,7 +75,26 @@ function displayUser() {
 }
 
 //MOVEMENT FUNCTIONS///////////////////////////////////////////////////////////////////////////////////////////////////////
+//User movement is based on mouse coordinates
 function moveUser(){
   user.x = mouseX;
   user.y = mouseY;
+}
+
+// Chooses whether the provided fish changes direction and moves it
+function moveFish(fish) {
+  // Choose whether to change direction
+  let change = random(0, 1);
+  if (change < 0.05) {
+    fish.vx = random(-fish.speed, fish.speed);
+    fish.vy = random(-fish.speed, fish.speed);
+  }
+
+  // Move the fish
+  fish.x = fish.x + fish.vx;
+  fish.y = fish.y + fish.vy;
+
+  // Constrain the fish to the canvas
+  fish.x = constrain(fish.x, 0, width);
+  fish.y = constrain(fish.y, 0, height);
 }
