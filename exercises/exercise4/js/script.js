@@ -39,7 +39,7 @@ function setup() {
 
 //OBJECT SETUP FUNCTIONS///////////////////////////////////////////////////////////////////////////////////////////////////////
 //Setups up all the objects in one function
-function objectSetup(){
+function objectSetup() {
   //Spawn for fishes
   for (let i = 0; i < schoolSize; i++) {
     school[i] = createFish(random(0, width), random(0, height));
@@ -47,7 +47,7 @@ function objectSetup(){
 
   //Spawn shark randomly and makes sure it doesn't spawn near the user
   let d2 = dist(mouseX, mouseY, shark.x, shark.y);
-  while (d2 < user.size/2 + shark.size/2) {
+  while (d2 < user.size / 2 + shark.size / 2) {
     shark.x = random(0, width);
     shark.y = random(0, height);
     d2 = dist(mouseX, mouseY, shark.x, shark.y);
@@ -72,15 +72,15 @@ function createFish(x, y) {
 //
 // Description of draw() goes here.
 function draw() {
-  background(12,164,255);
+  background(12, 164, 255);
 
-  if (state === `title`){
+  if (state === `title`) {
     title();
-  } else if (state === `simulation`){
+  } else if (state === `simulation`) {
     simulation();
-  } else if (state === `bad`){
+  } else if (state === `bad`) {
     badEnding();
-  } else if (state === `good`){
+  } else if (state === `good`) {
     goodEnding();
   }
 
@@ -104,16 +104,16 @@ function simulation() {
   moveShark();
   checkShark();
 
-  for (let i = 0; i < school.length; i++){
-  moveFish(school[i]);
-  displayFish(school[i]);
-  checkFish(school[i]);
+  for (let i = 0; i < school.length; i++) {
+    moveFish(school[i]);
+    displayFish(school[i]);
+    checkFish(school[i]);
   }
 
   fishEaten();
 }
 
-function goodEnding(){
+function goodEnding() {
   push();
   textSize(40);
   fill(255);
@@ -124,7 +124,7 @@ function goodEnding(){
   pop();
 }
 
-function badEnding(){
+function badEnding() {
   background(255, 0, 0);
 
   eaten();
@@ -133,7 +133,7 @@ function badEnding(){
 
 //TEXT FUNCTIONS///////////////////////////////////////////////////////////////////////////////////////////////////////
 //Text containing the title of the game
-function header(){
+function header() {
   push();
   textSize(75);
   fill(255);
@@ -145,18 +145,18 @@ function header(){
 }
 
 //Text containing the instructions of the game
-function instructions(){
+function instructions() {
   push();
   textSize(25);
   fill(255);
   textAlign(CENTER);
   text(`Eat the fishies, but watch out for the shark!
-Click to begin`, width / 2, height / 2+50);
+Click to begin`, width / 2, height / 2 + 50);
   pop();
 }
 
 //Text containing the bad ending text of the game
-function eaten(){
+function eaten() {
   push();
   textSize(75);
   fill(255);
@@ -166,12 +166,12 @@ function eaten(){
   pop();
 }
 
-function tryAgain(){
+function tryAgain() {
   push();
   textSize(25);
   fill(255);
   textAlign(CENTER);
-  text(`Refresh to try again`, width / 2, height / 2+50);
+  text(`Refresh to try again`, width / 2, height / 2 + 50);
   pop();
 }
 
@@ -180,9 +180,9 @@ function tryAgain(){
 //DISPLAY FUNCTIONS///////////////////////////////////////////////////////////////////////////////////////////////////////
 // Displays the provided fish on the canvas
 function displayFish(fish) {
-  if (!fish.eaten){
+  if (!fish.eaten) {
     push();
-    fill(225,192,39);
+    fill(225, 192, 39);
     ellipse(fish.x, fish.y, fish.size);
     pop();
   }
@@ -206,7 +206,7 @@ function displayShark() {
 
 //MOVEMENT FUNCTIONS///////////////////////////////////////////////////////////////////////////////////////////////////////
 //User movement is based on mouse coordinates
-function moveUser(){
+function moveUser() {
   user.x = mouseX;
   user.y = mouseY;
 }
@@ -230,7 +230,7 @@ function moveFish(fish) {
 }
 
 // Same movement as the fishes with a higher speed
-function moveShark(){
+function moveShark() {
   let change = random(0, 1);
   if (change < 0.05) {
     shark.vx = random(-shark.speed, shark.speed);
@@ -260,23 +260,23 @@ function checkFish(fish) {
 }
 
 // Checks if all the fish are eaten
-function fishEaten(){
-  if (schoolSize === 0){
+function fishEaten() {
+  if (schoolSize === 0) {
     state = `good`;
   }
 }
 
-function checkShark(){
+function checkShark() {
   let d1 = dist(user.x, user.y, shark.x, shark.y);
-  if (d1 < user.size/2 + shark.size/2) {
+  if (d1 < user.size / 2 + shark.size / 2) {
     state = `bad`;
   }
 }
 
 //MOUSE PRESSED FUNCTION///////////////////////////////////////////////////////////////////////////////////////////////////////
 //Clicking starts or either restarts the game
-function mousePressed(){
-  if (state === `title`){
-  state = `simulation`;
+function mousePressed() {
+  if (state === `title`) {
+    state = `simulation`;
   }
 }
