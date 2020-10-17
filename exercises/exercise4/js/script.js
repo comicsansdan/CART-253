@@ -45,9 +45,13 @@ function objectSetup(){
     school[i] = createFish(random(0, width), random(0, height));
   }
 
-  //Spawn shark randomly
-  shark.x = random(0, width);
-  shark.y = random(0, height);
+  //Spawn shark randomly and makes sure it doesn't spawn near the user
+  let d2 = dist(mouseX, mouseY, shark.x, shark.y);
+  while (d2 < user.size/2 + shark.size/2) {
+    shark.x = random(0, width);
+    shark.y = random(0, height);
+    d2 = dist(mouseX, mouseY, shark.x, shark.y);
+  }
 }
 
 // Creates the fishes
