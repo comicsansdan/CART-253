@@ -24,6 +24,8 @@ let shark = {
 let school = [];
 let schoolSize = 10;
 
+let state = `title`;
+
 //SETUP///////////////////////////////////////////////////////////////////////////////////////////////////////
 //
 // Description of setup() goes here.
@@ -31,6 +33,13 @@ function setup() {
   createCanvas(600, 600);
   noStroke();
 
+  objectSetup();
+
+}
+
+//OBJECT SETUP FUNCTIONS///////////////////////////////////////////////////////////////////////////////////////////////////////
+//Setups up all the objects in one function
+function objectSetup(){
   //Spawn for fishes
   for (let i = 0; i < schoolSize; i++) {
     school[i] = createFish(random(0, width), random(0, height));
@@ -41,8 +50,7 @@ function setup() {
   shark.y = random(0, height);
 }
 
-//OBJECT SETUP FUNCTIONS///////////////////////////////////////////////////////////////////////////////////////////////////////
-// Creates and spawn fishes
+// Creates the fishes
 function createFish(x, y) {
   let fish = {
     x: x,
@@ -62,6 +70,30 @@ function createFish(x, y) {
 function draw() {
   background(12,164,255);
 
+  if (state === `title`){
+    title();
+  } else if (state === `simulation`){
+    simulation();
+  } else if (state === `bad`){
+    badEnding();
+  } else if (state === `good`){
+    goodEnding();
+  }
+
+  console.log(schoolSize)
+
+}
+
+//STATES FUNCTIONS///////////////////////////////////////////////////////////////////////////////////////////////////////
+//Functions that activate when a different state occurs
+//Title state
+function title() {
+  header();
+  instructions();
+}
+
+//Simulation state
+function simulation() {
   displayUser();
   displayShark();
   moveUser();
@@ -73,7 +105,73 @@ function draw() {
   displayFish(school[i]);
   checkFish(school[i]);
   }
+
+  fishEaten();
 }
+
+function goodEnding(){
+  push();
+  textSize(40);
+  fill(255);
+  textStyle(BOLD);
+  textAlign(CENTER);
+  rectMode(CENTER);
+  text(`YOU ATE ALL THE FISH!`, width / 2, height / 2);
+  pop();
+}
+
+function badEnding(){
+  background(255, 0, 0);
+
+  eaten();
+  tryAgain();
+}
+
+//TEXT FUNCTIONS///////////////////////////////////////////////////////////////////////////////////////////////////////
+//Text containing the title of the game
+function header(){
+  push();
+  textSize(75);
+  fill(255);
+  textStyle(BOLD);
+  textAlign(CENTER);
+  rectMode(CENTER);
+  text(`- GO FISH -`, width / 2, height / 2);
+  pop();
+}
+
+//Text containing the instructions of the game
+function instructions(){
+  push();
+  textSize(25);
+  fill(255);
+  textAlign(CENTER);
+  text(`Eat the fishies, but watch out for the shark!
+Click to begin`, width / 2, height / 2+50);
+  pop();
+}
+
+//Text containing the bad ending text of the game
+function eaten(){
+  push();
+  textSize(75);
+  fill(255);
+  textStyle(BOLD);
+  textAlign(CENTER);
+  text(`YOU DIED`, width / 2, height / 2);
+  pop();
+}
+
+function tryAgain(){
+  push();
+  textSize(25);
+  fill(255);
+  textAlign(CENTER);
+  text(`Refresh to try again`, width / 2, height / 2+50);
+  pop();
+}
+
+
 
 //DISPLAY FUNCTIONS///////////////////////////////////////////////////////////////////////////////////////////////////////
 // Displays the provided fish on the canvas
@@ -147,18 +245,34 @@ function moveShark(){
 //COLLISION-BASED FUNCTIONS///////////////////////////////////////////////////////////////////////////////////////////////////////
 // Checks if the user overlaps the fish object and eats it if so
 function checkFish(fish) {
-  // We only want to check for an overlap if food1 hasn't been eaten yet
+  // We only want to check for an overlap if fish hasn't been eaten yet
   if (!fish.eaten) {
     let d = dist(user.x, user.y, fish.x, fish.y);
     if (d < user.size / 2 + fish.size / 2) {
       fish.eaten = true;
+      schoolSize += -1;
     }
+  }
+}
+
+// Checks if all the fish are eaten
+function fishEaten(){
+  if (schoolSize === 0){
+    state = `good`;
   }
 }
 
 function checkShark(){
   let d1 = dist(user.x, user.y, shark.x, shark.y);
   if (d1 < user.size/2 + shark.size/2) {
-    noLoop();
+    state = `bad`;
+  }
+}
+
+//MOUSE PRESSED FUNCTION///////////////////////////////////////////////////////////////////////////////////////////////////////
+//Clicking starts or either restarts the game
+function mousePressed(){
+  if (state === `title`){
+  state = `simulation`;
   }
 }
