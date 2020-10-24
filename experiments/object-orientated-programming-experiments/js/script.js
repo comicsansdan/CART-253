@@ -14,6 +14,10 @@ let garden = {
   flowers: [],
   // How many flowers in the garden
   numFlowers: 30,
+  // An array of bees
+  bees: [],
+  // How many bees in the garden
+  numBees: 7,
   // The color of the grass (background)
   grassColor: {
     r: 120,
@@ -49,6 +53,13 @@ for (let i = 0; i < garden.numFlowers; i++) {
   // Add the flower to the array of flowers
   garden.flowers.push(flower);
 }
+
+//INTERACTING OBJECTS/////////////////////////////////////////////////////////
+//Create the bees
+for (let i = 0; i < garden.numBees; i++){
+  let bee = new Bee(random(0,width), random(0,height));
+  garden.bees.push(bee);
+  }
 }
 
 // draw()
@@ -66,14 +77,34 @@ function draw() {
     //Before
     // displayFlower(flower);
     //After (From the display function in Flower.js)
+//INTERACTING OBJECTS/////////////////////////////////////////////////////////
+    if (flower.alive) {
+    flower.shrink();
     flower.display();
+    }
+  }
+
+  for (let i = 0; i < garden.bees.length; i++) {
+    let bee = garden.bees[i];
+    if (bee.alive) {
+      bee.shrink();
+      bee.move();
+      bee.display();
+
+      for (let j = 0; j < garden.flowers.length; j++) {
+        let flower = garden.flowers[j];
+        if (flower.alive){
+        bee.tryToPollinate(flower);
+        }
+      }
+    }
   }
 }
 
 //OBJECT-ORIENTATED-PROGRAMMING AND P5 EVENTS////////////////////////////////////////////////
-function mousePressed(){
-  for (let i = 0; i < garden.flowers.length; i++) {
-    let flower = garden.flowers[i];
-    flower.mousePressed();
-  }
-}
+// function mousePressed(){
+//   for (let i = 0; i < garden.flowers.length; i++) {
+//     let flower = garden.flowers[i];
+//     flower.mousePressed();
+//   }
+// }
