@@ -9,7 +9,7 @@ class Ball {
     this.ay = 0;
     this.maxSpeed = 10;
     this.size = 40;
-    this.active = true;
+    this.collected = false;
   }
 
   gravity(force) {
@@ -26,8 +26,10 @@ class Ball {
     this.x += this.vx;
     this.y += this.vy;
 
+//If balls go below off-screen, they will reappear above
     if (this.y - this.size/2 > height) {
-      this.active = false;
+      this.x = random(0, width);
+      this.y = random(-400, -100);
     }
   }
 
@@ -44,6 +46,22 @@ class Ball {
 
         this.vy = -this.vy;
         this.ay = 0;
+
+      }
+  }
+
+  collect(basket) {
+  //Paddle bounces not based on distance, but based on whether it is in the paddles x-y coordinates
+    if (this.x > basket.x - basket.width/2 &&
+        this.x < basket.x + basket.width/2 &&
+        this.y + this.size/2 > basket.y - basket.height/2 &&
+        this.y - this.size/2 < basket.y + basket.height/2) {
+
+        //Collect
+        let dx = this.x - basket.x;
+        this.vx = this.vx + map(dx, -basket.width/2, basket.width/2, -2, 2);
+
+        this.collected = true
 
       }
   }

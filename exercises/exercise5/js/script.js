@@ -56,11 +56,14 @@ function draw() {
 //Displays and gives movement to all the balls
   for (let i = 0; i < balls.length; i++) {
     let ball = balls[i];
-    if (ball.active){
+    if (!ball.collected){
     ball.gravity(gravityForce);
     ball.move();
     ball.bounce(paddle);
     ball.display();
-    }
+    ball.collect(basket);
+  } else if (ball.collected){
+    numBalls += -1;
+  }
   }
 }

@@ -10,7 +10,6 @@ class Basket {
     this.vx = 0;
     this.maxSpeed = 20;
     this.size = 40;
-    this.active = true;
   }
 
   //Move's the basket left and right with A and D keys
