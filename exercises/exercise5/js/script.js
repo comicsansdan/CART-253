@@ -48,6 +48,12 @@ function setup() {
     garden.flowers.push(flower);
   }
 
+  //Create the bees
+  for (let i = 0; i < garden.numBees; i++){
+    let bee = new Bee(random(0,width), random(0,height));
+    garden.bees.push(bee);
+    }
+
 }
 
 // draw()
@@ -65,6 +71,24 @@ function draw() {
     if (flower.alive) {
     flower.shrink();
     flower.display();
+    }
+  }
+
+  //Displays the bees (that are alive only)
+  for (let i = 0; i < garden.bees.length; i++) {
+    let bee = garden.bees[i];
+    if (bee.alive) {
+      bee.shrink();
+      bee.move();
+      bee.display();
+
+  //Allows the bees to polinate the flowers and survive
+      for (let j = 0; j < garden.flowers.length; j++) {
+        let flower = garden.flowers[j];
+        if (flower.alive){
+        bee.tryToPollinate(flower);
+        }
+      }
     }
   }
 }
