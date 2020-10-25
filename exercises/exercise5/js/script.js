@@ -30,7 +30,7 @@ function setup() {
   paddle = new Paddle(300, 20);
 
 //Call the Basket.js class
-    basket = new Basket(400, 50);
+  basket = new Basket(400, 50);
 
 //Call for the Ball.js class and make it a variable
   for (let i = 0; i < numBalls; i++) {

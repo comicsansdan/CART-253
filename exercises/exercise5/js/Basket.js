@@ -6,7 +6,8 @@ class Basket {
     this.height = h;
     this.x = 0;
     this.y = height/2;
-    this.speed = 2;
+    this.ax = 2;
+    this.vx = 0;
     this.maxSpeed = 20;
     this.size = 40;
     this.active = true;
@@ -16,24 +17,25 @@ class Basket {
     move() {
       //Right movement
       if (keyIsDown(68)) {
-        this.x += this.speed;
+        this.vx += this.ax;
       }
       //Left movement
       if (keyIsDown(65)) {
-        this.x += -this.speed;
+        this.vx += -this.ax;
       }
-
       //Constrain the speed of the basket
-      this.speed = constrain(this.speed, -this.maxSpeed, this.maxSpeed);
+      this.vx = constrain(this.vx, -this.maxSpeed, this.maxSpeed);
+
+      this.x += this.vx;
 
       //Constrain (doesn't go out of bounds)
-      player.x = constrain(this.x, 0, width);
+      this.x = constrain(this.x, 0, windowWidth);
     }
 
   //Displays the paddle
     display() {
       push();
-      fill(255);
+      fill(170, 118, 68);
       noStroke();
       rectMode(CENTER);
       rect(this.x, this.y, this.width, this.height);
