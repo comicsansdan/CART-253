@@ -12,6 +12,14 @@ Activities:
 
 -[Activity 04: Dodging COVID19](https://danielcacatian.github.io/CART-253/activities/04-dodging-covid-19)
 
+-[Activity 05: Looking for Love](https://danielcacatian.github.io/CART-253/activities/05-looking-for-love)
+
+-[Activity 05: Looking for Love](https://danielcacatian.github.io/CART-253/activities/05-looking-for-love)
+
+-[Activity 06: Debugging Activity](https://danielcacatian.github.io/CART-253/activities/06-debugging-activity)
+
+-[Activity 07: Object-Orientated-Programming](https://danielcacatian.github.io/CART-253/activities/07-object-orientated-programming-activity)
+
 
 Exercises:
 
