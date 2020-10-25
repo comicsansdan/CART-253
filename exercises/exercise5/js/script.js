@@ -37,12 +37,14 @@ function setup() {
     let ball = new Ball(random(0, width), random(-400, -100));
     balls.push(ball);
   }
+
 }
 
 // draw()
 //
 // Description of draw() goes here.
 function draw() {
+  console.log(numBalls);
   background(0);
 
 //Displays and moves the paddles

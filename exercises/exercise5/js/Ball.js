@@ -1,6 +1,7 @@
 class Ball {
 
   constructor(x, y) {
+  //Ball
     this.x = x;
     this.y = y;
     this.vx = 0;
@@ -10,6 +11,13 @@ class Ball {
     this.maxSpeed = 10;
     this.size = 40;
     this.collected = false;
+
+  //Text
+    // this.score = 0;
+    // this.textSize = 50;
+    // this.text = `Score:`;
+    // this.textX = 50;
+    // this.textY = 50;
   }
 
   gravity(force) {
@@ -50,19 +58,14 @@ class Ball {
       }
   }
 
+//Check to see if basket catches the ball
   collect(basket) {
-  //Paddle bounces not based on distance, but based on whether it is in the paddles x-y coordinates
     if (this.x > basket.x - basket.width/2 &&
         this.x < basket.x + basket.width/2 &&
         this.y + this.size/2 > basket.y - basket.height/2 &&
         this.y - this.size/2 < basket.y + basket.height/2) {
 
-        //Collect
-        let dx = this.x - basket.x;
-        this.vx = this.vx + map(dx, -basket.width/2, basket.width/2, -2, 2);
-
-        this.collected = true
-
+        this.collected = true;
       }
   }
 
@@ -72,6 +75,13 @@ class Ball {
     stroke(0);
     ellipse(this.x, this.y, this.size);
     pop();
+
+    // push();
+    // fill(255);
+    // textSize(this.textSize);
+    // text(this.text, this.textX, this.textY);
+    // text(this.score, this.textX, this.textY+50);
+    // pop();
   }
 
 }
