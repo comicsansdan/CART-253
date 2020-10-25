@@ -1,8 +1,8 @@
 /**************************************************
-Template p5 project
-Pippin Barr
+Exercise 5: Juggling Garden
+Daniel Cacatian
 
-Here is a description of this template p5 project.
+An exercise using OOP where I'll be reusing the code from the flower simulation and add my own code. 
 **************************************************/
 
 // setup()
