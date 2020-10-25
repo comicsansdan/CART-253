@@ -9,10 +9,10 @@ class Bee {
     this.maxSize = 40;
     this.vx = 0;
     this.vy = 0;
-    this.speed = 5;
+    this.speed = 1;
+    this.maxSpeed = 5;
     this.shrinkRate = 0.05; // How much smaller we get each frame
     this.growRate = 0.05;
-    this.jitteriness = 0.1; // How likely the bee is to change direction
     this.alive = true; // The Bee starts out alive!
   }
 
@@ -43,16 +43,38 @@ grow(){
   // move() moves the bee by potentially changing direction
   // and then changing position based on velocity
   move() {
-    // First check if we should change direction
-    let r = random(0, 1);
-    if (r < this.jitteriness) {
-      this.vx = random(-this.speed, this.speed);
-      this.vy = random(-this.speed, this.speed);
+    // Up movement
+    if (keyIsDown(38)){
+      this.vy += -this.speed;
+    } else if (keyIsDown(87)){
+      this.vy += -this.speed;
+    }
+    //Right movement
+    if (keyIsDown(39)){
+      this.vx += this.speed;
+    } else if (keyIsDown(68)){
+      this.vx += this.speed;
+    }
+    //Down movement
+    if (keyIsDown(40)){
+      this.vy += this.speed;
+    } else if (keyIsDown(83)){
+      this.vy += this.speed;
+    }
+    //Left movement
+    if (keyIsDown(37)){
+      this.vx += -this.speed;
+    } else if (keyIsDown(65)){
+      this.vx += -this.speed;
     }
 
     // Update position with velocity to actually move
     this.x = this.x + this.vx;
     this.y = this.y + this.vy;
+
+    // Constrain to the speed
+    this.vx = constrain(this.vx, -this.maxSpeed, this.maxSpeed);
+    this.vy = constrain(this.vy, -this.maxSpeed, this.maxSpeed);
 
     // Constrain to the canvas (guess it's a walled garden!)
     this.x = constrain(this.x, 0, width);

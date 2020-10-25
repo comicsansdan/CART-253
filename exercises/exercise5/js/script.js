@@ -13,23 +13,23 @@ let garden = {
   flowers: [],
   // How many flowers in the garden
   numFlowers: 20,
-  // An array of bees
-  bees: [],
-  // How many bees in the garden
-  numBees: 7,
   // The color of the grass (background)
   grassColor: {
     r: 120,
     g: 180,
     b: 120
   }
-};
+}
+
+let bee;
 
 // setup()
 //
 // Description of setup() goes here.
 function setup() {
   createCanvas(600,600);
+
+  bee = new Bee( width/2, height/2);
 
   // Create our flowers by counting up to the number of the flowers
   for (let i = 0; i < garden.numFlowers; i++) {
@@ -48,13 +48,8 @@ function setup() {
     garden.flowers.push(flower);
   }
 
-  //Create the bees
-  for (let i = 0; i < garden.numBees; i++){
-    let bee = new Bee(random(0,width), random(0,height));
-    garden.bees.push(bee);
-    }
-
 }
+
 
 // draw()
 //
@@ -74,21 +69,18 @@ function draw() {
     }
   }
 
-  //Displays the bees (that are alive only)
-  for (let i = 0; i < garden.bees.length; i++) {
-    let bee = garden.bees[i];
+  //Displays the bee (only if its alive)
     if (bee.alive) {
-      bee.shrink();
       bee.move();
       bee.display();
+      bee.shrink();
+  }
 
-  //Allows the bees to polinate the flowers and survive
+  //Allows the bee to polinate the flowers and survive
       for (let j = 0; j < garden.flowers.length; j++) {
         let flower = garden.flowers[j];
         if (flower.alive){
         bee.tryToPollinate(flower);
         }
       }
-    }
-  }
 }
