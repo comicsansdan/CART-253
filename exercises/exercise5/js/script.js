@@ -21,15 +21,40 @@ let garden = {
   }
 }
 
+//Timer to signal that you survived and won
+let gameOverTimer = 0;
+let gameLength = 60 * 20;
+
+//Text variable
+let type = {
+  x: 0,
+  y: 0,
+  title: `FLIGHT OF THE
+BUMBLEBEE`,
+  instructions: `Goal: Survive for 20 secs!`,
+  controls: `Use AWSD or ArrowKeys to move.
+Click to begin!`,
+  gameOver: `YOU DIED!`,
+  youWon: `YOU SURVIVED!`,
+  tryAgain: `Refresh to try again.`,
+  sizeBig: 50,
+  sizeSmall: 25,
+}
+
+//Bee variable
 let bee;
 
+//Bird variable
 let bird;
 
-// setup()
+//State variable
+let state = `title`;
+
+// SETUP /////////////////////////////////////////////////////////////////////
 //
 // Description of setup() goes here.
 function setup() {
-  createCanvas(600,600);
+  createCanvas(700,700);
 
 //Call the bee class
   bee = new Bee( width/2, height/2);
@@ -54,16 +79,59 @@ function setup() {
     garden.flowers.push(flower);
   }
 
+//Title screen x and y values:
+  type.x = width/2;
+  type.y = height/2;
+
 }
 
 
-// draw()
+// DRAW /////////////////////////////////////////////////////////////////////
 //
 // Description of draw() goes here.
 function draw() {
   // Display the grass
   background(garden.grassColor.r, garden.grassColor.g, garden.grassColor.b);
 
+  if (state === `title`) {
+    title();
+  } else if (state === `simulation`) {
+    simulation();
+  } else if (state === `eaten`) {
+    gameOver();
+  } else if (state === `survived`) {
+    win();
+  }
+}
+
+// STATES /////////////////////////////////////////////////////////////////////
+//Title screen state///////////////////////////////////////////////////////////
+function title(){
+  push();
+  textSize(type.sizeBig);
+  fill(255);
+  textAlign(CENTER);
+  textStyle(BOLD);
+  text(type.title, type.x, type.y);
+  pop();
+
+  push();
+  textSize(type.sizeSmall);
+  fill(0, 100, 0);
+  textAlign(CENTER);
+  text(type.instructions, type.x, type.y + height/3);
+  pop();
+
+  push();
+  textSize(type.sizeSmall);
+  fill(255);
+  textAlign(CENTER);
+  text(type.controls, type.x, type.y + height/5);
+  pop();
+}
+
+//Simulation state///////////////////////////////////////////////////////////
+function simulation(){
   // Loop through all the flowers in the array and display them
   for (let i = 0; i < garden.flowers.length; i++) {
     let flower = garden.flowers[i];
@@ -83,15 +151,65 @@ function draw() {
       bee.eaten(bird);
   }
 
+  //If bee eaten then game over
+  if (!bee.alive) {
+    state = `eaten`;
+  }
+
+  //Game Timer
+  gameOverTimer++;
+  if (gameOverTimer >= gameLength){
+    state = `survived`
+  }
+
+
   //displays the bird
     bird.move();
     bird.display();
 
-  //Allows the bee to polinate the flowers and survive
+//Allows the bee to polinate the flowers and survive
       for (let j = 0; j < garden.flowers.length; j++) {
         let flower = garden.flowers[j];
         if (flower.alive){
         bee.tryToPollinate(flower);
         }
       }
+}
+
+//Gameover state///////////////////////////////////////////////////////////
+function gameOver(){
+  push();
+  textSize(type.sizeBig);
+  fill(255);
+  textAlign(CENTER);
+  textStyle(BOLD);
+  text(type.gameOver, type.x, type.y);
+  pop();
+
+  push();
+  textSize(type.sizeSmall);
+  fill(255);
+  textAlign(CENTER);
+  text(type.tryAgain, type.x, type.y + height/5);
+  pop();
+}
+
+//Win state//////////////////////////////////////////////////////////////////
+function win(){
+  push();
+  textSize(type.sizeBig);
+  fill(255);
+  textAlign(CENTER);
+  textStyle(BOLD);
+  text(type.youWon, type.x, type.y);
+  pop();
+}
+
+
+// GAMESTART ///////////////////////////////////////////////////////////////////
+//Clicking starts the game
+function mousePressed() {
+  if (state === `title`) {
+    state = `simulation`;
+  }
 }
