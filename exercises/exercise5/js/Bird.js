@@ -3,25 +3,29 @@ class Bird {
   constructor(x, y) {
     this.x = x;
     this.y = y;
-    this.size = 60;
-    this.vx = 0;
-    this.vy = 0;
-    this.speed = 1;
+    this.size = 70;
+    this.speedX = 5;
+    this.speedY = 5;
     this.maxSpeed = 5;
-    this.jitteriness = 0.2; // How likely the bird is to change direction
   }
 
   move() {
-    // First check if we should change direction
-    let r = random(0, 1);
-    if (r < this.jitteriness) {
-      this.vx = random(-this.speed, this.speed);
-      this.vy = random(-this.speed, this.speed);
-    }
+    this.x += this.speedX;
+    if (this.x > width){
+        this.speedX = -this.speedX;
+      }
+      if (this.x < 0){
+          this.speedX = -this.speedX;
+        }
 
-    // Update position with velocity to actually move
-    this.x = this.x + this.vx;
-    this.y = this.y + this.vy;
+    //Clown's mouvement controls (Y axis)
+    this.y += this.speedY;
+    if (this.y > height){
+      this.speedY = -this.speedY;
+    }
+    if (this.y < 0){
+      this.speedY = -this.speedY;
+    }
 
     // Constrain to the canvas (guess it's a walled garden!)
     this.x = constrain(this.x, 0, width);

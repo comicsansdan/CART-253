@@ -35,7 +35,7 @@ function setup() {
   bee = new Bee( width/2, height/2);
 
 //Call the bird class
-  bird = new Bird(0, 0);
+  bird = new Bird(0, random(0, height));
 
   // Create our flowers by counting up to the number of the flowers
   for (let i = 0; i < garden.numFlowers; i++) {
