@@ -4,8 +4,8 @@ class Bird {
     this.x = x;
     this.y = y;
     this.size = 70;
-    this.speedX = 5;
-    this.speedY = 5;
+    this.speedX = 6;
+    this.speedY = 6;
     this.maxSpeed = 5;
   }
 
