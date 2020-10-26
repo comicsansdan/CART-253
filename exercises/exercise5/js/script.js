@@ -23,13 +23,19 @@ let garden = {
 
 let bee;
 
+let bird;
+
 // setup()
 //
 // Description of setup() goes here.
 function setup() {
   createCanvas(600,600);
 
+//Call the bee class
   bee = new Bee( width/2, height/2);
+
+//Call the bird class
+  bird = new Bird(0, 0);
 
   // Create our flowers by counting up to the number of the flowers
   for (let i = 0; i < garden.numFlowers; i++) {
@@ -75,6 +81,10 @@ function draw() {
       bee.display();
       bee.shrink();
   }
+
+  //displays the bird
+    bird.move();
+    bird.display();
 
   //Allows the bee to polinate the flowers and survive
       for (let j = 0; j < garden.flowers.length; j++) {
