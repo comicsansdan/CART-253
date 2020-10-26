@@ -80,6 +80,7 @@ function draw() {
       bee.move();
       bee.display();
       bee.shrink();
+      bee.eaten(bird);
   }
 
   //displays the bird

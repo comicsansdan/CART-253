@@ -40,6 +40,13 @@ grow(){
   this.size = constrain(this.size, this.minSize, this.maxSize);
 }
 
+eaten(bird){
+  let d = dist(this.x, this.y, bird.x, bird.y);
+  if (d < this.size/2 + bird.size/2){
+    this.alive = false; // The Bee dies
+  }
+}
+
   // move() moves the bee by potentially changing direction
   // and then changing position based on velocity
   move() {
