@@ -9,25 +9,27 @@ class Bird {
     this.maxSpeed = 5;
   }
 
+  //Birds movement
   move() {
+    //Bird's movement controls (X axis)
     this.x += this.speedX;
-    if (this.x > width){
-        this.speedX = -this.speedX;
-      }
-      if (this.x < 0){
-          this.speedX = -this.speedX;
-        }
+    if (this.x > width) {
+      this.speedX = -this.speedX;
+    }
+    if (this.x < 0) {
+      this.speedX = -this.speedX;
+    }
 
-    //Clown's mouvement controls (Y axis)
+    //Bird's movement controls (Y axis)
     this.y += this.speedY;
-    if (this.y > height){
+    if (this.y > height) {
       this.speedY = -this.speedY;
     }
-    if (this.y < 0){
+    if (this.y < 0) {
       this.speedY = -this.speedY;
     }
 
-    // Constrain to the canvas (guess it's a walled garden!)
+    // Constrain to the canvas (so no out of bounds)
     this.x = constrain(this.x, 0, width);
     this.y = constrain(this.y, 0, height);
   }

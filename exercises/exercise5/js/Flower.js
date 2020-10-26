@@ -1,5 +1,5 @@
-class Flower{
-// constructor (CONSTRUCTORS WITH PARAMETERS)
+class Flower {
+  // constructor (CONSTRUCTORS WITH PARAMETERS)
   constructor(x, y, size, stemLength, petalColor) {
     // Position and size information
     this.x = x;
@@ -16,7 +16,7 @@ class Flower{
       g: 150,
       b: 50
     };
-  this.petalColor = petalColor;
+    this.petalColor = petalColor;
     this.centreColor = {
       r: 50,
       g: 0,
@@ -25,11 +25,11 @@ class Flower{
     this.alive = true;
   }
 
-//INTERACTING OBJECTS////////////////////////////////////////////////
-  shrink(){
-    let shrinkage = random(0,0.1);
+  //INTERACTING OBJECTS////////////////////////////////////////////////
+  shrink() {
+    let shrinkage = random(0, 0.1);
     this.size += -shrinkage;
-    this.petalThickness += -shrinkage/10;
+    this.petalThickness += -shrinkage / 10;
 
     if (this.size <= 0 || this.petalThickness <= 0) {
       this.alive = false;
@@ -37,15 +37,15 @@ class Flower{
   }
 
   pollinate() {
-    let growth = random(0,0.5);
+    let growth = random(0, 0.5);
     this.size += growth;
-    this.petalThickness += growth/10;
+    this.petalThickness += growth / 10;
 
     this.size = constrain(this.size, 0, this.maxSize);
     this.petalThickness = constrain(this.petalThickness, 0, this.maxPetalThickness);
   }
 
-  display(){
+  display() {
     push();
     // Draw a line for the stem
     strokeWeight(this.stemThickness);

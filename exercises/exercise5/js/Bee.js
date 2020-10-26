@@ -27,51 +27,51 @@ class Bee {
     }
   }
 
-  tryToPollinate(flower){
+  tryToPollinate(flower) {
     let d = dist(this.x, this.y, flower.x, flower.y);
-    if (d < this.size/2 + flower.size/2 + flower.petalThickness){
-        this.grow();
-        flower.pollinate();
+    if (d < this.size / 2 + flower.size / 2 + flower.petalThickness) {
+      this.grow();
+      flower.pollinate();
     }
   }
 
-grow(){
-  this.size += this.growRate;
-  this.size = constrain(this.size, this.minSize, this.maxSize);
-}
-
-eaten(bird){
-  let d = dist(this.x, this.y, bird.x, bird.y);
-  if (d < this.size/2 + bird.size/2){
-    this.alive = false; // The Bee dies
+  grow() {
+    this.size += this.growRate;
+    this.size = constrain(this.size, this.minSize, this.maxSize);
   }
-}
+
+  eaten(bird) {
+    let d = dist(this.x, this.y, bird.x, bird.y);
+    if (d < this.size / 2 + bird.size / 2) {
+      this.alive = false; // The Bee dies
+    }
+  }
 
   // move() moves the bee by potentially changing direction
   // and then changing position based on velocity
   move() {
     // Up movement
-    if (keyIsDown(38)){
+    if (keyIsDown(38)) {
       this.vy += -this.speed;
-    } else if (keyIsDown(87)){
+    } else if (keyIsDown(87)) {
       this.vy += -this.speed;
     }
     //Right movement
-    if (keyIsDown(39)){
+    if (keyIsDown(39)) {
       this.vx += this.speed;
-    } else if (keyIsDown(68)){
+    } else if (keyIsDown(68)) {
       this.vx += this.speed;
     }
     //Down movement
-    if (keyIsDown(40)){
+    if (keyIsDown(40)) {
       this.vy += this.speed;
-    } else if (keyIsDown(83)){
+    } else if (keyIsDown(83)) {
       this.vy += this.speed;
     }
     //Left movement
-    if (keyIsDown(37)){
+    if (keyIsDown(37)) {
       this.vx += -this.speed;
-    } else if (keyIsDown(65)){
+    } else if (keyIsDown(65)) {
       this.vx += -this.speed;
     }
 

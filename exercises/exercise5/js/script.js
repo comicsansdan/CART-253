@@ -50,28 +50,33 @@ let bird;
 //State variable
 let state = `title`;
 
-// SETUP /////////////////////////////////////////////////////////////////////
+// SETUP ///////////////////////////////////////////////////////////////////////
 //
 // Description of setup() goes here.
 function setup() {
-  createCanvas(700,700);
+  createCanvas(700, 700);
 
-//Call the bee class
-  bee = new Bee( width/2, height/2);
+  objectSetup();
+}
 
-//Call the bird class
+//Function that setup all the objects
+function objectSetup() {
+  //Call the bee class
+  bee = new Bee(width / 2, height / 2);
+
+  //Call the bird class
   bird = new Bird(0, random(0, height));
 
   // Create our flowers by counting up to the number of the flowers
   for (let i = 0; i < garden.numFlowers; i++) {
     let x = random(0, width);
     let y = random(0, height);
-    let size = random(50,80);
+    let size = random(50, 80);
     let stemLength = random(50, 100);
     let petalColor = {
-      r: random(100,255),
-      g: random(100,255),
-      b: random(100,255),
+      r: random(100, 255),
+      g: random(100, 255),
+      b: random(100, 255),
     }
 
     let flower = new Flower(x, y, size, stemLength, petalColor);
@@ -79,10 +84,9 @@ function setup() {
     garden.flowers.push(flower);
   }
 
-//Title screen x and y values:
-  type.x = width/2;
-  type.y = height/2;
-
+  //Title screen x and y values:
+  type.x = width / 2;
+  type.y = height / 2;
 }
 
 
@@ -106,7 +110,8 @@ function draw() {
 
 // STATES /////////////////////////////////////////////////////////////////////
 //Title screen state///////////////////////////////////////////////////////////
-function title(){
+function title() {
+  //Main title text
   push();
   textSize(type.sizeBig);
   fill(255);
@@ -115,40 +120,42 @@ function title(){
   text(type.title, type.x, type.y);
   pop();
 
+  //instructions text
   push();
   textSize(type.sizeSmall);
   fill(0, 100, 0);
   textAlign(CENTER);
-  text(type.instructions, type.x, type.y + height/3);
+  text(type.instructions, type.x, type.y + height / 3);
   pop();
 
+  //controls text
   push();
   textSize(type.sizeSmall);
   fill(255);
   textAlign(CENTER);
-  text(type.controls, type.x, type.y + height/5);
+  text(type.controls, type.x, type.y + height / 5);
   pop();
 }
 
 //Simulation state///////////////////////////////////////////////////////////
-function simulation(){
+function simulation() {
   // Loop through all the flowers in the array and display them
   for (let i = 0; i < garden.flowers.length; i++) {
     let flower = garden.flowers[i];
 
-  //Will only display flowers that are alive
+    //Will only display flowers that are alive
     if (flower.alive) {
-    flower.shrink();
-    flower.display();
+      flower.shrink();
+      flower.display();
     }
   }
 
   //Displays the bee (only if its alive)
-    if (bee.alive) {
-      bee.move();
-      bee.display();
-      bee.shrink();
-      bee.eaten(bird);
+  if (bee.alive) {
+    bee.move();
+    bee.display();
+    bee.shrink();
+    bee.eaten(bird);
   }
 
   //If bee eaten then game over
@@ -158,26 +165,26 @@ function simulation(){
 
   //Game Timer
   gameOverTimer++;
-  if (gameOverTimer >= gameLength){
+  if (gameOverTimer >= gameLength) {
     state = `survived`
   }
 
-
   //displays the bird
-    bird.move();
-    bird.display();
+  bird.move();
+  bird.display();
 
-//Allows the bee to polinate the flowers and survive
-      for (let j = 0; j < garden.flowers.length; j++) {
-        let flower = garden.flowers[j];
-        if (flower.alive){
-        bee.tryToPollinate(flower);
-        }
-      }
+  //Allows the bee to polinate the flowers and survive
+  for (let j = 0; j < garden.flowers.length; j++) {
+    let flower = garden.flowers[j];
+    if (flower.alive) {
+      bee.tryToPollinate(flower);
+    }
+  }
 }
 
 //Gameover state///////////////////////////////////////////////////////////
-function gameOver(){
+//Game over text
+function gameOver() {
   push();
   textSize(type.sizeBig);
   fill(255);
@@ -186,16 +193,17 @@ function gameOver(){
   text(type.gameOver, type.x, type.y);
   pop();
 
+  //Try again text
   push();
   textSize(type.sizeSmall);
   fill(255);
   textAlign(CENTER);
-  text(type.tryAgain, type.x, type.y + height/5);
+  text(type.tryAgain, type.x, type.y + height / 5);
   pop();
 }
 
 //Win state//////////////////////////////////////////////////////////////////
-function win(){
+function win() {
   push();
   textSize(type.sizeBig);
   fill(255);
