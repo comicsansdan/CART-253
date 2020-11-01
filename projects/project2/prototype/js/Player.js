@@ -39,6 +39,15 @@ class Player {
     }
   }
 
+  wrap(){
+    if (this.x > width) {
+      this.x -= width;
+    }
+    else if (this.x < 0) {
+      this.x += width;
+    }
+  }
+
   bounce(platform){
 
     if (this.x > platform.x - platform.width/2 &&

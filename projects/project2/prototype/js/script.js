@@ -36,6 +36,7 @@ function draw() {
 
   player.handleInput();
   player.gravity(gravityForce);
+  player.wrap();
   player.move();
   player.display();
 
