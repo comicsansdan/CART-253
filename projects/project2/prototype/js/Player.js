@@ -34,20 +34,20 @@ class Player {
     else if (keyIsDown(RIGHT_ARROW)){
       this.vx = this.speed;
     }
-    //Jump
-    else if (keyIsDown(32) && this.jump){
-      this.vy = -this.vy;
-      this.ay = 0;
-
-      this.jump = false;
-    }
     else  {
       this.vx = 0;
     }
   }
 
-  wrap(canvasHeight){
-    this.y = constrain(this.y, 0, canvasHeight);
+  bounce(platform){
+
+    if (this.x > platform.x - platform.width/2 &&
+        this.x < platform.x + platform.width/2 &&
+        this.y + this.size/2 > platform.y - platform.height/2 &&
+        this.y - this.size/2 < platform.y + platform.height/2) {
+          this.vy = -this.vy;
+          this.ay = 0;
+        }
   }
 
   display(){
