@@ -17,6 +17,10 @@ let numCars = 10;
 // let motorcycles = [];
 let numMotorcycles = 10;
 
+//CHAIN OF INHERITANCE///////////////////////////////////////////////////////
+let numSportsCars = 3;
+
+
 // setup()
 //
 // Description of setup() goes here.
@@ -40,6 +44,13 @@ function setup() {
     // motorcycles.push(motorcycle);
 // POLYMORPHISM ////////////////////////////////////////////////////////////////
     vehicles.push(motorcycle);
+  }
+
+  for (let i = 0; i < numSportsCars; i++) {
+    let x = random(0, width);
+    let y = random(0, height);
+    let sportscar = new SportsCar(x,y);
+    vehicles.push(sportscar);
   }
 }
 
