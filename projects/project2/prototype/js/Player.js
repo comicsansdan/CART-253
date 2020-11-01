@@ -37,25 +37,33 @@ class Player {
     else  {
       this.vx = 0;
     }
+    //Jump
+    if (keyIsDown(32) && this.jump){
+      this.vy = -this.vy;
+      this.ay = 0;
+
+      this.jump = false;
+    }
   }
 
-  wrap(){
+  wrap(platform){
     if (this.x > width) {
       this.x -= width;
     }
     else if (this.x < 0) {
       this.x += width;
     }
+
+    this.y = constrain(this.y, 0, platform.y-platform.height);
+
   }
 
-  bounce(platform){
-
+  jumpCooldown(platform){
     if (this.x > platform.x - platform.width/2 &&
         this.x < platform.x + platform.width/2 &&
         this.y + this.size/2 > platform.y - platform.height/2 &&
         this.y - this.size/2 < platform.y + platform.height/2) {
-          this.vy = -this.vy;
-          this.ay = 0;
+          this.jump = true;
         }
   }
 

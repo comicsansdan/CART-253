@@ -9,21 +9,18 @@ let gravityForce = 0.0025;
 
 let player;
 
-let platforms = [];
-let numPlatforms = 1;
+let platform;
 
 // setup()
 //
 // Description of setup() goes here.
 function setup() {
-  createCanvas(600, windowHeight);
+  createCanvas(500, 500);
 
-  player = new Player(width/2, height - 50);
+  player = new Player(width/2, height/2);
 
-  for (let i = 0; i < numPlatforms; i++) {
-    let platform = new Platform(width/2, height, 600, 25);
-    platforms.push(platform);
-  }
+  platform = new Platform(width/2, height, 600, 25);
+
 }
 
 // draw()
@@ -34,17 +31,13 @@ function draw() {
 
   let canvasHeight = height - 40;
 
+  platform.display();
+
   player.handleInput();
   player.gravity(gravityForce);
-  player.wrap();
+  player.wrap(platform);
   player.move();
   player.display();
+  player.jumpCooldown(platform);
 
-  for (let i = 0; i < platforms.length; i++) {
-    let platform = platforms[i];
-    platform.display();
-
-    player.bounce(platform);
   }
-
-}
