@@ -7,9 +7,22 @@ class Player {
     this.vx = 0;
     this.vy = 0;
     this.ay = 0;
-    this.speed = 5;
-    this.maxSpeed = 10;
+    this.speed = 4;
     this.jump = true;
+  }
+
+  gravity(force) {
+    this.ay += force;
+  }
+
+  move(){
+    this.x += this.vx;
+    this.y += this.vy;
+
+    this.vy += this.ay;
+
+    this.vy = constrain(this.vy, -this.speed, this.speed)
+    this.y += this.vy;
   }
 
   handleInput(){
@@ -21,14 +34,20 @@ class Player {
     else if (keyIsDown(RIGHT_ARROW)){
       this.vx = this.speed;
     }
+    //Jump
+    else if (keyIsDown(32) && this.jump){
+      this.vy = -this.vy;
+      this.ay = 0;
+
+      this.jump = false;
+    }
     else  {
       this.vx = 0;
     }
   }
 
-  move(){
-    this.x += this.vx;
-    this.y += this.vy;
+  wrap(canvasHeight){
+    this.y = constrain(this.y, 0, canvasHeight);
   }
 
   display(){
