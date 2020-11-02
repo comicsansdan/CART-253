@@ -11,15 +11,23 @@ let player;
 
 let platform;
 
+let obstacle;
+
+let ground;
+
 // setup()
 //
 // Description of setup() goes here.
 function setup() {
-  createCanvas(500, 500);
+  createCanvas(800, 500);
 
-  player = new Player(width/2, height/2);
+  player = new Player(width/2, height-25);
 
   platform = new Platform(width/2, height, 600, 25);
+
+  let x = width/2;
+  let w = width;
+  ground = new Ground(x, w);
 
 }
 
@@ -27,7 +35,11 @@ function setup() {
 //
 // Description of draw() goes here.
 function draw() {
-  background(0);
+
+  background(150, 230, 240);
+
+  //Display ground
+  ground.display();
 
   let canvasHeight = height - 40;
 

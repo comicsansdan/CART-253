@@ -1,10 +1,10 @@
 class Platform {
 
-  constructor(x, y, width, height){
+  constructor(x, y){
     this.x = x;
     this.y = y;
-    this.width = width;
-    this.height = height;
+    this.width = 200;
+    this.height = 40;
   }
 
   display() {

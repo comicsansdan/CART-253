@@ -3,11 +3,11 @@ class Player {
   constructor(x,y){
     this.x = x;
     this.y = y;
-    this.size = 20;
+    this.size = 30;
     this.vx = 0;
     this.vy = 0;
     this.ay = 0;
-    this.speed = 4;
+    this.speed = 2;
     this.jump = true;
   }
 
