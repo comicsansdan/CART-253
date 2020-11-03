@@ -29,6 +29,7 @@ function setup() {
 function draw() {
   background(0);
   //Display player
+  player.controls();
   player.display();
 
   //Platform
