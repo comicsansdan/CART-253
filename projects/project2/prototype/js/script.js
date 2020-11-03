@@ -5,6 +5,8 @@ Pippin Barr
 Here is a description of this template p5 project.
 **************************************************/
 
+let gravityForce = 1;
+
 let player;
 
 let platform;
@@ -28,12 +30,6 @@ function setup() {
 // Description of draw() goes here.
 function draw() {
   background(0);
-  //Display player
-  player.controls();
-  player.display();
-
-  //Platform
-  platform.display();
 
   //Ground
   push();
@@ -41,5 +37,13 @@ function draw() {
   rectMode(CENTER);
   rect(width/2, 450, width, 100);
   pop();
+
+  //Display player
+  player.controls();
+  player.display();
+  player.gravity(gravityForce);
+
+  //Platform
+  platform.display();
 
 }
