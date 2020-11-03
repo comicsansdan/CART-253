@@ -42,6 +42,7 @@ function draw() {
   player.controls();
   player.display();
   player.gravity(gravityForce);
+  player.collision(platform);
 
   //Platform
   platform.display();
