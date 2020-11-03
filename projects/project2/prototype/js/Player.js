@@ -8,7 +8,8 @@ class Player {
     this.vy = 2;
     this.jumpPower = 15;
     this.jump = false;
-    this.jumpCounter = 0
+    this.jumpCounter = 0;
+    this.exited = false;
   }
 
   controls(){
@@ -34,7 +35,7 @@ class Player {
   }
 
   gravity(force){
-    if (this.y >= 375 && !this.jump){
+    if (this.y >= 375+this.size/2 && !this.jump){
       this.y = this.y;
       this.jumpCounter = 0; //Resets jump counter (limits the amount of time in the air you can jump)
     }
@@ -44,8 +45,8 @@ class Player {
 
     if (this.jump){
       if(this.y <= 50 || this.jumpCounter >= this.jumpPower )// Reached max jump height/jumpPower
-        if(this.y >= 375){
-          this.y = 375; //Stays at the minimum height
+        if(this.y >= 375+this.size/2){
+          this.y = 375+this.size/2; //Stays at the minimum height
         }
         else {
         this.vy = this.speed;
@@ -60,12 +61,25 @@ class Player {
     }
   }
 
-  collision(platform){
-    if(this.x >= platform.x-platform.width/2 && this.x <= platform.x+platform.width/2 &&
-    this.y+this.size/2 >= platform.y-platform.height/2 && this.y+this.size/2 <= platform.y+platform.height/2 && !this.jump){
+  collision(platform, exit, state){
+    //Player colides with platform
+    if(this.x >= platform.x-platform.width/2 &&
+      this.x <= platform.x+platform.width/2 &&
+      this.y+this.size/2 >= platform.y-platform.height/2 &&
+      this.y+this.size/2 <= platform.y+platform.height/2 &&
+      !this.jump){
       this.y = this.y;//dont fall
       this.vy = 0;
       this.jumpCounter = 0;//Allows to jump again
+    }
+
+    //Player colides with exit
+    else if(this.x >= exit.x-exit.width/2 &&
+       this.x <= exit.x+exit.width/2 &&
+       this.y >= exit.y-exit.height/2 &&
+       this.y <= exit.y+exit.height/2 &&
+       !exit.locked){
+        this.exited = true;
     }
   }
 
