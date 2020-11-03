@@ -38,3 +38,5 @@ Exercises:
 Projects:
 
 -[Project 1](https://danielcacatian.github.io/CART-253/projects/project1)
+
+-[Project 2 (Prototype)](https://danielcacatian.github.io/CART-253/projects/project2/prototype)
