@@ -15,12 +15,12 @@ let platform;
 //
 // Description of setup() goes here.
 function setup() {
-  createCanvas(800,500);
+  createCanvas(800, 500);
   noStroke();
 
-  x = width/2;
+  x = width / 2;
   y = 375;
-  player = new Player(x,y);
+  player = new Player(x, y);
 
   platform = new Platform(200, 300, 200, 40);
 }
@@ -35,7 +35,7 @@ function draw() {
   push();
   fill(100, 200, 75);
   rectMode(CENTER);
-  rect(width/2, 450, width, 100);
+  rect(width / 2, 450, width, 100);
   pop();
 
   //Display player
