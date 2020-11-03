@@ -9,7 +9,7 @@ Here is a description of this template p5 project.
 //
 // Description of setup() goes here.
 function setup() {
-
+  createCanvas(800,500);
 }
 
 // draw()
