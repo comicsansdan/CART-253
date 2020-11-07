@@ -33,18 +33,15 @@ function setup() {
 function draw() {
   background(0);
 
-  circle.x = mouseX;
-  circle.y = mouseY;
-
-  ellipse(circle.x,circle.y,100);
+// REIVISITED SOUND (RATE) ////////////////////////////////////////////////////////////////////
+  let newRate = map(mouseX, 0, width, -3, 3);
+  barkSFX.rate(newRate);
 }
 
-// SOUND ////////////////////////////////////////////////////////////////////
-// function mousePressed(){
-//   if (!music.isPlaying()) {
-//     music.play();
-//   }
-// }
+// REIVISITED SOUND (RATE) ////////////////////////////////////////////////////////////////////
+function mousePressed(){
+    barkSFX.play();
+}
 //
 // function keyPressed(){
 //   if (!music.isPlaying()) {
