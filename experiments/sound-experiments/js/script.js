@@ -19,12 +19,21 @@ function preload() {
   barkSFX = loadSound(`assets/sounds/bark.wav`);
   music = loadSound(`assets/sounds/bark.wav`);
 }
+// OSCILLATOR ////////////////////////////////////////////////////////////////////
+let oscillator;
+let t = 0;
 
 // setup()
 //
 // Description of setup() goes here.
 function setup() {
   createCanvas(500,500);
+
+// OSCILLATOR ////////////////////////////////////////////////////////////////////
+  userStartAudio();
+
+  oscillator = new p5.Oscillator(440,`sine`);
+  oscillator.amp(0.2); //amp. Controls volume
 }
 
 // draw()
@@ -33,15 +42,32 @@ function setup() {
 function draw() {
   background(0);
 
-// REIVISITED SOUND (RATE) ////////////////////////////////////////////////////////////////////
-  let newRate = map(mouseX, 0, width, -3, 3);
-  barkSFX.rate(newRate);
+// OSCILLATOR ////////////////////////////////////////////////////////////////////
+  let noiseValue = noise(t);
+  let newFreq = map(noiseValue, 0, 1, 20, 2000);
+  oscillator.freq(newFreq); //freq. Frequency controls the pitch of the noise 0 = low, to high pitch
+
+  t += 0.5;
+}
+
+// OSCILLATOR ////////////////////////////////////////////////////////////////////
+function mousePressed(){
+  oscillator.start();
+}
+
+function mouseReleased(){
+  oscillator.stop();
 }
 
 // REIVISITED SOUND (RATE) ////////////////////////////////////////////////////////////////////
-function mousePressed(){
-    barkSFX.play();
-}
+//   let newRate = map(mouseX, 0, width, -3, 3);
+//   barkSFX.rate(newRate);
+// }
+
+// REIVISITED SOUND (RATE) ////////////////////////////////////////////////////////////////////
+// function mousePressed(){
+//     barkSFX.play();
+// }
 //
 // function keyPressed(){
 //   if (!music.isPlaying()) {
