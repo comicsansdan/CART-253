@@ -12,7 +12,8 @@ class NoteD5 extends MusicBlock {
   display(){
     super.display();
     push();
-    fill(150, 100, 255);
+    noStroke();
+    fill(255, 101, 0);
     ellipse(this.x, this.y, this.size);
     pop();
   }

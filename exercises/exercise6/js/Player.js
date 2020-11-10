@@ -9,7 +9,7 @@ class Player {
   display(){
     push();
     noStroke();
-    fill(255,0,0);
+    fill(255,253,80);
     ellipse(this.x, this.y, this.size);
     pop();
   }
