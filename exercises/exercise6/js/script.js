@@ -18,11 +18,11 @@ let currentNote = 0;
 
 //Music blocks
 let musicBlocks = [];
-let noteB5;
-let noteA5;
-let noteF5;
-let noteE5;
-let noteD5;
+let noteB5; //blue
+let noteA5; //red
+let noteF5; //green
+let noteE5; //purple
+let noteD5; //orange
 
 
 // setup()
@@ -89,7 +89,13 @@ function listen(){
 function mousePressed(){
   for (let i = 0; i < musicBlocks.length; i++) {
     let musicBlock = musicBlocks[i];
-    musicBlock.mousePressed(player);
+
+    console.log(musicBlock.note);
+    musicBlock.mousePressed();
+
+    if (musicBlock.order === 13){
+      noLoop();
+    }
   }
 
 }
