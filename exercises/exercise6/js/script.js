@@ -31,8 +31,6 @@ function setup() {
 function draw() {
   background(0);
 
-  console.log(currentNote)
-
 }
 
 function mousePressed(){
