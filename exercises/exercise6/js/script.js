@@ -70,19 +70,27 @@ function draw() {
     musicBlock.display();
   }
 
+  //Listen to tune
+  if (keyIsDown(32)){
+    listen();
+  }
+
 }
 
-function mousePressed(){
-  // if(!song.playing){
-  // setInterval(playSong, 500);
-  // song.playing = true;
-  // }
+//Listen function
+function listen(){
+  if(!song.playing){
+  setInterval(playSong, 500);
+  song.playing = true;
+  }
+}
 
+//MousePressed function allows to
+function mousePressed(){
   for (let i = 0; i < musicBlocks.length; i++) {
     let musicBlock = musicBlocks[i];
     musicBlock.mousePressed(player);
   }
-
 
 }
 
