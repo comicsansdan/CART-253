@@ -5,6 +5,9 @@ Daniel Cacatian
 This project use sound in form of a puzzle. Play the tune in the correct order and you win
 **************************************************/
 
+//User
+let player;
+
 //Song
 //The tune the player must recreate
 let song = {
@@ -30,6 +33,10 @@ function setup() {
 // Description of draw() goes here.
 function draw() {
   background(0);
+
+  //Display the player
+  player = new Player(mouseX, mouseY);
+  player.display();
 
 }
 
