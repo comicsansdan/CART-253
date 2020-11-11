@@ -16,7 +16,6 @@ let noteF5; //green
 let noteE5; //purple
 let noteD5; //orange
 
-
 // setup()
 //
 // Setup contains the call for the classes for the musical notes and canvas
