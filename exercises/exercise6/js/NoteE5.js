@@ -1,22 +1,22 @@
 class NoteE5 extends MusicBlock {
 
-  constructor(x,y){
-    super(x,y);
+  constructor(x, y) {
+    super(x, y);
     this.note = `E5`;
   }
 
-  mousePressed(){
+  mousePressed() {
     super.mousePressed();
 
   }
 
-  display(){
+  display() {
     push();
     noStroke();
     fill(128, 0, 156);
     ellipse(this.x, this.y, this.size);
     pop();
-    
+
     super.display();
   }
 
