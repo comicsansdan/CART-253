@@ -19,7 +19,7 @@ let noteD5; //orange
 
 // setup()
 //
-// Description of setup() goes here.
+// Setup contains the call for the classes for the musical notes and canvas
 function setup() {
   createCanvas(800, 800);
   userStartAudio();
@@ -49,7 +49,7 @@ function setup() {
 
 // draw()
 //
-// Description of draw() goes here.
+// All the display and interactive functions for the classes are contained here
 function draw() {
   background(0);
 
