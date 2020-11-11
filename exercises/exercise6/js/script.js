@@ -8,14 +8,6 @@ This project use sound in form of a puzzle. Play the tune in the correct order a
 //User
 let player;
 
-//Song
-//The tune the player must recreate
-let song = {
-  playing: false,
-};
-let notes = [`B5`, `A5`, `F5`, `B5`, `A5`, `F5`, `A5`, `F5`, `E5`, `D5`, `E5`, `E5` ];
-let currentNote = 0;
-
 //Music blocks
 let musicBlocks = [];
 let noteB5; //blue
@@ -68,48 +60,17 @@ function draw() {
   for (let i = 0; i < musicBlocks.length; i++) {
     let musicBlock = musicBlocks[i];
     musicBlock.display();
-  }
 
-  //Listen to tune
-  if (keyIsDown(32)){
-    listen();
   }
 
 }
 
-//Listen function
-function listen(){
-  if(!song.playing){
-  setInterval(playSong, 500);
-  song.playing = true;
-  }
-}
-
-//MousePressed function allows to
+//MousePressed function allows to play the notes
 function mousePressed(){
   for (let i = 0; i < musicBlocks.length; i++) {
     let musicBlock = musicBlocks[i];
 
-    console.log(musicBlock.note);
-    musicBlock.mousePressed();
+    musicBlock.mousePressed(width/2, height/2);
 
-    if (musicBlock.order === 13){
-      noLoop();
-    }
-  }
-
-}
-
-function playSong(){
-  if (song.playing){
-  let note = notes[currentNote];
-  song.play(note, 1, 0, 0.2);
-
-  currentNote += 1;
-
-  if (currentNote === notes.length){
-    currentNote = 0;
-    song.playing = false;
-  }
   }
 }
