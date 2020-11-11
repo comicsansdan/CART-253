@@ -27,24 +27,24 @@ function setup() {
   song = new p5.PolySynth();
 
   //Note B5
-    let noteB5 = new NoteB5(400,100);
-    musicBlocks.push(noteB5);
+  let noteB5 = new NoteB5(400, 100);
+  musicBlocks.push(noteB5);
 
   //Note A5
-    let noteA5 = new NoteA5(200,700);
-    musicBlocks.push(noteA5);
+  let noteA5 = new NoteA5(200, 700);
+  musicBlocks.push(noteA5);
 
   //Note F5
-    let noteF5 = new NoteF5(700,400);
-    musicBlocks.push(noteF5);
+  let noteF5 = new NoteF5(700, 400);
+  musicBlocks.push(noteF5);
 
   //Note E5
-    let noteE5 = new NoteE5(600,700);
-    musicBlocks.push(noteE5);
+  let noteE5 = new NoteE5(600, 700);
+  musicBlocks.push(noteE5);
 
   //Note D5
-    let noteD5 = new NoteD5(100,400);
-    musicBlocks.push(noteD5);
+  let noteD5 = new NoteD5(100, 400);
+  musicBlocks.push(noteD5);
 }
 
 // draw()
@@ -66,11 +66,11 @@ function draw() {
 }
 
 //MousePressed function allows to play the notes
-function mousePressed(){
+function mousePressed() {
   for (let i = 0; i < musicBlocks.length; i++) {
     let musicBlock = musicBlocks[i];
 
-    musicBlock.mousePressed(width/2, height/2);
+    musicBlock.mousePressed(width / 2, height / 2);
 
   }
 }
