@@ -1,8 +1,8 @@
 /**************************************************
-Template p5 project
-Pippin Barr
+Melody Cave
+Daniel Cacatian
 
-Here is a description of this template p5 project.
+Creating a platforming game that incorporates platforming and sound mechanics within p5.js
 **************************************************/
 
 // setup()

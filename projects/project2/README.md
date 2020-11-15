@@ -1,3 +1,3 @@
-# Template p5 project
+# Project 2: Melody Cave
 
-This is the README file for the entire project. For more official projects you should write information here about the nature of the project, your name, any special explanations of how the project works, etc.
+This README file contains the link to [Project 1: Until Nightfall](https://danielcacatian.github.io/CART-253/projects/project2/)
