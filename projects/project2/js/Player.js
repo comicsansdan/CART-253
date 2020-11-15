@@ -3,6 +3,7 @@ class Player {
   constructor(x, y){
     this.x = x;
     this.y = y;
+    this.minHeight = y;
     this.size = 50
     this.image = undefined;
     this.speed = 5;
@@ -34,7 +35,7 @@ class Player {
   }
 
   gravity(force){
-    if (this.y >= 375+this.size/2 && !this.jump){
+    if (this.y >= this.minHeight+this.size/2 && !this.jump){
       this.y = this.y;
       this.jumpCounter = 0; //Resets jump counter (limits the amount of time in the air you can jump)
     }
@@ -44,8 +45,8 @@ class Player {
 
     if (this.jump){
       if(this.y <= 50 || this.jumpCounter >= this.jumpPower )// Reached max jump height/jumpPower
-        if(this.y >= 375+this.size/2){
-          this.y = 375+this.size/2; //Stays at the minimum height
+        if(this.y >= this.minHeight+this.size/2){
+          this.y = this.minHeight+this.size/2; //Stays at the minimum height
         }
         else {
         this.vy = this.speed;
