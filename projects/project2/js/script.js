@@ -1,5 +1,5 @@
 /**************************************************
-Melody Cave
+Melody Tower
 Daniel Cacatian
 
 Creating a platforming game that incorporates platforming and sound mechanics within p5.js
@@ -9,12 +9,12 @@ Creating a platforming game that incorporates platforming and sound mechanics wi
 //
 // Description of setup() goes here.
 function setup() {
-
+  createCanvas(600, windowHeight);
 }
 
 // draw()
 //
 // Description of draw() goes here.
 function draw() {
-
+  background(0);
 }
