@@ -11,7 +11,11 @@ let player;
 
 //platform player can jump on
 let platforms = [];
-let numBluePlatforms = 2;
+let bluePlatform;
+let orangePlatform;
+let redPlatform;
+let greenPlatform;
+
 
 // setup()
 //
@@ -25,14 +29,24 @@ function setup() {
   y = height - 100;
   player = new Player(x, y);
 
-  for (let i = 0; i < numBluePlatforms; i++) {
-    let x = width/2;
-    let y = height/2 + 300;
-    let bluePlatform = new BluePlatform(x, y);
-    platforms.push(bluePlatform);
-  }
+  //Blue platform
+  let bluePlatform = new BluePlatform(width/2, height-200);
+  platforms.push(bluePlatform);
+
+  //Orange platform
+  let orangePlatform = new OrangePlatform(width/2, height-350);
+  platforms.push(orangePlatform);
+
+  //Red platform
+  let redPlatform = new RedPlatform(width/2, height-500);
+  platforms.push(redPlatform);
+
+  //Green platform
+  let greenPlatform = new GreenPlatform(width/2, height-650);
+  platforms.push(greenPlatform);
 
 }
+
 
 // draw()
 //

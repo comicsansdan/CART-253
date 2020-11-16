@@ -7,6 +7,7 @@ class Player {
     this.size = 50
     this.image = undefined;
     this.speed = 5;
+    this.fallingSpeed = 7.5;
     this.vy = 2;
     this.jumpPower = 15;
     this.jump = false;
@@ -49,7 +50,7 @@ class Player {
           this.y = this.minHeight+this.size/2; //Stays at the minimum height
         }
         else {
-        this.vy = this.speed;
+        this.vy = this.fallingSpeed;
       }
       else {
       this.vy = -this.jumpPower; //Jumping (only once)
@@ -57,7 +58,7 @@ class Player {
       }
     }
     else {
-      this.vy = this.speed;
+      this.vy = this.fallingSpeed;
     }
   }
 
