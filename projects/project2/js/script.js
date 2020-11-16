@@ -51,11 +51,14 @@ function draw() {
   player.controls();
   player.display();
   player.gravity(gravityForce);
+  player.wrap();
 
   //Display platforms
   for (let i = 0; i < platforms.length; i++){
     let platform = platforms[i];
     platform.display();
+
+    player.collision(platform);
   }
 
 }

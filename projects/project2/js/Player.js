@@ -61,6 +61,26 @@ class Player {
     }
   }
 
+  collision(platform){
+    //Player colides with platform
+    if(this.x >= platform.x-platform.width/2 &&
+      this.x <= platform.x+platform.width/2 &&
+      this.y+this.size/2 >= platform.y-platform.height/2 &&
+      this.y+this.size/2 <= platform.y+platform.height/2 &&
+      !this.jump){
+      this.y = this.y;//dont fall
+      this.vy = 0;
+      this.jumpCounter = 0;//Allows to jump again
+    }
+
+  }
+
+  wrap(){
+    //Object doesn't go out of bounds
+    this.x = constrain(this.x, 0, width-this.size/2);
+    this.y = constrain(this.y, -10, height-this.size/2);
+  }
+
   display(){
     push();
     noStroke();
