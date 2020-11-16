@@ -2,7 +2,7 @@ class RedPlatform extends Platform {
 
   constructor(x,y){
     super(x,y);
-    this.activated = false;
+    this.note = `A4`;
   }
 
   display(){

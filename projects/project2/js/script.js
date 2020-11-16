@@ -25,24 +25,22 @@ function setup() {
   noStroke();
 
   //Player setup
-  x = width / 2;
-  y = height - 100;
-  player = new Player(x, y);
+  player = new Player(width/2, height-100);
 
   //Blue platform
   let bluePlatform = new BluePlatform(width/2, height-200);
   platforms.push(bluePlatform);
 
   //Orange platform
-  let orangePlatform = new OrangePlatform(width/2, height-350);
+  let orangePlatform = new OrangePlatform(width/2, height-400);
   platforms.push(orangePlatform);
 
   //Red platform
-  let redPlatform = new RedPlatform(width/2, height-500);
+  let redPlatform = new RedPlatform(width/2, height-600);
   platforms.push(redPlatform);
 
   //Green platform
-  let greenPlatform = new GreenPlatform(width/2, height-650);
+  let greenPlatform = new GreenPlatform(width/2, height-800);
   platforms.push(greenPlatform);
 
 }
@@ -67,10 +65,12 @@ function draw() {
   player.gravity(gravityForce);
   player.wrap();
 
+
   //Display platforms
   for (let i = 0; i < platforms.length; i++){
     let platform = platforms[i];
     platform.display();
+    platform.pressedOn(player);
 
     player.collision(platform);
   }

@@ -2,7 +2,7 @@ class OrangePlatform extends Platform {
 
   constructor(x,y){
     super(x,y);
-    this.activated = false;
+    this.note = `G4`;
   }
 
   display(){

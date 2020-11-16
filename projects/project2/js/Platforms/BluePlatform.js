@@ -2,7 +2,7 @@ class BluePlatform extends Platform {
 
   constructor(x,y){
     super(x,y);
-    this.activated = false;
+    this.note = `C4`;
   }
 
   display(){
