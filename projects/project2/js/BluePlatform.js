@@ -8,7 +8,9 @@ class BluePlatform extends Platform {
   display(){
     super.display();
     push();
+    rectMode(CENTER);
     fill(4, 143, 255);
+    rect(this.x, this.y, this.width, this.height);
     pop();
   }
 

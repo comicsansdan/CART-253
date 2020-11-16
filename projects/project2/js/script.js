@@ -1,7 +1,6 @@
 /**************************************************
 Melody Tower
 Daniel Cacatian
-
 Creating a platforming game that incorporates platforming and sound mechanics within p5.js
 **************************************************/
 
@@ -11,7 +10,8 @@ let gravityForce = 1;
 let player;
 
 //platform player can jump on
-let platform;
+let platforms = [];
+let numBluePlatforms = 2;
 
 // setup()
 //
@@ -20,9 +20,17 @@ function setup() {
   createCanvas(600, windowHeight);
   noStroke();
 
+  //Player setup
   x = width / 2;
   y = height - 100;
   player = new Player(x, y);
+
+  for (let i = 0; i < numBluePlatforms; i++) {
+    let x = width/2;
+    let y = height/2 + 300;
+    let bluePlatform = new BluePlatform(x, y);
+    platforms.push(bluePlatform);
+  }
 
 }
 
@@ -43,4 +51,11 @@ function draw() {
   player.controls();
   player.display();
   player.gravity(gravityForce);
+
+  //Display platforms
+  for (let i = 0; i < platforms.length; i++){
+    let platform = platforms[i];
+    platform.display();
+  }
+
 }

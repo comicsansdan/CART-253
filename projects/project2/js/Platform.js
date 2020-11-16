@@ -1,17 +1,14 @@
 class Platform{
 
-  constructor(x, y, w, h){
+  constructor(x, y){
     this.x = x;
     this.y = y;
-    this.width = w;
-    this.height = h;
+    this.width = 200;
+    this.height = 20;
   }
 
   display(){
-    push();
-    rectMode(CENTER);
-    rect(this.x, this.y, this.width, this.height);
-    pop();
+
   }
 
 }
