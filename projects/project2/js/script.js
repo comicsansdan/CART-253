@@ -42,6 +42,8 @@ function setup() {
   //Green platform
   let greenPlatform = new GreenPlatform(width/2, height-800);
   platforms.push(greenPlatform);
+  greenPlatform = new GreenPlatform(width/2, height-900);
+  platforms.push(greenPlatform);
 
 }
 
