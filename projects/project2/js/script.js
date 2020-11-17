@@ -4,13 +4,12 @@ Daniel Cacatian
 Creating a platforming game that incorporates platforming and sound mechanics within p5.js
 **************************************************/
 
-let gravityForce = 1;
-
 //User himself
 let player;
 
 //platform player can jump on
 let platforms = [];
+//
 let bluePlatform;
 let orangePlatform;
 let redPlatform;
@@ -64,7 +63,7 @@ function draw() {
   //Display player
   player.controls();
   player.display();
-  player.gravity(gravityForce);
+  player.gravity();
   player.wrap();
 
 

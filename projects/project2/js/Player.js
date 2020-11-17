@@ -4,12 +4,14 @@ class Player {
     this.x = x;
     this.y = y;
     this.minHeight = y;
-    this.size = 50
+    //display variables
+    this.size = 50;
     this.image = undefined;
     this.speed = 5;
     this.fallingSpeed = 7.5;
-    this.vy = 2;
-    this.jumpPower = 15;
+    this.vy = 0;
+    this.force = 1;
+    this.jumpPower = 16;
     this.jump = false;
     this.jumpCounter = 0;
   }
@@ -35,13 +37,13 @@ class Player {
     }
   }
 
-  gravity(force){
+  gravity(){
     if (this.y >= this.minHeight+this.size/2 && !this.jump){
       this.y = this.y;
       this.jumpCounter = 0; //Resets jump counter (limits the amount of time in the air you can jump)
     }
     else {
-      this.y += this.vy*force; //Falling (gravity)
+      this.y += this.vy*this.force; //Falling (gravity)
     }
 
     if (this.jump){
