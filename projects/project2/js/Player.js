@@ -47,7 +47,7 @@ class Player {
     }
 
     if (this.jump){
-      if(this.y <= 50 || this.jumpCounter >= this.jumpPower )// Reached max jump height/jumpPower
+      if(this.y <= -40 || this.jumpCounter >= this.jumpPower )// Reached max jump height/jumpPower
         if(this.y >= this.minHeight+this.size/2){
           this.y = this.minHeight+this.size/2; //Stays at the minimum height
         }
@@ -80,8 +80,8 @@ class Player {
 
   wrap(){
     //Object doesn't go out of bounds
-    this.x = constrain(this.x, 0, width-this.size/2);
-    this.y = constrain(this.y, -10, height-this.size/2);
+    this.x = constrain(this.x, 0+this.size/2, width-this.size/2);
+    this.y = constrain(this.y, -40, height);
   }
 
   display(){
