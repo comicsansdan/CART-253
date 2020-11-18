@@ -22,6 +22,9 @@ function setup() {
   createCanvas(600, windowHeight);
   noStroke();
 
+  userStartAudio();
+
+
   //Player setup
   player = new Player(width/2, height-100);
 
