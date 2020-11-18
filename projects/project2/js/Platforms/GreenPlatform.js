@@ -2,7 +2,7 @@ class GreenPlatform extends Platform {
 
   constructor(x,y){
     super(x,y);
-    this.note = `F4`;
+    this.note = `G5`;
   }
 
   display(){

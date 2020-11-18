@@ -9,11 +9,10 @@ let player;
 
 //platform player can jump on
 let platforms = [];
-//
-let bluePlatform;
-let orangePlatform;
-let redPlatform;
-let greenPlatform;
+let bluePlatform; //E note
+let orangePlatform; //B note
+let redPlatform; //A note
+let greenPlatform; //G note
 
 
 // setup()
