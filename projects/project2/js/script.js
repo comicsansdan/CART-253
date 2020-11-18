@@ -25,24 +25,33 @@ function setup() {
   //Player setup
   player = new Player(width/2, height-100);
 
+  scene1Setup();
+
+}
+
+function scene1Setup(){
+  //Platforms IN ORDER
   //Blue platform
-  let bluePlatform = new BluePlatform(width/2, height-200);
+  let bluePlatform = new BluePlatform(width/2, height-150, 500);
+  platforms.push(bluePlatform);
+  bluePlatform = new BluePlatform(width/2, height-600, 500);
   platforms.push(bluePlatform);
 
   //Orange platform
-  let orangePlatform = new OrangePlatform(width/2, height-400);
+  let orangePlatform = new OrangePlatform(width/2, height-350 , 500);
   platforms.push(orangePlatform);
 
   //Red platform
-  let redPlatform = new RedPlatform(width/2, height-600);
+  let redPlatform = new RedPlatform(width/2, height-500 , 500);
+  platforms.push(redPlatform);
+  redPlatform = new RedPlatform(width/2, height-950 , 500);
   platforms.push(redPlatform);
 
   //Green platform
-  let greenPlatform = new GreenPlatform(width/2, height-800);
+  let greenPlatform = new GreenPlatform(width/2, height-750 , 500);
   platforms.push(greenPlatform);
-  greenPlatform = new GreenPlatform(width/2, height-900);
+  greenPlatform = new GreenPlatform(width/2, height-850 , 500);
   platforms.push(greenPlatform);
-
 }
 
 
@@ -56,7 +65,7 @@ function draw() {
   push();
   fill(100, 200, 75);
   rectMode(CENTER);
-  rect(width / 2, windowHeight, width, 100);
+  rect(width / 2, windowHeight, width, 120);
   pop();
 
   //Display player

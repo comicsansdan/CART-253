@@ -1,9 +1,9 @@
 class Platform{
 
-  constructor(x, y){
+  constructor(x, y, w){
     this.x = x;
     this.y = y;
-    this.width = 200;
+    this.width = w;
     this.height = 20;
 
     //Synth
@@ -18,7 +18,7 @@ class Platform{
       player.y+player.size/2 >= this.y-this.height/2 &&
       player.y+player.size/2 <= this.y+this.height/2){
 
-      this.synth.play(this.note, 1, 0, 0.4);
+      this.synth.play(this.note, 0.5, 0, 0.3);
 
     }
   }

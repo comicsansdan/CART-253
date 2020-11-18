@@ -1,8 +1,8 @@
 class BluePlatform extends Platform {
 
-  constructor(x,y){
-    super(x,y);
-    this.note = `E5`;
+  constructor(x,y,w){
+    super(x,y, w);
+    this.note = `E4`;
   }
 
   display(){

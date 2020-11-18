@@ -1,7 +1,7 @@
 class RedPlatform extends Platform {
 
-  constructor(x,y){
-    super(x,y);
+  constructor(x,y,w){
+    super(x,y,w);
     this.note = `A5`;
   }
 

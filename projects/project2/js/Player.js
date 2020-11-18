@@ -5,13 +5,13 @@ class Player {
     this.y = y;
     this.minHeight = y;
     //display variables
-    this.size = 50;
+    this.size = 40;
     this.image = undefined;
     this.speed = 5;
     this.fallingSpeed = 7.5;
     this.vy = 0;
     this.force = 1;
-    this.jumpPower = 16;
+    this.jumpPower = 15;
     this.jump = false;
     this.jumpCounter = 0;
   }
