@@ -35,6 +35,8 @@ Exercises:
 
 -[Exercise 6](https://danielcacatian.github.io/CART-253/exercises/exercise6)
 
+-[Exercise 7](https://danielcacatian.github.io/CART-253/exercises/exercise7)
+
 
 Projects:
 
