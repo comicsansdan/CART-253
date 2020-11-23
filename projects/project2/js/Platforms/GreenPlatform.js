@@ -1,16 +1,17 @@
 class GreenPlatform extends Platform {
 
-  constructor(x,y, w){
+  constructor(x,y, w, platformImage){
     super(x,y, w);
     this.note = `G4`;
+
+    this.image = platformImage;
   }
 
   display(){
     super.display();
     push();
-    rectMode(CENTER);
-    fill(103, 204, 0);
-    rect(this.x, this.y, this.width, this.height);
+    imageMode(CENTER);
+    image(this.image, this.x, this.y, this.width, this.height);
     pop();
   }
 

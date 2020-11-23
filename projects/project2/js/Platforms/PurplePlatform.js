@@ -1,16 +1,17 @@
 class PurplePlatform extends Platform {
 
-  constructor(x,y, w){
+  constructor(x,y, w, platformImage){
     super(x,y, w);
     this.note = `C5`;
+    
+    this.image = platformImage;
   }
 
   display(){
     super.display();
     push();
-    rectMode(CENTER);
-    fill(128, 0, 156);
-    rect(this.x, this.y, this.width, this.height);
+    imageMode(CENTER);
+    image(this.image, this.x, this.y, this.width, this.height);
     pop();
   }
 

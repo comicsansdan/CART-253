@@ -1,12 +1,12 @@
 class Player {
 
-  constructor(x, y){
+  constructor(x, y, playerImage, playerImage2){
     this.x = x;
     this.y = y;
     this.minHeight = y;
     //display variables
-    this.size = 40;
-    this.image = undefined;
+    this.size = 60;
+    this.image = playerImage;
     this.speed = 5;
     this.fallingSpeed = 7.5;
     this.vy = 0;
@@ -20,12 +20,15 @@ class Player {
     //Left and right movement
     if(keyIsDown(LEFT_ARROW)){
       this.x -= this.speed;
+      this.image = playerImage2;
     }
     else if(keyIsDown(RIGHT_ARROW)){
       this.x += this.speed;
+      this.image = playerImage;
     }
     else {
       this.x += 0;
+      this.image = playerImage;
     }
 
     //Jump
@@ -86,9 +89,8 @@ class Player {
 
   display(){
     push();
-    noStroke();
-    fill(255,0,0);
-    ellipse(this.x, this.y, this.size);
+    imageMode(CENTER);
+    image(this.image, this.x, this.y, this.size, this.size);
     pop();
   }
 

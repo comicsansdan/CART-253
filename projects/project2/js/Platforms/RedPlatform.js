@@ -1,16 +1,17 @@
 class RedPlatform extends Platform {
 
-  constructor(x,y,w){
+  constructor(x,y,w, platformImage){
     super(x,y,w);
     this.note = `A5`;
+
+    this.image = platformImage;
   }
 
   display(){
     super.display();
     push();
-    rectMode(CENTER);
-    fill(242, 1, 1);
-    rect(this.x, this.y, this.width, this.height);
+    imageMode(CENTER);
+    image(this.image, this.x, this.y, this.width, this.height);
     pop();
   }
 
