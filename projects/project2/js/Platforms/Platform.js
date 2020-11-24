@@ -5,6 +5,9 @@ class Platform{
     this.y = y;
     this.width = w;
     this.height = 20;
+    this.vx = 2;
+    this.speed = 2;
+    this.moving = false;
 
     //Synth
     this.note = undefined;
@@ -24,7 +27,24 @@ class Platform{
 
       this.synth.play(this.note, 0.1, 0, 0.3);
 
+      this.speed=0;
     }
+    else{
+      this.speed = 2;
+    }
+  }
+
+  move(level){
+    if(this.moving){
+    this.x += this.vx;
+
+    if(this.x > 550-this.width/2){
+      this.vx -= this.speed;
+    }
+    else if(this.x < 50+this.width/2){
+      this.vx += this.speed;
+    }
+  }
   }
 
   display(){
