@@ -7,7 +7,7 @@ Creating a platforming game that incorporates platforming and sound mechanics wi
 //User himself
 let player;
 
-//platform player can jump on
+//Platform player can jump on
 let platforms = [];
 let bluePlatform; //E note
 let orangePlatform; //B note
@@ -15,12 +15,20 @@ let redPlatform; //A note
 let greenPlatform; //G note
 let purplePlatform; //C note
 
-
+//States & Levels
+let state = `title`;
 let level = 1;
 
+//Font
+let pixelFont;
+
+//Load images
 function preload(){
-  //Player image
+  //Background images
   backgroundImage = loadImage(`assets/images/Background.png`);
+  titleImage = loadImage(`assets/images/TitleScreen.png`);
+  controlsImage = loadImage(`assets/images/Controls.png`)
+  endImage = loadImage(`assets/images/EndScreen.png`);
 
   //Player image
   playerImage = loadImage(`assets/images/Player.png`);
@@ -36,6 +44,9 @@ function preload(){
   redImage = loadImage(`assets/images/Red.png`);
   greenImage = loadImage(`assets/images/Green.png`);
   purpleImage = loadImage(`assets/images/Purple.png`);
+
+  //Fonts
+  pixelFont = loadFont(`assets/fonts/EnterCommand.ttf`)
 }
 
 // setup()
@@ -65,12 +76,41 @@ function setup() {
 //
 // Description of draw() goes here.
 function draw() {
+  background(0);
 
+  if (state === `title`){
+    title();
+  }
+  else if (state === `controls`){
+    controls();
+  }
+  else if (state === `simulation`){
+    simulation();
+  }
+
+//STATE FUNCTIONS////////////////////////////////////////////////////////
+//Title State
+function title(){
   //Background
-  push();
-  imageMode(CENTER);
-  image(backgroundImage, width/2, height/2, width, height);
-  pop();
+  displayBackground(titleImage);
+  //Text
+  displayText(`Press 'any key' to START`, width/2, height/2+125, 36);
+}
+
+//Control States
+function controls(){
+  //Background
+  displayBackground(controlsImage);
+  //Text
+  displayText(`CONTROLS`, width/2, 50, 50);
+  displayText(`Press 'any key' to CONTINUE`, width/2, height-50, 36);
+}
+
+function simulation(){
+  //Background
+  displayBackground(backgroundImage);
+  //Text
+  displayText(`GOAL: Get to the top!`, width/2, height/2, 50);
 
   //Ground
   push();
@@ -97,11 +137,23 @@ function draw() {
   }
 
 }
+}
 
+//MISCELLANEOUS FUNCTIONS//////////////////////////////////////////////////
+//Proceed to next level
 function levelComplete(){
   if(player.y <= -25){
     level++ ;
     player.y = height-100;
+  }
+}
+
+function keyPressed(){
+  if(state===`title`){
+    state = `controls`;
+  }
+  else if(state===`controls`){
+    state = `simulation`;
   }
 }
 
@@ -176,4 +228,22 @@ function level3Setup(){
 
   orangePlatform = new OrangePlatform(width/2, height-850 , 150, orangeImage);
   platforms.push(orangePlatform);
+}
+
+//TEXT & BACKGROUND IMAGE FUNCTION ///////////////////////////////////////////////////////////////
+function displayText(string, x, y, size){
+  push();
+  textFont(pixelFont);
+  textAlign(CENTER, CENTER);
+  textSize(size);
+  fill(255);
+  text(string, x, y);
+  pop();
+}
+
+function displayBackground(loadImage){
+  push();
+  imageMode(CENTER);
+  image(loadImage, width/2, height/2, width, height);
+  pop()
 }
