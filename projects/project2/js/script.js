@@ -119,7 +119,7 @@ function draw() {
     displayBackground(titleImage);
     //Text
     displayText(`Press 'any key' to START`, width / 2, height / 2 + 125, 36);
-    displayText(`The game is experienced best with SOUND ON`, width / 2, 50, 36);
+    displayText(`The game is best experienced with SOUND ON`, width / 2, 50, 36);
   }
 
   //Control States////////////////////////
@@ -154,12 +154,6 @@ function draw() {
     image(floorImage, width / 2, windowHeight, width, 90);
     pop();
 
-    //Display player
-    player.controls();
-    player.display();
-    player.gravity();
-    player.wrap();
-
     levelComplete();
 
     // //Display chords
@@ -180,6 +174,12 @@ function draw() {
 
       player.collision(platform);
     }
+
+    //Display player
+    player.controls();
+    player.display();
+    player.gravity();
+    player.wrap();
   }
 
   //End state//////////////////////
