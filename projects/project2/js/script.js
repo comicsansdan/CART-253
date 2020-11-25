@@ -1,6 +1,7 @@
 /**************************************************
 Melody Tower
 Daniel Cacatian
+
 Creating a platforming game that incorporates platforming and sound mechanics within p5.js
 **************************************************/
 
@@ -79,7 +80,7 @@ function preload() {
 
 // setup()/////////////////////////////////////////////////////////////////////
 //
-// Description of setup() goes here.
+// This function contains the very basics (canvas, noStroke, etc.) and the functions that determine the starting positions of the objects in draw()
 function setup() {
   createCanvas(600, windowHeight);
   noStroke();
@@ -98,7 +99,7 @@ function setup() {
 
 // draw()//////////////////////////////////////////////////////////////////////
 //
-// Description of draw() goes here.
+// This function contains the states (title, controls, simulation, end).
 function draw() {
   background(0);
 
