@@ -48,7 +48,7 @@ let purpleImage;
 let backgroundSong;
 
 //Load images
-function preload(){
+function preload() {
   //Background images
   backgroundImage = loadImage(`assets/images/Background.png`);
   titleImage = loadImage(`assets/images/TitleScreen.png`);
@@ -86,10 +86,10 @@ function setup() {
   userStartAudio();
 
   //Player setup
-  player = new Player(width/2, height-100, playerImage, playerImage2);
+  player = new Player(width / 2, height - 100, playerImage, playerImage2);
 
   //Platform setup for 1st level
-  if(level===1){
+  if (level === 1) {
     level1Setup();
   }
 
@@ -102,161 +102,148 @@ function setup() {
 function draw() {
   background(0);
 
-  if (state === `title`){
+  if (state === `title`) {
     title();
-  }
-  else if (state === `controls`){
+  } else if (state === `controls`) {
     controls();
-  }
-  else if (state === `simulation`){
+  } else if (state === `simulation`) {
     simulation();
-  }
-  else if (state === `end`){
+  } else if (state === `end`) {
     end();
   }
 
-//STATE FUNCTIONS////////////////////////////////////////////////////////
-//Title State////////////////////////////
-function title(){
-  //Background
-  displayBackground(titleImage);
-  //Text
-  displayText(`Press 'any key' to START`, width/2, height/2+125, 36);
-  displayText(`The game is experienced best with SOUND ON`, width/2, 50, 36);
-}
-
-//Control States////////////////////////
-function controls(){
-  //Background
-  displayBackground(controlsImage);
-  //Text
-  displayText(`CONTROLS`, width/2, 50, 50);
-  displayText(`Press 'any key' to CONTINUE`, width/2, height-50, 36);
-}
-
-//Simulation state//////////////////////
-function simulation(){
-  //Background
-  displayBackground(backgroundImage);
-  //Text
-  if(level===1){
-    displayText(`GOAL: Get to the top!`, width/2, height/2, 50);
-  }
-  else if(level===9){
-    displayText(`↑ End ↑`, width/2, 50, 50);
-
+  //STATE FUNCTIONS////////////////////////////////////////////////////////
+  //Title State////////////////////////////
+  function title() {
+    //Background
+    displayBackground(titleImage);
+    //Text
+    displayText(`Press 'any key' to START`, width / 2, height / 2 + 125, 36);
+    displayText(`The game is experienced best with SOUND ON`, width / 2, 50, 36);
   }
 
-  //Ground
-  if(level===1){
-    floorImage = groundImage;
-  } else {
-    floorImage = groundImage2;
+  //Control States////////////////////////
+  function controls() {
+    //Background
+    displayBackground(controlsImage);
+    //Text
+    displayText(`CONTROLS`, width / 2, 50, 50);
+    displayText(`Press 'any key' to CONTINUE`, width / 2, height - 50, 36);
   }
-  push();
-  imageMode(CENTER);
-  image(floorImage, width / 2, windowHeight, width, 90);
-  pop();
 
-  //Display player
-  player.controls();
-  player.display();
-  player.gravity();
-  player.wrap();
+  //Simulation state//////////////////////
+  function simulation() {
+    //Background
+    displayBackground(backgroundImage);
+    //Text
+    if (level === 1) {
+      displayText(`GOAL: Get to the top!`, width / 2, height / 2, 50);
+    } else if (level === 9) {
+      displayText(`↑ End ↑`, width / 2, 50, 50);
 
-  levelComplete();
+    }
 
-  // //Display chords
-  // for (let i = 0; i < chords.length; i++){
-  //   let chord = chords[i];
-  //   chord.display();
-  //   chord.playNote();
-  //   chord.struck(player);
-  // }
+    //Ground
+    if (level === 1) {
+      floorImage = groundImage;
+    } else {
+      floorImage = groundImage2;
+    }
+    push();
+    imageMode(CENTER);
+    image(floorImage, width / 2, windowHeight, width, 90);
+    pop();
 
-  //Display platforms
-  for (let i = 0; i < platforms.length; i++){
-    let platform = platforms[i];
-    platform.display();
-    platform.playNote();
-    platform.pressedOn(player);
-    platform.move(level);
+    //Display player
+    player.controls();
+    player.display();
+    player.gravity();
+    player.wrap();
 
-    player.collision(platform);
+    levelComplete();
+
+    // //Display chords
+    // for (let i = 0; i < chords.length; i++){
+    //   let chord = chords[i];
+    //   chord.display();
+    //   chord.playNote();
+    //   chord.struck(player);
+    // }
+
+    //Display platforms
+    for (let i = 0; i < platforms.length; i++) {
+      let platform = platforms[i];
+      platform.display();
+      platform.playNote();
+      platform.pressedOn(player);
+      platform.move(level);
+
+      player.collision(platform);
+    }
   }
-}
 
-//End state//////////////////////
-function end(){
-  //Background
-  displayBackground(endImage);
-  //Text
-  displayText(`CREDITS`, width/2, 50, 50);
-  displayText(`Background music by
-Memory - toby fox`, width/2, 150, 36);
-  displayText(`Melody by
-Memory (Piano Cover) - toby fox`, width/2, 300, 36);
-  displayText(`Art & Game Design by
-Daniel Cacatian`, width/2, 450, 36);
-  displayText(`Thanks for playing!`, width/2, height-50, 36);
-}
+  //End state//////////////////////
+  function end() {
+    //Background
+    displayBackground(endImage);
+    //Text
+    displayText(`CREDITS`, width / 2, 50, 50);
+    displayText(`Background music by
+Memory - toby fox`, width / 2, 150, 36);
+    displayText(`Melody by
+Memory (Piano Cover) - toby fox`, width / 2, 300, 36);
+    displayText(`Art & Game Design by
+Daniel Cacatian`, width / 2, 450, 36);
+    displayText(`Thanks for playing!`, width / 2, height - 50, 36);
+  }
 
 }
 
 //MISCELLANEOUS FUNCTIONS////////////////////////////////////////////////////
 //Proceed to next level
-function levelComplete(){
-  if(player.y <= -25){
-    level++ ;
-    if(level===2){
+function levelComplete() {
+  if (player.y <= -25) {
+    level++;
+    if (level === 2) {
       level2Setup();
-    }
-    else if(level===3){
+    } else if (level === 3) {
       level3Setup();
-    }
-    else if(level===4){
+    } else if (level === 4) {
       level4Setup();
-    }
-    else if(level===5){
+    } else if (level === 5) {
       level5Setup();
-    }
-    else if(level===6){
+    } else if (level === 6) {
       level6Setup();
-    }
-    else if(level===7){
+    } else if (level === 7) {
       level7Setup();
-    }
-    else if(level===8){
+    } else if (level === 8) {
       level8Setup();
-    }
-    else if(level===9){
+    } else if (level === 9) {
       level9Setup();
-    }
-    else if(level===10){
+    } else if (level === 10) {
       state = `end`
     }
     //Return player back to ground
-    player.y = height-50;
+    player.y = height - 50;
   }
 }
 
-function keyPressed(){
+function keyPressed() {
   //Press `any key` to CONTINUE
-  if(state===`title`){
+  if (state === `title`) {
     state = `controls`;
-  }
-  else if(state===`controls`){
+  } else if (state === `controls`) {
     state = `simulation`;
   }
   //Background music
-  if(!backgroundSong.isPlaying()){
+  if (!backgroundSong.isPlaying()) {
     backgroundSong.play();
     backgroundSong.loop();
   }
 }
 
 //Text function (displays text)
-function displayText(string, x, y, size){
+function displayText(string, x, y, size) {
   push();
   textFont(pixelFont);
   textAlign(CENTER, CENTER);
@@ -267,16 +254,16 @@ function displayText(string, x, y, size){
 }
 
 //Background image function (displays background image)
-function displayBackground(loadImage){
+function displayBackground(loadImage) {
   push();
   imageMode(CENTER);
-  image(loadImage, width/2, height/2, width, height);
+  image(loadImage, width / 2, height / 2, width, height);
   pop()
-  }
+}
 
 //LEVEL PLATFORM SETUPS////////////////////////////////////////////////////////
 //Level 1////////////////////////////////
-function level1Setup(){
+function level1Setup() {
   // //String positioning
   // chord = new Chord(width/2, height-150);
   // chords.push(chord);
@@ -286,30 +273,30 @@ function level1Setup(){
 
 
   //Platforms IN ORDER
-  bluePlatform = new BluePlatform(width/2, height-150, 250, blueImage);
+  bluePlatform = new BluePlatform(width / 2, height - 150, 250, blueImage);
   platforms.push(bluePlatform);
 
-  orangePlatform = new OrangePlatform(width/2, height-300 , 250, orangeImage);
+  orangePlatform = new OrangePlatform(width / 2, height - 300, 250, orangeImage);
   platforms.push(orangePlatform);
 
-  redPlatform = new RedPlatform(width/2, height-450 , 250, redImage);
+  redPlatform = new RedPlatform(width / 2, height - 450, 250, redImage);
   platforms.push(redPlatform);
 
-  bluePlatform = new BluePlatform(width/2, height-600, 250, blueImage);
+  bluePlatform = new BluePlatform(width / 2, height - 600, 250, blueImage);
   platforms.push(bluePlatform);
 
-  greenPlatform = new GreenPlatform(width/2, height-700 , 250, greenImage);
+  greenPlatform = new GreenPlatform(width / 2, height - 700, 250, greenImage);
   platforms.push(greenPlatform);
 
-  greenPlatform = new GreenPlatform(width/2, height-750 , 250, greenImage);
+  greenPlatform = new GreenPlatform(width / 2, height - 750, 250, greenImage);
   platforms.push(greenPlatform);
 
-  redPlatform = new RedPlatform(width/2, height-900 , 250, redImage);
+  redPlatform = new RedPlatform(width / 2, height - 900, 250, redImage);
   platforms.push(redPlatform);
 }
 
 //level 2///////////////////////////////////
-function level2Setup(){
+function level2Setup() {
   // chords = [];
   // //String positioning
   // chord = new Chord(width/2, height-150);
@@ -320,30 +307,30 @@ function level2Setup(){
 
   platforms = [];
   //Platforms IN ORDER
-  bluePlatform = new BluePlatform(100, height-150, 100, blueImage);
+  bluePlatform = new BluePlatform(100, height - 150, 100, blueImage);
   platforms.push(bluePlatform);
 
-  orangePlatform = new OrangePlatform(100, height-300 , 100, orangeImage);
+  orangePlatform = new OrangePlatform(100, height - 300, 100, orangeImage);
   platforms.push(orangePlatform);
 
-  redPlatform = new RedPlatform(100, height-450 , 100, redImage);
+  redPlatform = new RedPlatform(100, height - 450, 100, redImage);
   platforms.push(redPlatform);
 
-  bluePlatform = new BluePlatform(width/2, height-500, 100, blueImage);
+  bluePlatform = new BluePlatform(width / 2, height - 500, 100, blueImage);
   platforms.push(bluePlatform);
 
-  greenPlatform = new GreenPlatform(500, height-550 , 100, greenImage);
+  greenPlatform = new GreenPlatform(500, height - 550, 100, greenImage);
   platforms.push(greenPlatform);
 
-  greenPlatform = new GreenPlatform(500, height-700 , 100, greenImage);
+  greenPlatform = new GreenPlatform(500, height - 700, 100, greenImage);
   platforms.push(greenPlatform);
 
-  redPlatform = new RedPlatform(500, height-850 , 100, redImage);
+  redPlatform = new RedPlatform(500, height - 850, 100, redImage);
   platforms.push(redPlatform);
 }
 
 //level 3///////////////////////////////////
-function level3Setup(){
+function level3Setup() {
   // chords = [];
   // //String positioning
   // chord = new Chord(width/2, height-100);
@@ -354,27 +341,27 @@ function level3Setup(){
 
   platforms = [];
   //Platforms IN ORDER
-  bluePlatform = new BluePlatform(150, height-100, 150, blueImage);
+  bluePlatform = new BluePlatform(150, height - 100, 150, blueImage);
   platforms.push(bluePlatform);
 
-  redPlatform = new RedPlatform(width/2, height-250 , 150, redImage);
+  redPlatform = new RedPlatform(width / 2, height - 250, 150, redImage);
   platforms.push(redPlatform);
 
-  purplePlatform = new PurplePlatform(450, height-400 , 150, purpleImage);
+  purplePlatform = new PurplePlatform(450, height - 400, 150, purpleImage);
   platforms.push(purplePlatform);
 
-  orangePlatform = new OrangePlatform(width/2, height-550 , 150, orangeImage);
+  orangePlatform = new OrangePlatform(width / 2, height - 550, 150, orangeImage);
   platforms.push(orangePlatform);
 
-  redPlatform = new RedPlatform(150, height-700 , 150, redImage);
+  redPlatform = new RedPlatform(150, height - 700, 150, redImage);
   platforms.push(redPlatform);
 
-  orangePlatform = new OrangePlatform(width/2, height-850 , 150, orangeImage);
+  orangePlatform = new OrangePlatform(width / 2, height - 850, 150, orangeImage);
   platforms.push(orangePlatform);
 }
 
 //level 4///////////////////////////////////
-function level4Setup(){
+function level4Setup() {
   // chords = [];
   // //String positioning
   // chord = new Chord(width/2, height-150);
@@ -385,30 +372,30 @@ function level4Setup(){
 
   platforms = [];
   //Platforms IN ORDER
-  bluePlatform = new BluePlatform(100, height-150, 100, blueImage);
+  bluePlatform = new BluePlatform(100, height - 150, 100, blueImage);
   platforms.push(bluePlatform);
 
-  orangePlatform = new OrangePlatform(width/2, height-300 , 100, orangeImage);
+  orangePlatform = new OrangePlatform(width / 2, height - 300, 100, orangeImage);
   platforms.push(orangePlatform);
 
-  redPlatform = new RedPlatform(500, height-400 , 100, redImage);
+  redPlatform = new RedPlatform(500, height - 400, 100, redImage);
   platforms.push(redPlatform);
 
-  bluePlatform = new BluePlatform(500, height-550, 100, blueImage);
+  bluePlatform = new BluePlatform(500, height - 550, 100, blueImage);
   platforms.push(bluePlatform);
 
-  greenPlatform = new GreenPlatform(width/2, height-650 , 100, greenImage);
+  greenPlatform = new GreenPlatform(width / 2, height - 650, 100, greenImage);
   platforms.push(greenPlatform);
 
-  greenPlatform = new GreenPlatform(100, height-700 , 100, greenImage);
+  greenPlatform = new GreenPlatform(100, height - 700, 100, greenImage);
   platforms.push(greenPlatform);
 
-  redPlatform = new RedPlatform(100, height-850 , 100, redImage);
+  redPlatform = new RedPlatform(100, height - 850, 100, redImage);
   platforms.push(redPlatform);
 }
 
 //level 5///////////////////////////////////
-function level5Setup(){
+function level5Setup() {
   // chords = [];
   // //String positioning
   // chord = new Chord(width/2, height-150);
@@ -419,30 +406,30 @@ function level5Setup(){
 
   platforms = [];
   //Platforms IN ORDER
-  bluePlatform = new BluePlatform(500, height-150, 100, blueImage);
+  bluePlatform = new BluePlatform(500, height - 150, 100, blueImage);
   platforms.push(bluePlatform);
 
-  orangePlatform = new OrangePlatform(width/2, height-300 , 100, orangeImage);
+  orangePlatform = new OrangePlatform(width / 2, height - 300, 100, orangeImage);
   platforms.push(orangePlatform);
 
-  redPlatform = new RedPlatform(width/2, height-450 , 100, redImage);
+  redPlatform = new RedPlatform(width / 2, height - 450, 100, redImage);
   platforms.push(redPlatform);
 
-  bluePlatform = new BluePlatform(100, height-600, 100, blueImage);
+  bluePlatform = new BluePlatform(100, height - 600, 100, blueImage);
   platforms.push(bluePlatform);
 
-  greenPlatform = new GreenPlatform(width/2, height-700 , 100, greenImage);
+  greenPlatform = new GreenPlatform(width / 2, height - 700, 100, greenImage);
   platforms.push(greenPlatform);
 
-  greenPlatform = new GreenPlatform(width/2, height-750 , 100, greenImage);
+  greenPlatform = new GreenPlatform(width / 2, height - 750, 100, greenImage);
   platforms.push(greenPlatform);
 
-  redPlatform = new RedPlatform(width/2, height-900 , 100, redImage);
+  redPlatform = new RedPlatform(width / 2, height - 900, 100, redImage);
   platforms.push(redPlatform);
 }
 
 //level 6///////////////////////////////////
-function level6Setup(){
+function level6Setup() {
   // chords = [];
   // //String positioning
   // chord = new Chord(width/2, height-100);
@@ -453,27 +440,27 @@ function level6Setup(){
 
   platforms = [];
   //Platforms IN ORDER
-  bluePlatform = new BluePlatform(150, height-100, 100, blueImage);
+  bluePlatform = new BluePlatform(150, height - 100, 100, blueImage);
   platforms.push(bluePlatform);
 
-  redPlatform = new RedPlatform(150, height-250 , 100, redImage);
+  redPlatform = new RedPlatform(150, height - 250, 100, redImage);
   platforms.push(redPlatform);
 
-  purplePlatform = new PurplePlatform(width/2, height-400 , 100, purpleImage);
+  purplePlatform = new PurplePlatform(width / 2, height - 400, 100, purpleImage);
   platforms.push(purplePlatform);
 
-  orangePlatform = new OrangePlatform(width/2, height-550 , 100, orangeImage);
+  orangePlatform = new OrangePlatform(width / 2, height - 550, 100, orangeImage);
   platforms.push(orangePlatform);
 
-  redPlatform = new RedPlatform(150, height-700 , 100, redImage);
+  redPlatform = new RedPlatform(150, height - 700, 100, redImage);
   platforms.push(redPlatform);
 
-  orangePlatform = new OrangePlatform(width/2, height-850 , 100, orangeImage);
+  orangePlatform = new OrangePlatform(width / 2, height - 850, 100, orangeImage);
   platforms.push(orangePlatform);
 }
 
 //level 7///////////////////////////////////
-function level7Setup(){
+function level7Setup() {
   // chords = [];
   // //String positioning
   // chord = new Chord(width/2, height-100);
@@ -484,27 +471,27 @@ function level7Setup(){
 
   platforms = [];
   //Platforms IN ORDER
-  bluePlatform = new BluePlatform(100, height-100, 75, blueImage);
+  bluePlatform = new BluePlatform(100, height - 100, 75, blueImage);
   platforms.push(bluePlatform);
 
-  orangePlatform = new OrangePlatform(width/2, height-250 , 75, orangeImage);
+  orangePlatform = new OrangePlatform(width / 2, height - 250, 75, orangeImage);
   platforms.push(orangePlatform);
 
-  redPlatform = new RedPlatform(500, height-400 , 75, redImage);
+  redPlatform = new RedPlatform(500, height - 400, 75, redImage);
   platforms.push(redPlatform);
 
-  bluePlatform = new BluePlatform(500, height-550, 75, blueImage);
+  bluePlatform = new BluePlatform(500, height - 550, 75, blueImage);
   platforms.push(bluePlatform);
 
-  greenPlatform = new GreenPlatform(width/2, height-700 , 75, greenImage);
+  greenPlatform = new GreenPlatform(width / 2, height - 700, 75, greenImage);
   platforms.push(greenPlatform);
 
-  redPlatform = new RedPlatform(100, height-850 , 75, redImage);
+  redPlatform = new RedPlatform(100, height - 850, 75, redImage);
   platforms.push(redPlatform);
 }
 
 //level 8///////////////////////////////////
-function level8Setup(){
+function level8Setup() {
   // chords = [];
   // //String positioning
   // chord = new Chord(width/2, height-100);
@@ -515,30 +502,30 @@ function level8Setup(){
 
   platforms = [];
   //Platforms IN ORDER
-  bluePlatform = new BluePlatform(100, height-100, 100, blueImage);
+  bluePlatform = new BluePlatform(100, height - 100, 100, blueImage);
   platforms.push(bluePlatform);
 
-  orangePlatform = new OrangePlatform(500, height-225 , 100, orangeImage);
+  orangePlatform = new OrangePlatform(500, height - 225, 100, orangeImage);
   platforms.push(orangePlatform);
 
-  redPlatform = new RedPlatform(width/2, height-350 , 100, redImage);
+  redPlatform = new RedPlatform(width / 2, height - 350, 100, redImage);
   platforms.push(redPlatform);
 
-  bluePlatform = new BluePlatform(500, height-475, 100, blueImage);
+  bluePlatform = new BluePlatform(500, height - 475, 100, blueImage);
   platforms.push(bluePlatform);
 
-  greenPlatform = new GreenPlatform(500, height-600 , 100, greenImage);
+  greenPlatform = new GreenPlatform(500, height - 600, 100, greenImage);
   platforms.push(greenPlatform);
 
-  greenPlatform = new GreenPlatform(100, height-725 , 100, greenImage);
+  greenPlatform = new GreenPlatform(100, height - 725, 100, greenImage);
   platforms.push(greenPlatform);
 
-  redPlatform = new RedPlatform(width/2, height-850 , 100, redImage);
+  redPlatform = new RedPlatform(width / 2, height - 850, 100, redImage);
   platforms.push(redPlatform);
 }
 
 //level 9///////////////////////////////////
-function level9Setup(){
+function level9Setup() {
   // chords = [];
   // //String positioning
   // chord = new Chord(width/2, height-100);
@@ -549,21 +536,21 @@ function level9Setup(){
 
   platforms = [];
   //Platforms IN ORDER
-  bluePlatform = new BluePlatform(150, height-100, 150, blueImage);
+  bluePlatform = new BluePlatform(150, height - 100, 150, blueImage);
   platforms.push(bluePlatform);
 
-  redPlatform = new RedPlatform(500, height-250 , 100, redImage);
+  redPlatform = new RedPlatform(500, height - 250, 100, redImage);
   platforms.push(redPlatform);
 
-  purplePlatform = new PurplePlatform(width/2, height-400 , 75, purpleImage);
+  purplePlatform = new PurplePlatform(width / 2, height - 400, 75, purpleImage);
   platforms.push(purplePlatform);
 
-  orangePlatform = new OrangePlatform(500, height-550 , 75, orangeImage);
+  orangePlatform = new OrangePlatform(500, height - 550, 75, orangeImage);
   platforms.push(orangePlatform);
 
-  redPlatform = new RedPlatform(100, height-700 , 75, redImage);
+  redPlatform = new RedPlatform(100, height - 700, 75, redImage);
   platforms.push(redPlatform);
 
-  orangePlatform = new OrangePlatform(width/2, height-850 , 50, orangeImage);
+  orangePlatform = new OrangePlatform(width / 2, height - 850, 50, orangeImage);
   platforms.push(orangePlatform);
 }
