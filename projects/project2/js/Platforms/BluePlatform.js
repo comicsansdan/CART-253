@@ -10,7 +10,13 @@ class BluePlatform extends Platform {
 
   move(level){
     super.move();
-    if(level === 4){
+    if(level === 5){
+      this.moving = true;
+    }
+    else if(level === 8){
+      this.moving = true;
+    }
+    else if(level === 9){
       this.moving = true;
     }
   }

@@ -25,9 +25,10 @@ class Platform{
       player.y+player.size/2 >= this.y-this.height/2 &&
       player.y+player.size/2 <= this.y+this.height/2){
 
-      this.synth.play(this.note, 0.1, 0, 0.3);
+      this.synth.play(this.note, 0.25, 0, 0.3);
 
-      this.speed=0;
+      this.speed = 0;
+      this.moving = false;
     }
     else{
       this.speed = 2;
