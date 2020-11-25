@@ -17,9 +17,9 @@ let redPlatform; //A note
 let greenPlatform; //G note
 let purplePlatform; //C note
 
-//Strings (extra note)
-let chords = [];
-let chord;
+// //Strings (extra note)
+// let chords = [];
+// let chord;
 
 //States & Levels
 let state = `title`;
@@ -166,13 +166,13 @@ function simulation(){
 
   levelComplete();
 
-  //Display strings
-  for (let i = 0; i < chords.length; i++){
-    let chord = chords[i];
-    chord.display();
-    chord.playNote();
-    chord.struck(player);
-  }
+  // //Display chords
+  // for (let i = 0; i < chords.length; i++){
+  //   let chord = chords[i];
+  //   chord.display();
+  //   chord.playNote();
+  //   chord.struck(player);
+  // }
 
   //Display platforms
   for (let i = 0; i < platforms.length; i++){
@@ -277,12 +277,12 @@ function displayBackground(loadImage){
 //LEVEL PLATFORM SETUPS////////////////////////////////////////////////////////
 //Level 1////////////////////////////////
 function level1Setup(){
-  //String positioning
-  chord = new Chord(width/2, height-150);
-  chords.push(chord);
-
-  chord = new Chord(width/2, height-700);
-  chords.push(chord);
+  // //String positioning
+  // chord = new Chord(width/2, height-150);
+  // chords.push(chord);
+  //
+  // chord = new Chord(width/2, height-700);
+  // chords.push(chord);
 
 
   //Platforms IN ORDER
@@ -310,13 +310,13 @@ function level1Setup(){
 
 //level 2///////////////////////////////////
 function level2Setup(){
-  chords = [];
-  //String positioning
-  chord = new Chord(width/2, height-150);
-  chords.push(chord);
-
-  chord = new Chord(width/2, height-550);
-  chords.push(chord);
+  // chords = [];
+  // //String positioning
+  // chord = new Chord(width/2, height-150);
+  // chords.push(chord);
+  //
+  // chord = new Chord(width/2, height-550);
+  // chords.push(chord);
 
   platforms = [];
   //Platforms IN ORDER
@@ -344,13 +344,13 @@ function level2Setup(){
 
 //level 3///////////////////////////////////
 function level3Setup(){
-  chords = [];
-  //String positioning
-  chord = new Chord(width/2, height-100);
-  chords.push(chord);
-
-  chord = new Chord(width/2, height-700);
-  chords.push(chord);
+  // chords = [];
+  // //String positioning
+  // chord = new Chord(width/2, height-100);
+  // chords.push(chord);
+  //
+  // chord = new Chord(width/2, height-700);
+  // chords.push(chord);
 
   platforms = [];
   //Platforms IN ORDER
@@ -375,13 +375,13 @@ function level3Setup(){
 
 //level 4///////////////////////////////////
 function level4Setup(){
-  chords = [];
-  //String positioning
-  chord = new Chord(width/2, height-150);
-  chords.push(chord);
-
-  chord = new Chord(width/2, height-700);
-  chords.push(chord);
+  // chords = [];
+  // //String positioning
+  // chord = new Chord(width/2, height-150);
+  // chords.push(chord);
+  //
+  // chord = new Chord(width/2, height-700);
+  // chords.push(chord);
 
   platforms = [];
   //Platforms IN ORDER
@@ -409,13 +409,13 @@ function level4Setup(){
 
 //level 5///////////////////////////////////
 function level5Setup(){
-  chords = [];
-  //String positioning
-  chord = new Chord(width/2, height-150);
-  chords.push(chord);
-
-  chord = new Chord(width/2, height-700);
-  chords.push(chord);
+  // chords = [];
+  // //String positioning
+  // chord = new Chord(width/2, height-150);
+  // chords.push(chord);
+  //
+  // chord = new Chord(width/2, height-700);
+  // chords.push(chord);
 
   platforms = [];
   //Platforms IN ORDER
@@ -443,13 +443,13 @@ function level5Setup(){
 
 //level 6///////////////////////////////////
 function level6Setup(){
-  chords = [];
-  //String positioning
-  chord = new Chord(width/2, height-100);
-  chords.push(chord);
-
-  chord = new Chord(width/2, height-700);
-  chords.push(chord);
+  // chords = [];
+  // //String positioning
+  // chord = new Chord(width/2, height-100);
+  // chords.push(chord);
+  //
+  // chord = new Chord(width/2, height-700);
+  // chords.push(chord);
 
   platforms = [];
   //Platforms IN ORDER
@@ -474,13 +474,13 @@ function level6Setup(){
 
 //level 7///////////////////////////////////
 function level7Setup(){
-  chords = [];
-  //String positioning
-  chord = new Chord(width/2, height-100);
-  chords.push(chord);
-
-  chord = new Chord(width/2, height-700);
-  chords.push(chord);
+  // chords = [];
+  // //String positioning
+  // chord = new Chord(width/2, height-100);
+  // chords.push(chord);
+  //
+  // chord = new Chord(width/2, height-700);
+  // chords.push(chord);
 
   platforms = [];
   //Platforms IN ORDER
@@ -505,13 +505,13 @@ function level7Setup(){
 
 //level 8///////////////////////////////////
 function level8Setup(){
-  chords = [];
-  //String positioning
-  chord = new Chord(width/2, height-100);
-  chords.push(chord);
-
-  chord = new Chord(width/2, height-600);
-  chords.push(chord);
+  // chords = [];
+  // //String positioning
+  // chord = new Chord(width/2, height-100);
+  // chords.push(chord);
+  //
+  // chord = new Chord(width/2, height-600);
+  // chords.push(chord);
 
   platforms = [];
   //Platforms IN ORDER
@@ -539,13 +539,13 @@ function level8Setup(){
 
 //level 9///////////////////////////////////
 function level9Setup(){
-  chords = [];
-  //String positioning
-  chord = new Chord(width/2, height-100);
-  chords.push(chord);
-
-  chord = new Chord(width/2, height-700);
-  chords.push(chord);
+  // chords = [];
+  // //String positioning
+  // chord = new Chord(width/2, height-100);
+  // chords.push(chord);
+  //
+  // chord = new Chord(width/2, height-700);
+  // chords.push(chord);
 
   platforms = [];
   //Platforms IN ORDER
