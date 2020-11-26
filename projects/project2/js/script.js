@@ -87,7 +87,7 @@ function preload() {
 
   //Background sound
   backgroundSong = loadSound(`assets/sounds/Memory.mp3`);
-  soundFX = loadSound(`assets/sounds/soundFX.mp3`);
+  soundFX = loadSound(`assets/sounds/SoundFX.mp3`);
 
   //Fonts
   pixelFont = loadFont(`assets/fonts/EnterCommand.ttf`)
