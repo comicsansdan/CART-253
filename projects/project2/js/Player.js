@@ -1,3 +1,9 @@
+/*
+Collision and Gravity code
+by Jason Erdreich
+source: https://www.youtube.com/watch?v=FZlpuQeCvlk
+*/
+
 class Player {
 
   constructor(x, y, playerImage, playerImage2){

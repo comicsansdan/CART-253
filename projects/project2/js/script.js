@@ -5,6 +5,16 @@ Daniel Cacatian
 Creating a platforming game that incorporates platforming and sound mechanics within p5.js
 **************************************************/
 
+/*
+Player collision() and gravity() code
+by Jason Erdreich
+source: https://www.youtube.com/watch?v=FZlpuQeCvlk
+---------------------------------------------------
+Array platform debugging help from
+Pippin Barr
+---------------------------------------------------
+*/
+
 "use strict";
 
 //User himself
