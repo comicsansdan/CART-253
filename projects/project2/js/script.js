@@ -5,13 +5,16 @@ Daniel Cacatian
 Creating a platforming game that incorporates platforming and sound mechanics within p5.js
 **************************************************/
 
-/*
+/* CREDITS
 Player collision() and gravity() code
 by Jason Erdreich
 source: https://www.youtube.com/watch?v=FZlpuQeCvlk
 ---------------------------------------------------
 Array platform debugging help from
 Pippin Barr
+---------------------------------------------------
+Sound effects provided by
+freesoundeffect.net
 ---------------------------------------------------
 */
 
@@ -57,6 +60,7 @@ let purpleImage;
 
 //Sound
 let backgroundSong;
+let soundFX;
 
 //Load images
 function preload() {
@@ -83,6 +87,7 @@ function preload() {
 
   //Background sound
   backgroundSong = loadSound(`assets/sounds/Memory.mp3`);
+  soundFX = loadSound(`assets/sounds/soundFX.mp3`);
 
   //Fonts
   pixelFont = loadFont(`assets/fonts/EnterCommand.ttf`)
@@ -243,9 +248,18 @@ function keyPressed() {
   //Press `any key` to CONTINUE
   if (state === `title`) {
     state = `controls`;
+    //plays sound effect
+    if (!soundFX.isPlaying()) {
+      soundFX.play();
+    }
   } else if (state === `controls`) {
     state = `simulation`;
+    //plays sound effect
+    if (!soundFX.isPlaying()) {
+      soundFX.play();
+    }
   }
+
   //Background music
   if (!backgroundSong.isPlaying()) {
     backgroundSong.play();
