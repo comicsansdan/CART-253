@@ -37,12 +37,14 @@ Exercises:
 
 -[Exercise 7](https://danielcacatian.github.io/CART-253/exercises/exercise7)
 
+-[Exercise 8](https://danielcacatian.github.io/CART-253/exercises/exercise8/Reflection.pdf)
+
+
 
 Projects:
 
--[Project 1](https://danielcacatian.github.io/CART-253/projects/project1)
+-[Project 1: Until Nightfall](https://danielcacatian.github.io/CART-253/projects/project1)
 
--[Project 2](https://danielcacatian.github.io/CART-253/projects/project2)
-
+-[Project 2: Melody Tower](https://danielcacatian.github.io/CART-253/projects/project2)
 
 -[Project 2 (Prototype)](https://danielcacatian.github.io/CART-253/projects/project2/prototype)
